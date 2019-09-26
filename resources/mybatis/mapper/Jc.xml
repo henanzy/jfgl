@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnzy.hot.dao.JcDao">
+	<resultMap id="JcMap" type="java.util.HashMap"></resultMap>
+	
+	
+	<insert id="InsertJcxx" >
+		insert into J_Jcxx
+		(JCQK,YRZT,JCRQ,JCWT,YHBM,JCR,JCBZ,CLQK,CLRQ,CLJG,CLBZ)
+		values(#{JCQK},#{YRZT},#{JCRQ},#{JCWT},#{YHBM},#{JCR},#{JCBZ},#{CLQK},#{CLRQ},#{CLJG},#{CLBZ})
+	</insert>
+	
+   
+</mapper>

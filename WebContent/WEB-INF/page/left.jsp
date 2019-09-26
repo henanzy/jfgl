@@ -219,6 +219,10 @@ function shisdw(){//
 function lisgj(){// 
 	window.open("<%=basePath%>user/lisgj.action","Conframe");
 } 
+function tfcx(){// 
+	window.open("<%=basePath%>user/tfcx.action","Conframe");
+}
+
 </script>
 
 
@@ -262,13 +266,14 @@ ul.ac_kf li a:hover {
 						<li><a onclick="yhds()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;银行代收查询</a></li>
 						<li><a onclick="wxzf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;微信支付查询</a></li>
 						<li><a onclick="zfbzf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;支付宝支付查询</a></li>
-						<li><a onclick="tf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费查询</a></li>
+						<li><a onclick="tf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费登记</a></li>
+						<li><a onclick="tfcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费查询</a></li>
 						<li><a onclick="lxsf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;离线收费</a></li>
 					</ul>
 				</li>
 
 				<li class="active"><a onclick="jcgl()" href="#" class="mws-i-24 i-users">稽查管理</a></li>
-				<li class="active"><a onclick="qqzx()" href="#" class="mws-i-24 i-users">清欠中心</a></li>
+				<!-- <li class="active"><a onclick="qqzx()" href="#" class="mws-i-24 i-users">清欠中心</a></li> -->
 				<li class="active"><a onclick="cnbg()" href="#" class="mws-i-24 i-users">采暖变更</a></li>
 				<!-- <li class="active"><a onclick="khgl()" href="#" class="mws-i-24 i-users">客户管理</a></li>  -->
 				<li class="active">

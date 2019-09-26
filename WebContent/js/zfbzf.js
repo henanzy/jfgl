@@ -41,7 +41,7 @@ $(document).ready(function(){
 			dataType : "json",
 			data : {
 				
-				"JFTJ":"微信",
+				"JFTJ":"支付宝",
 			},
 			success : function(data) {
 				
@@ -279,7 +279,7 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		dataType : "json",
 		data : {
 			"CNQ":$("#CNQ").val(),
-			"JFTJ":"微信",
+			"JFTJ":"支付宝",
 			"YhName":$("#YhName").val(),
 			"IDNum":$("#IDNum").val(),
 			"YHBM":$("#YHBM").val(),

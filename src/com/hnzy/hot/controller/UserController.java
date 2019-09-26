@@ -302,6 +302,11 @@ public class UserController {
     	public String mjbg(){
     		return "bbgl/mjbg";
     	}
+    	
+    	@RequestMapping("/tfcx")
+    	public String tfcx(){
+    		return "sfgl/tfcx";
+    	}
     
     	
 }
