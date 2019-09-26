@@ -1,0 +1,38 @@
+package com.hnzy.hot.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hnzy.hot.dao.JfxxDao;
+import com.hnzy.hot.service.JfxxService;
+
+
+@Service
+public class JfxxServiceImpl implements JfxxService{
+
+	@Autowired
+	private JfxxDao jfxxDao;
+	@Override
+	public List<Map<String, Object>> findYhByBm(String YHBM) {
+		// TODO Auto-generated method stub
+		return jfxxDao.findYhByBm(YHBM);
+	}
+	@Override
+	public void InsertJfxx(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		jfxxDao.InsertJfxx(map);
+	}
+	@Override
+	public List<Map<String, Object>> findYhds(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return jfxxDao.findYhds(map);
+	}
+
+	
+
+
+	
+}
