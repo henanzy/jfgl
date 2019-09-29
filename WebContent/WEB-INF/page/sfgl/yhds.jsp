@@ -255,10 +255,6 @@ th, td {
 				 <input type="submit" id="search_btn"
 					class="mws-button black" value="查询" />
 				</span>
-
-
-
-
 			</p>
 		</div>
 

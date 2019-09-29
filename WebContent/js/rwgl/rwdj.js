@@ -1,188 +1,426 @@
 $(document).ready(function(){
-	
-	var xinList = [
-		["金领小区","1号楼","1单元","101","董新召","123456001","987654001","董新召",13548639715,"民用住宅","金领小区换热站","2018-04-16","2018-06-07","是","否","地暖","金领小区","住宅","63.4","2.9"],
-		["金领小区","1号楼","1单元","102","王丽丽","123456002","987654002","王丽丽",17246823541,"民用住宅","金领小区换热站","2018-04-16","2018-06-07","是","否","地暖","金领小区","住宅","48.7","2.9"],
-		["金领小区","1号楼","1单元","302","苗琳","123456003","987654003","苗琳",18236417589,"民用住宅","金领小区换热站","2018-04-16","2018-06-07","是","否","地暖","金领小区","住宅","97.8","2.9"],
-		["金领小区","1号楼","2单元","204","崔静静","123456004","987654004","崔静静",13951063841,"民用住宅","金领小区换热站","2018-04-16","2018-06-07","是","否","地暖","金领小区","住宅","132","2.9"],
-		["金领小区","2号楼","1单元","101","南丽丹","123456005","987654005","南丽丹",18036481297,"民用住宅","金领小区换热站","2018-04-16","2018-06-07","是","否","地暖","金领小区","住宅","63.4","2.9"],
-		["金领小区","2号楼","1单元","402","田雪","123456006","987654006","田雪",12681023649,"民用住宅","金领小区换热站","2018-04-16","2018-06-07","是","否","地暖","金领小区","住宅","63.4","2.9"],
-		["天鹅堡","1号楼","1单元","101","刘雪琴","123456007","987654007","刘雪琴",13548639715,"民用住宅","天鹅堡换热站","2018-04-16","2018-06-07","是","否","地暖","天鹅堡","住宅","132","2.9"],
-		["天鹅堡","1号楼","1单元","102","秦蕊","123456008","987654008","秦蕊",17246823541,"民用住宅","天鹅堡换热站","2018-04-16","2018-06-07","是","否","地暖","天鹅堡","住宅","63.4","2.9"],
-		["天鹅堡","1号楼","1单元","302","高燕","123456009","987654009","高燕",18236417589,"民用住宅","天鹅堡换热站","2018-04-16","2018-06-07","是","否","地暖","天鹅堡","住宅","63.4","2.9"],
-		["天鹅堡","1号楼","2单元","204","黄棒棒","123456010","987654010","黄棒棒",13951063841,"民用住宅","天鹅堡换热站","2018-04-16","2018-06-07","是","否","地暖","天鹅堡","住宅","63.4","2.9"],
-		["天鹅堡","2号楼","1单元","101","候碎琴","123456011","987654011","候碎琴",18036481297,"民用住宅","天鹅堡换热站","2018-04-16","2018-06-07","是","否","地暖","天鹅堡","住宅","132","2.9"],
-		["天鹅堡","2号楼","1单元","402","高松","123456012","987654012","高松",12681023649,"民用住宅","天鹅堡换热站","2018-04-16","2018-06-07","是","否","地暖","天鹅堡","住宅","63.4","2.9"],
-		["上村花苑","1号楼","1单元","101","孙江平","123456013","987654013","孙江平",13548639715,"民用住宅","上村花苑换热站","2018-04-16","2018-06-07","是","否","地暖","上村花苑","住宅","48.7","2.9"],
-		["上村花苑","1号楼","1单元","102","崔志强","123456014","987654014","崔志强",17246823541,"民用住宅","上村花苑换热站","2018-04-16","2018-06-07","是","否","地暖","上村花苑","住宅","97.8","2.9"],
-		["上村花苑","1号楼","1单元","302","付乾坤","123456015","987654015","付乾坤",18236417589,"民用住宅","上村花苑换热站","2018-04-16","2018-06-07","是","否","地暖","上村花苑","住宅","63.4","2.9"],
-		["上村花苑","1号楼","2单元","204","王丽霞","123456016","987654016","王丽霞",13951063841,"民用住宅","上村花苑换热站","2018-04-16","2018-06-07","是","否","地暖","上村花苑","住宅","48.7","2.9"],
-		["上村花苑","2号楼","1单元","101","傅焕","123456017","987654017","傅焕",18036481297,"民用住宅","上村花苑换热站","2018-04-16","2018-06-07","是","否","地暖","上村花苑","住宅","97.8","2.9"],
-		["上村花苑","2号楼","1单元","402","崔继斌","123456018","987654018","崔继斌",12681023649,"民用住宅","上村花苑换热站","2018-04-16","2018-06-07","是","否","地暖","上村花苑","住宅","48.7","2.9"],
-	];
-	
-	var html = "";
-	for(var i = 0; i < xinList.length; i++) {
-			if(i%2 == 1){
-				html += "<tr class='gradeX odd'>";
-			}else if(i%2 == 0){
-				html += "<tr class='gradeX even'>";
-			}
+//  表格
 
-			for (var j = 0 ; j <7; j ++) {
-				
-              html += "<td>" + xinList[i][j] + "</td>"
-			}
+	var qgxxList=[];
+	function jsArrChange(json){
+		for (var i = 0 ; i < json.length ; i ++) {
+			var arr1 = [];
+			arr1[0] = json[i].IDNum;
+			arr1[1] = json[i].XqName;
+			arr1[2] = json[i].BuildNo;
+			arr1[3] = json[i].CellNO;
+			arr1[4] = json[i].HouseNO;
+			arr1[5] = json[i].YhName;
+			arr1[6] = json[i].YHBM;
+			arr1[7] = json[i].RWBM;
+			arr1[8] = json[i].RWRQ;
+			arr1[9] = json[i].SFRZ;
+			arr1[10] = json[i].SFDB;
+			arr1[11] = json[i].CNSS;
+			arr1[12] = json[i].JZMC;
+			arr1[13] = json[i].JZYT;
+			arr1[14] = json[i].JZCG;
+			arr1[15] = json[i].DJ;
+			arr1[16] = json[i].HTQSRQ;
+			arr1[17] = json[i].HTJSRQ;
+			arr1[17] = json[i].BZ;
+			qgxxList.push(arr1);
+		};
 	}
-	xinword_body.innerHTML = html;
+	debugger;
+	jsArrChange(rwxx);
+	tbodydis("",qgxxList)
+	
+/*	//新增按钮
+	$("#increase_btn").click(function(){
+		$("#increase_word").show();
+	});
 
-	//小区
-	var xqb = [];
-	for(var y = 0;y < xinList.length; y ++){
-		if(xqb.indexOf(xinList[y][0]) == -1){
-			xqb.push(xinList[y][0]);
+	
+	//关闭新增
+	$(".close").click(function(){
+		$("#increase_word").hide();
+		$("#change_word").hide();
+	});*/
+	
+});
+
+$("#search_btn").click(function(){
+	/*layer.msg('数据加载中...', {
+		icon: 16,
+		shade: 0.01
+		
+		})*/
+		
+	
+	var xq = $('#xq').val();
+	var ld = $('#ldh').val();
+	var dy = $('#dyh').val();
+	var hh = $('#hh').val();
+	var compareWordList = [];
+	
+	
+	
+		compareWord(xq,ld,dy,hh,compareWordList);
+		qgxxList=compareWordList;
+	$("#qgxx_body").empty();
+
+	for(var x = 0;x < compareWordList.length;x ++){
+		
+		var newWordElemnet = "";
+		if(x%2 == 1){
+			newWordElemnet = "<tr class='gradeX odd'>";
+		}else if(x%2 == 0){
+			newWordElemnet = "<tr class='gradeX even'>";
 		}
-	}
-	for(var i = 0; i < xqb.length; i++) {
-		$("#xq").append("<option>"+xqb[i]+"</option>");
+	
+		for(var y = 0;y < compareWordList[x].length;y ++){
+			
+			
+
+				newWordElemnet += "<td>" + compareWordList[x][y] + "</td>"
+			
+		}
+		
+		
+		$("#qgxx_body").append(newWordElemnet);
+		
 	}
 	
-	// 小区楼栋选择
-	$("#xq").change(function(){
-		ldselect(xinList);
-	});
-	$("#ldh").change(function(){
-		dyselect(xinList);
-	});
-	$("#dyh").change(function(){
-		hhselect(xinList);
-	});
-	$("#hh").click(function(){
-		var xq = $('#xq  option:selected').val();
-		if(xq == ""){
-			alert("请先选择小区名称");
-		}
-	});
-	$("#dyh").click(function(){
-		var xq = $('#xq  option:selected').val();
-		var ld = $('#ldh  option:selected').val();
-		if(xq == ""){
-			alert("请先选择小区名称");
-			return;
-		}
-		if(ld == ""){
-			alert("请先选择楼栋号");
-		}
-	});
+	tbodydis(qgxxList,compareWordList);
 	
-	// 工单搜索
-	$("#search_btn").click(function(){
-		var rwbh = $("#rwbm").val();
-		if(rwbh == ""){
+
+
+	
+});
+
+function compareWord(xq,ld,dy,hh,compareWordList){
+		
+		var json;
+		compareWordList.length=0;
+		$.ajax({
+			url : "findYh.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"xqm":xq,
+				"ldh":ld,
+				"dyh":dy,
+				"hh":hh,
+				"yhfl":$("#yhfl").val(),
 				
-			var xq = $('#xq').val();
-			var ld = $('#ldh').val();
-			var dy = $('#dyh').val();
-			var hh = $('#hh').val();
-			for(var i = 0 ; i < xinList.length ; i ++){
-				 if( xq == xinList[i][0] && ld == xinList[i][1] && dy == xinList[i][2] && hh == xinList[i][3]){
-					var inp = $(".khxx_input");
-					for(var j = 0;j < inp.length; j ++){
-						if(j == 18){
-							inp[j].value = xinList[i][j] + "m³";
-						}else if(j == 19){
-							inp[j].value = xinList[i][j] + "m";
-						}else{
-							inp[j].value = xinList[i][j];
-						}
-					}
-				
-				 }
-			 }
-		}else{
-			for(var x = 0 ; x < xinList.length ; x ++){
-				if(rwbh == xinList[x][6]){
-					var inp = $(".khxx_input");
-					for(var j = 0;j < inp.length; j ++){
-						inp[j].value = xinList[x][j];
+			},
+			success : function(data) {
+			 json=data.list;
+			
+			}
+		});
+
+		for (var i = 0 ; i < json.length ; i ++) {
+			var arr1 = [];
+			arr1[0] = json[i].id;
+			arr1[1] = json[i].YhName;
+			arr1[2] = json[i].XqName;
+			arr1[3] = json[i].BuildNO;
+			arr1[4] = json[i].CellNO;
+			arr1[5] = json[i].HouseNO;
+			arr1[6] = json[i].ValAd;
+			arr1[7] = json[i].WCAd;
+			arr1[8] = json[i].QgID;
+			arr1[9] = json[i].Status;
+			arr1[10] = json[i].yhfl;
+			arr1[11] = json[i].SFJF;
+			arr1[12] = json[i].RoomTemp;
+			arr1[13] = json[i].ValTemp;
+			arr1[14] = json[i].Bz;
+			compareWordList.push(arr1);
+		};
+		
+	}	
+	
+//表格写入函数带分页
+function tbodydis(oldlist,newlist){
+	
+	if(oldlist == ""){
+		var opt = [];
+		for(var i = 0; i < newlist.length; i++) {
+			for (var j = 0 ; j <newlist[i].length ; j ++) {
+				if(j == 1){
+					if( opt.indexOf(newlist[i][1]) == -1){
+						opt.push(newlist[i][1]);
 					}
 				}
 			}
 		}
-	});
+		
+	}
 	
-	
-//	查看
-	
-	$(".checkinp").click(function(){
-		var idnum = parseInt($(this).attr("alt"));
-		var check = $(this);
-		var inp = $(".khxx_input");
-		for(var j = 0;j < inp.length; j ++){
-			inp[j].value = xinList[idnum][j];
+	var current = 1;
+	function pageInit(currentPage, pagesize) {
+		current = currentPage; // 将当前页存储全局变量
+		pageCount = Math.ceil(newlist.length / pagesize); // 一共分多少页
+		currentNum.innerHTML = currentPage;
+		num.innerHTML = newlist.length + "条";
+		pages.innerHTML = pageCount;
+		var startRow = (currentPage - 1) * pagesize; // 开始显示的行
+		var endRow = currentPage * pagesize - 1; // 结束显示的行
+		var endRow = (endRow > newlist.length) ? newlist.length : endRow; // 如果结束行数大于总数目，显示总数目，否则结束行
+		
+		var html = "";
+		for(var i = 0; i < newlist.length; i++) {
+			if(i >= startRow && i <= endRow) { // 通过间隔分隔数组
+				if(i%2 == 1){
+					html += "<tr class='gradeX odd'>";
+				}else if(i%2 == 0){
+					html += "<tr class='gradeX even'>";
+				}
+				
+
+				for (var j = 0 ; j <newlist[i].length ; j ++) {
+                  html += "<td>" + newlist[i][j] + "</td>"
+				}
+			}
 		}
-		$("#subbtn").val("审核通过");
+		debugger;
+		xinword_body.innerHTML = html;
+
+	
+		
+	
+		var classname = "";
+		$("table tbody td").hover(function() {
+			classname = $(this).parent().attr("class");
+			$(this).parent().removeClass(classname).addClass("blue");
+			$("table tbody tr").find('td:eq(' + $(this).index() + ')').addClass('blue')
+		}, function() {
+			$(this).parent().removeClass("blue").addClass(classname);
+			$("table tbody tr").find('td:eq(' + $(this).index() + ')').removeClass('blue')
+		});
+		
+		$("#increase_btn").click(function(){
+
+			$("#increase_word").show();
+		});
+		//修改按钮
+		$(".xinjgd_change").click(function(){
+			xin_change(this);
+		});
+		$(".xinjgd_del").click(function(){
+			xin_del(this);
+		});
+		
+	}
+	
+	select.onchange = function(ev) {
+		pageInit(1, this.value)
+	}
+	first.onclick = function() {
+		pageInit(1, select.value)
+	}
+	end.onclick = function() {
+		pageInit(pageCount, select.value)
+	}
+
+	next.onclick = function() {
+		var curr = current + 1;
+		if(curr > pageCount) {
+			return
+		}
+		pageInit(curr, select.value)
+	}
+
+	last.onclick = function() {
+		var curr = current - 1;
+		if(curr < 1) {
+			return
+		}
+		pageInit(curr, select.value)
+	}
+	pageInit(1, 15);
+	
+	
+	$("#word_increase_btn").click(function(){
+		//获取到新增表单的信息
+		 $.ajax({
+             type: "post",
+            url: "findFm.action",
+              dataType:'json',
+          	data:{	
+					"ValAd":$("#ValAd1").val(),
+				},
+             dataType: "json",
+              success: function (data) {
+            	  var flag=data.flag;
+            	  if(flag==0){
+            		  $("#insert").submit();
+            		  alert("添加成功");
+            		  $("#increase_word").hide(); 
+            	  }else{
+            		  alert("阀门地址已存在，请重新输入");
+            	  }
+             },
+
+         })
 	});
+	//关闭新增
+	$(".close").click(function(){
+		$("#increase_word").hide();
+		$("#change_word").hide();
+	});
+	$("#increase_btn").click(function(){
+
+		$("#increase_word").show();
+	});
+	//修改按钮
+	$(".xinjgd_change").click(function(){
+		xin_change(this);
+	});
+	$(".xinjgd_del").click(function(){
+		xin_del(this);
+	});
+	$("#word_change_btn").click(function(){
+		 $.ajax({
+             type: "post",
+            url: "findFm.action",
+              dataType:'json',
+          	data:{	
+					"ValAd":$("#ValAd2").val(),
+				},
+             dataType: "json",
+              success: function (data) {
+            	  var flag=data.flag;
+            	  if(flag==0||valad==$("#ValAd2").val()){
+            		  $("#update").submit();
+            		  alert("修改成功");
+            		  $("#change_word").hide(); 
+            	  }else{
+            		  alert("阀门地址已存在，请重新输入");
+            	  }
+             },
+
+         })
+        
+		
+		/*alert(increaseValue);*/
+		
+	});
+	var valad;
+	function xin_change(p){
+		$("#change_word").show();
+		
+		
+
+		
+		 
+		var xintr = $(p).parent().parent().children();
+		//修改数据
+		var changewordList = [];
+		var flag=[0,1,2,3,4,5,6,8,10,14]
+		for(var x = 0 ; x < 15 ; x ++){
+			if(flag.includes(x)){
+				changewordList.push(xintr[x].innerHTML);
+			}			
+		}
+		
+		var changeInput = $("#change_word .change_word_input");
+		for(var i = 0;i < changeInput.length;i ++){
+			if(i==2){
+				 $.ajax({
+						url : "findXq.action", 
+						async : false,
+						dataType : "json",
+						data : {
+							
+						},
+						success : function(data) {
+							
+							var opt="";
+							 xq=data.Xq;
+							
+							 for(var i=0; i<xq.length; i++){
+									
+									
+									$("#xq2").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
+									
+								}
+						}
+
+					});
+			}
+			
+			if(i==3){
+				 $.ajax({
+						url : "findLd.action", 
+						async : false,
+						dataType : "json",
+						data : {
+							"xqm" : $("#xq2").val(),
+						},
+						success : function(data) {
+							$("#ldh2 option:gt(0)").remove();
+							$("#dyh2 option:gt(0)").remove();
+							$("#hh2 option:gt(0)").remove();
+							var ld=data.Ld;
+							for(var i=0; i<ld.length; i++){
+								
+								$("#ldh2").append("<option value='"+ld[i].BuildNo+"'>"+ld[i].BuildNo+"</option>");
+							}	
+						}
+
+					});
+			}
+			if(i==4){
+				$.ajax({
+					url : "findDy.action", 
+					async : false,
+					dataType : "json",
+					data : {
+						"xqm" : $("#xq2").val(),
+						"ldh" : $("#ldh2").val(),
+					},
+					success : function(data) {
+						$("#dyh2 option:gt(0)").remove();
+						$("#hh2 option:gt(0)").remove();
+						var dy=data.Dy;
+						for(var i=0; i<dy.length; i++){
+							
+							$("#dyh2").append("<option value='"+dy[i].CellNo+"'>"+dy[i].CellNo+"</option>");
+						}	
+					}
+
+				});
+			}
+				$("#change_word .change_word_input")[i].value = changewordList[i];
+			
+			
+		}
+		
+		valad=$("#ValAd2").val();
+	}
 	
-})
 
-
-
-//楼栋选择
-function ldselect(xinwordList){
-	 // 获取被选中的option标签
-	 var xq = $('#xq  option:selected').val();
-	 $("#ldh").html("<option value='' disabled selected hidden>--选择楼栋号--</option>");
-	 $("#dyh").html("<option value='' disabled selected hidden>--选择单元号--</option>");
-	 $("hh").html("<option value='' disabled selected hidden>--选择户号--</option>");
-
-	 var opt = [];
-	 for(var i = 0 ; i < xinwordList.length ; i ++){
-		 if( xq == xinwordList[i][0] && opt.indexOf(xinwordList[i][1]) == -1){
-				opt.push(xinwordList[i][1]);
-		 }
-	 }
 	
-	 for(var j = 0; j < opt.length; j++) {
-			$("#ldh").append("<option value="+opt[j]+">"+opt[j]+"</option>");
+
+
+	function xin_del(p){
+		var xintr = $(p).parent().parent().children();
+		var id=xintr[6].innerHTML
+		
+		 layer.confirm('确认删除么', function(index) {
+			                 $.ajax({
+			                     type: "post",
+			                    url: "DeleteYh.action",
+			                      dataType:'json',
+			                  	data:{	
+			      					"id":id,
+			      				},
+			                     dataType: "json",
+			                      success: function (data) {
+			                    	   layer.close(index);
+			                          window.location.reload();
+			                     },
+			  
+			                 })
+			              });
 	}
-	 
-	 
-}
-
-
-function dyselect(xinwordList){
-	 // 获取被选中的option标签
-	 var xq = $('#xq  option:selected').val();
-	 var ld = $('#ldh  option:selected').val();
-	 $("#dyh").html("<option value='' disabled selected hidden>--选择单元号--</option>");
-	 var opt = [];
-	 for(var i = 0 ; i < xinwordList.length ; i ++){
-		 if( xq == xinwordList[i][0] && ld == xinwordList[i][1] && opt.indexOf(xinwordList[i][2]) == -1){
-				opt.push(xinwordList[i][2]);
-		 }
-	 }
-	 for(var j = 0; j < opt.length; j++) {
-			$("#dyh").append("<option>"+opt[j]+"</option>");
-	}
-	 
-}
-
-function hhselect(xinwordList){
-
-	 // 获取被选中的option标签
-	 var xq = $('#xq  option:selected').val();
-	 var ld = $('#ldh  option:selected').val();
-	 var dy = $('#dyh  option:selected').val();
-	 $("#hh").html("<option value='' disabled selected hidden>--选择户号--</option>");
-	 var hharr = [];
-	 for(var i = 0 ; i < xinwordList.length ; i ++){
-		 if( xq == xinwordList[i][0] && ld == xinwordList[i][1] && dy == xinwordList[i][2] && hharr.indexOf(xinwordList[i][3]) == -1){
-			 hharr.push(xinwordList[i][3]);
-		 }
-	 }
-	 for(var j = 0; j < hharr.length; j++) {
-			$("#hh").append("<option>"+hharr[j]+"</option>");
-	}
-	 
 }

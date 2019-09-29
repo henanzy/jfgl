@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnzy.hot.dao.RwxxDao">
+	<resultMap id="rwMap" type="java.util.HashMap"></resultMap>
+	
+	
+	
+	 <select id="findrwxx" resultMap="rwMap" >
+	
+	select YhName,BuildNO,CellNO,HouseNO,XqName,YHBM,Telephone,IDNum from T_YhInfo 
+	where 1=1
+	
+	    <if test="XqName!=null and XqName!=''">
+			and XqName=#{XqName}
+		</if>
+		
+		<if test="BuildNo!=null and BuildNo!=''">
+			and BuildNo=#{BuildNo}
+		</if>
+		<if test="CellNo!=null and CellNo!=''">
+			and CellNO=#{CellNo}
+		</if>
+		<if test="HouseNo!=null and HouseNo!=''">
+	      and HouseNO=#{HouseNo}
+        </if>
+		
+	</select> 
+	<insert id="InsertDrwxx">
+	insert into J_Rwxx(RWBM,YHBM,IDNum,LXR,LXDH,SFRZ,SFDB,CNSS,JZMC,JZYT,JZCG,BZ,HTQSRQ,HTJSRQ,DJ,RWFY)
+	values (#{RWBM},#{YHBM},#{IDNum},#{LXR},#{LXDH},#{SFRZ},#{SFDB},#{CNSS},#{JZMC},#{JZYT},#{JZCG},#{BZ},#{HTQSRQ},#{HTJSRQ},#{DJ},#{RWFY}) 
+	
+	</insert>
+	<select id="findRw"  resultMap="rwMap">
+	select RWBM,y.YHBM,y.IDNum,LXR,LXDH,SFRZ,SFDB,CNSS,JZMC,JZYT,JZCG,J_Rwxx.BZ,HTQSRQ,HTJSRQ,DJ,RWFY,xqName,BuildNo,CellNO,HouseNO
+	 from J_Rwxx ,T_YhInfo y where J_Rwxx.YHBM=y.YHBM 
+	</select>
+</mapper>

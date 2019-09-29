@@ -98,7 +98,7 @@
 <script type="text/javascript" src="../js/mws.js"></script>
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
-<script type="text/javascript" src="../js/rwgl/rwdj.js"></script>
+
 
  
  <style>
@@ -204,30 +204,25 @@ display:block;
     				 </select>
     				 </span>
 				<span class="mws-report-title"> 选择小区 :
-					<select id="xq" name="xqName">
-						<option>--选择小区名称--</option>
-					</select> &nbsp;&nbsp;&nbsp; 楼栋号:
-					<select name="buildNo" id="ldh">
-						<option value=0>--选择楼栋号--</option>
-					</select> &nbsp;&nbsp;&nbsp; 单元号:
-					<select name="cellNo" id="dyh">
-						<option value=0>--选择单元号--</option>
-					</select> &nbsp;&nbsp;&nbsp; 户号:
-					<select name="hhNo" id="hh">
-						<option value=0>--选择单元号--</option>
+					<select id="xq" style="width: 150px" name="xqName">
+                          <option value="" selected="selected">--选择小区--</option>
+					</select>
+				</span> <span>楼栋号： <select name="ldh" id="ldh" style="width: 70px">
+							<option value="">--楼栋--</option>
+					</select>
+				</span> <span>单元号： <select name="dyh" id="dyh" style="width: 70px">
+							<option value="">--单元--</option>
 					</select>
 				</span>
-				</span>
 	
-				<span class="mws-report-title" style="margin-left:10px;"> 入网编码:
-					<input type="text" id="rwbm"  />
+				<span class="mws-report-title" style="margin-left:10px;">
+				 户号:<input type="text" id="houseNo"  />
 					 &nbsp;&nbsp;&nbsp; 
-					<input type="submit" class="mws-button black" id="search_btn" value="搜索" />
+					<input type="submit" class="mws-button black" id="search_btn" onclick="rwSer()" value="搜索" />
 				</span>
 			</p>
 			
 		</div>
-		
 		<div class="mws-panel grid_8 "
 			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:500px">
 			<div class="mws-panel-header">
@@ -236,18 +231,18 @@ display:block;
 			
 			<div id="khxx" class="mws-panel-body" style="height:330px; padding:10px;">
 				<p class="khxx_p">
-					<label><span>小区名称:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>楼栋号:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>单元号:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>户号:</span><input type="text" class="khxx_input" vlaue="" /></label>
+					<label><span>小区名称:</span><input type="text"  id="XqName" class="khxx_input" vlaue="" /></label>
+					<label><span>楼栋号:</span><input type="text" id="BuildNO" class="khxx_input" vlaue="" /></label>
+					<label><span>单元号:</span><input type="text" id="CellNO" class="khxx_input" vlaue="" /></label>
+					<label><span>户号:</span><input type="text" id="HouseNO" class="khxx_input" vlaue="" /></label>
 				</p>
 				<p class="khxx_p">
-					<label><span>客户名称:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>客户编码:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>入网编码:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>联系人:</span><input type="text" class="khxx_input" vlaue="" /></label>
+					<label><span>用户名称:</span><input type="text" id="yhName" class="khxx_input" vlaue="" /></label>
+					<label><span>用户编码:</span><input type="text" id="YHBM" class="khxx_input" vlaue="" /></label>
+					<label><span>入网编码:</span><input type="text" id="rwbm" class="khxx_input" vlaue="" /></label>
+					<label><span>联系电话:</span><input type="text" id="TelePhone" class="khxx_input" vlaue="" /></label>
 				</p>
-				<p class="khxx_p">
+				<!-- <p class="khxx_p">
 					<label><span>联系电话:</span><input type="text" class="khxx_input" vlaue="" /></label>
 					<label>
 						<span>房屋类型:</span>
@@ -267,25 +262,25 @@ display:block;
 						</select>
 					</label>
 					<label><span>竣工日期:</span><input type="date" class="khxx_input" vlaue="" /></label>
-				</p>
+				</p> -->
 				<p class="khxx_p">
-					<label><span>入网日期:</span><input type="date" class="khxx_input" vlaue="" /></label>
+                <label><span>入网日期:</span><input type="date" id="rwDate" class="khxx_input" vlaue="" /></label> 
 					<label>
 						<span>是否入住:</span>
-						<select class="khxx_input">
+						<select class="khxx_input" id="sfrz">
 							<option value="是">是</option>
 							<option value="否">否</option>
 						</select>
 					</label>
 					<label><span>是否低保:</span>
-						<select class="khxx_input">
+						<select class="khxx_input" id="sfdb">
 							<option value="是">是</option>
 							<option value="否">否</option>
 						</select>
 					</label>
 					<label>
 						<span>采暖设施:</span>
-						<select class="khxx_input">
+						<select class="khxx_input" id="cnss">
 							<option value="地暖">地暖</option>
 							<option value="散热器">散热器</option>
 							<option value="风机盘管">风机盘管</option>
@@ -293,25 +288,35 @@ display:block;
 					</label>
 				</p>
 				<p class="khxx_p">
-					<label><span>建筑物名称:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>建筑物用途:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>建筑面积:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label><span>建筑层高:</span><input type="text" class="khxx_input" vlaue="" /></label>
+					<label><span>建筑物名称:</span><input type="text" id="jzwmc" class="khxx_input" vlaue="" /></label>
+					<label><span>建筑物用途:</span><input type="text" id="jzwyt" class="khxx_input" vlaue="" /></label>
+					<label><span>建筑层高:</span><input type="text" id="jzwcg" class="khxx_input" vlaue="" /></label>
+					<label><span>备注:</span><input type="text" id="bz" class="khxx_input" vlaue="" /></label>
 				</p>
-				<div class="khxx_div">
+				<p class="khxx_p">
+				    <label><span>入网单价:</span><input type="text" id="dj" class="khxx_input" vlaue="" /></label>
+					<label><span>入网费用:</span><input type="text" id="rwfy" class="khxx_input" vlaue="" /></label>
+					<label><span>合同起始:</span><input type="date" id="HTQSRQ" class="khxx_input" vlaue="" /></label>
+					<label><span>入网结束:</span><input type="date" id="HTJSRQ" class="khxx_input" vlaue="" /></label>
+				</p>
+				<p class="khxx_p">
+				    <label><span>用户卡号:</span><input type="text" id="IDNum" class="khxx_input" vlaue="" /></label>
+				</p>
+				
+				<!-- <div class="khxx_div">
 					<div class="htpz_title">合同拍照:</div>
 					<div class="htpz_content">
 					
 						<img src="../images/background/photo.png" />
 					</div>
-				</div>
+				</div> -->
 				<p class="khxx_p" style="text-align:center">
-				<c:if test="${type=='qyyh'}">
-					<input style="width:80px;" type="button" id="subbtn" value="确认" />
-				</c:if>
-				<c:if test="${type=='jtyh'}">
+				<%-- <c:if test="${type=='qyyh'}">
 					<input style="width:80px;" onclick="jt()" type="button" id="subbtn" value="确认" />
-				</c:if>	
+				</c:if>
+				<c:if test="${type=='jtyh'}"> --%>
+					<input style="width:80px;" onclick="jt()" type="button" id="subbtn" value="确认" />
+				<%-- </c:if>	 --%>
 				</p>
 				
 			</div>
@@ -329,13 +334,26 @@ display:block;
 					<thead>
 						<tr>
 							<!-- <th class="table-th-css">操作人<span class="span-up"></span> <span class="span-down"></span></th> -->
+							<th>用户卡号</th>
 							<th>小区名称</th>
-							<th>楼号</th>
+							<th>楼栋号</th>
 							<th>单元号</th>
 							<th>户号</th>
-							<th>客户名称</th>
-							<th>客户编码</th>
+							<th>联系电话</th>
+							<th>用户名称</th>
+							<th>用户编码</th>
 							<th>入网编码</th>
+							<th>入网日期</th>
+							<th>是否入住</th>
+							<th>是否低保</th>
+							<th>采暖设施</th>
+							<th>建筑名称</th>
+							<th>建筑用户</th>
+							<th>建筑层高</th>
+							<th>入网单价</th>
+							<th>入网费用</th>
+							<th>合同起始</th>
+							<th>合同结束</th>
 					</thead>
 					<tbody id="xinword_body">
 						
@@ -345,7 +363,7 @@ display:block;
 			</div>
 		</div>
 		
-		<!-- <nav style="width:100%;">
+		 <nav style="width:100%;">
             <ul style="width:500px;display:flex;justify-content:space-between;margin:0 auto;" >
             	
                 <li id="first">首页</li>
@@ -364,7 +382,7 @@ display:block;
                     </select>
                      
             </ul>
-         </nav> -->
+         </nav> 
 
 	<script type="text/javascript">
 var ssgs="<%=request.getSession().getAttribute("gs")%>";
@@ -378,11 +396,192 @@ for (i=0;i<strs.length ;i++ )
 
 } 
   function jt(){
-	  alert("您没有权限!")
+debugger;
+	  var IDNum=$("#IDNum").val();
+	  var XqName=$("#XqName").val();
+		var BuildNO=$("#BuildNO").val();
+		var CellNO=$("#CellNO").val();
+		var HouseNO=$("#HouseNO").val();
+		var yhName=$("#yhName").val();
+		var YHBM=$("#YHBM").val();
+		var rwbm=$("#rwbm").val();
+		var rwDate=$("#rwDate").val();
+		var sfrz=$("#sfrz").val();
+		var sfdb=$("#sfdb").val();
+		var cnss=$("#cnss").val();
+		var jzwmc=$("#jzwmc").val();
+		var jzwyt=$("#jzwyt").val();
+		var jzwcg=$("#jzwcg").val();
+		var bz=$("#bz").val();
+		var rwfy=$("#rwfy").val();
+		var TelePhone=$("#TelePhone").val();
+		var HTQSRQ=$("#HTQSRQ").val();
+		var HTJSRQ=$("#HTJSRQ").val();
+		var DJ=$("#dj").val();
+		 $.ajax({
+				url : "<%=basePath%>rwxxCont/InsertrRw.action", 
+				async : false,
+				dataType : "json",
+				data : {
+					"IDNum":IDNum,
+					"XqName":XqName,
+					"BuildNO":BuildNO,
+					"CellNO":CellNO,
+					"HouseNO":HouseNO,
+					"yhName":yhName,
+					"YHBM":YHBM,
+					"rwbm":rwbm,
+					"rwDate":rwDate,
+					"sfrz":sfrz,
+					"sfdb":sfdb,
+					"cnss":cnss,
+					"jzwmc":jzwmc,
+					"jzwyt":jzwyt,
+					"jzwcg":jzwcg,
+					"bz":bz,
+					"rwfy":rwfy,
+					"TelePhone":TelePhone,
+					"HTQSRQ":HTQSRQ,
+					"HTJSRQ":HTJSRQ,
+					"DJ":DJ,
+				},
+				success : function(data) {
+					location.reload();
+				}
+
+			});	
   }
 </script>
-	</div>
+<script type="text/javascript">
+ function rwSer(){
+	var xq=$("#xq").val();
+	var ldh=$("#ldh").val();
+	var dyh=$("#dyh").val();
+	var houseNo=$("#houseNo").val();
+	 $.ajax({
+			url : "<%=basePath%>rwxxCont/rwSer.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"XqName":xq,
+				"BuildNo":ldh,
+				"CellNo":dyh,
+				"HouseNo":houseNo,
+			},
+			success : function(data) {
+				debugger;
+				var rwxx=data.rwxx;
+				var YHBM=rwxx.YHBM;
+				var TelePhone=rwxx.Telephone;
+				var BuildNO=rwxx.BuildNO;
+				var XqName=rwxx.XqName;
+				var CellNO=rwxx.CellNO;
+				var HouseNO=rwxx.HouseNO;
+				var rwbm=rwxx.rwbm;
+				var IDNum=rwxx.IDNum;
+				$("#YHBM").val(YHBM)
+				$("#TelePhone").val(TelePhone)
+				$("#BuildNO").val(BuildNO)
+				$("#XqName").val(XqName)
+				$("#CellNO").val(CellNO)
+				$("#HouseNO").val(HouseNO)
+				$("#rwbm").val(rwbm)
+				$("#IDNum").val(IDNum)
+			}
 
+		});	
+}
+ 
+ var rwxx;
+ $.ajax({
+		url : "<%=basePath%>rwxxCont/rwxx.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			
+		},
+		success : function(data) {
+			debugger;
+			var opt="";
+			 rwxx=data.rwxx;
+		}
+
+	});
+ 
+	
+var xq;
+
+ $.ajax({
+		url : "<%=basePath%>yhInfo/findXq.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			
+		},
+		success : function(data) {
+			
+			var opt="";
+			 xq=data.Xq;
+			
+			 for(var i=0; i<xq.length; i++){
+					
+				 $("#xq").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
+				}
+		}
+
+	});
+ 
+ $("#xq").change(function(){
+	 $.ajax({
+			url : "<%=basePath%>yhInfo/findLd.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"xqm" : $("#xq").val(),
+			},
+			success : function(data) {
+				$("#ldh option:gt(0)").remove();
+				$("#dyh option:gt(0)").remove();
+				$("#hh option:gt(0)").remove();
+				var ld=data.Ld;
+				for(var i=0; i<ld.length; i++){
+					
+					$("#ldh").append("<option value='"+ld[i].BuildNo+"'>"+ld[i].BuildNo+"</option>");
+				}	
+			}
+
+		});
+		
+		
+	});
+ 
+ $("#ldh").change(function(){
+	 $.ajax({
+			url : "<%=basePath%>yhInfo/findDy.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"xqm" : $("#xq").val(),
+				"ldh" : $("#ldh").val(),
+			},
+			success : function(data) {
+				$("#dyh option:gt(0)").remove();
+				$("#hh option:gt(0)").remove();
+				var dy=data.Dy;
+				for(var i=0; i<dy.length; i++){
+					
+					$("#dyh").append("<option value='"+dy[i].CellNo+"'>"+dy[i].CellNo+"</option>");
+				}	
+			}
+
+		});
+		
+		
+	});
+
+ </script>
+	</div>
+<script type="text/javascript" src="../js/rwgl/rwdj.js"></script>
 </body>
 
 </html>
