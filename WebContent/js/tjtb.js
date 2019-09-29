@@ -127,7 +127,7 @@ $(function () {
 							
 						},
 						tooltip: {
-								pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+								pointFormat: ' <b>{point.total:.1f}<br/>{point.percentage:.1f}%</b>'
 						},
 						plotOptions: {
 								pie: {
@@ -192,23 +192,26 @@ function twdbar(optbar,wdbardata,pie,m){
 
 //欠费饼图
 function tgrbar(optbar,grbardata,pie,m){
-	
-				 optbar.subtitle.text = "欠费比例图";
+	var pieList=[];
+	$.ajax({
+		url : getRootPath()+"/jfxx/findJfze.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			
+		},
+		success : function(data) {
+	    var list= data.list;
+	    for(var i=0; i<list.length; i++){
+	    	pieList.push({name:list[i].XqName,y:list[i].je});
+	    }
+		}
+	});
+				 optbar.subtitle.text = "缴费比例图";
 					optbar.series = [{
-						name: 'Brands',
+						name: '',
 						colorByPoint: true,
-						data: [{
-								name: '金领小区',
-								y: grbardata[m].qf,
-								sliced: true,
-								selected: true
-						}, {
-								name: '天鹅堡',
-								y:   grbardata[m].qf
-						}, {
-							name: '上村花苑',
-							y:   grbardata[m].qf
-						}]
+						data: pieList
 					}];
 					var chart = Highcharts.chart(pie, optbar);
 		

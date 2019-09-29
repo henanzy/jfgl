@@ -244,6 +244,12 @@ public class YhInfoServiceImpl implements YhInfoService{
 		return yhnfoDao.findAll(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> findQf(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return yhnfoDao.findQf(map);
+	}
+
 
 
 	

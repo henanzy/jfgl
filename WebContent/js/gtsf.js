@@ -74,6 +74,10 @@ $(function () {
 function jf(){
 	var JFTJ=$("input[name='JFTJ']:checked").val();
 	var SFFS=$("input[name='SFFS']:checked").val();
+	if(isNaN(JFJE)){
+		alert("缴费金额请输入数字")
+		return;
+	}
 	$.ajax({
 		url : getRootPath()+"/jfxx/InsertJfxx.action", 
 		async : false,

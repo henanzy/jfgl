@@ -12,4 +12,7 @@ public interface JfxxDao {
    public void InsertJfxx(Map<String, Object> map);
    
    public List<Map<String, Object>> findYhds(Map<String, Object> map);
+   
+   public List<Map<String, Object>> findJfze();
+   
 }

@@ -300,19 +300,19 @@ width:51px;
 			<div class="mws-panel-header">
 				<span class="mws-i-24 i-table-1">稽查反馈</span>
 			</div>
-			
+			<input type="text" style="display:none" id="YHBM"   />
 			<div id="khxx" class="mws-panel-body" style="height:600px; padding:10px;">
 				<p class="khxx_p">
 					<label></label>
-					<label><input type="checkbox"  />正常</label>
-					<label><input type="checkbox"  />存在问题</label>
+					<label><input type="radio" value="正常" name="JCQK" />正常</label>
+					<label><input type="radio"  value="存在问题" name="JCQK"/>存在问题</label>
 					<label></label>
 				</p>
 				<p class="khxx_p">
 				<label></label>
 					<label>
 						<span>稽查问题:</span>
-						<select  class="khxx_input">
+						<select  class="khxx_input" id="JCWT">
 							<option value="私改暖气设备">私改暖气设备</option>
 							<option value="其他">其他</option>
 						</select>
@@ -324,8 +324,8 @@ width:51px;
 				</p>
 				<p class="khxx_p">
 				<label></label>
-					<label><span>稽查日期:</span><input type="date" class="khxx_input" id="jcrq" value="" readonly="readonly" /></label>
-					<label><span>稽查人:</span><select class="khxx_input">
+					<label><span>稽查日期:</span><input type="date" class="khxx_input" id="JCRQ" value=""  /></label>
+					<label><span>稽查人:</span><select class="khxx_input" id="JCR">
 							<option value="张婷婷">张婷婷</option>
 							<option value="李璇">李璇</option>
 						</select></label>
@@ -334,7 +334,7 @@ width:51px;
 				<p class="khxx_p">
 					<label></label>
 					<label style="width:50%;"><span>备注：</span>
-						<textarea style="width:100%;height:60px;"  class="khxx_input" rows="" cols=""></textarea>
+						<textarea id="JCBZ" style="width:100%;height:60px;"  class="khxx_input" rows="" cols=""></textarea>
 					</label>
 					<label></label>
 					<label></label>
@@ -342,16 +342,16 @@ width:51px;
 				
 				<hr style="margin-top:60px;"></hr>
 				
-				<p class="khxx_p">
+				<!-- <p class="khxx_p">
 					<label></label>
-					<label style="width:50%;">处理结果登记</label>
+					<label id="CLJG" style="width:50%;">处理结果登记</label>
 					<label></label>
-				</p>
+				</p> -->
 				<p class="khxx_p">
 				<label></label>
 					<label>
 						<span>处理情况:</span>
-						<select  class="khxx_input">
+						<select  id="CLQK" class="khxx_input">
 							<option value="处理完成">处理完成</option>
 							<option value="未完成">未完成</option>
 						</select>
@@ -363,24 +363,24 @@ width:51px;
 				</p>
 				<p class="khxx_p">
 				<label></label>
-				<label><span>处理结果:</span><select class="khxx_input">
+				<label><span>处理结果:</span><select id="CLJG" class="khxx_input">
 							<option value="封条">封条</option>
 							<option value="其他">其他</option>
 						</select></label>
-					<label><span>稽查日期:</span><input type="date" class="khxx_input" id="jcrq" value="" readonly="readonly" /></label>
+					<label><span>处理日期:</span><input type="date" class="khxx_input" id="CLRQ" value=""  /></label>
 					
 						<label></label>
 				</p>
 				<p class="khxx_p">
 					<label></label>
 					<label style="width:50%;"><span>备注：</span>
-						<textarea style="width:100%;height:60px;"  class="khxx_input" rows="" cols=""></textarea>
+						<textarea id="CLBZ" style="width:100%;height:60px;"  class="khxx_input" rows="" cols=""></textarea>
 					</label>
 					<label></label>
 					<label></label>
 				</p>
 				<p class="khxx_p" style="text-align:center;margin-top:50px;">
-					<input style="width:80px;" type="button" alt="" id="subbtn" value="确认" />
+					<input style="width:80px;" type="button" alt="" id="subbtn" onclick="jc()" value="确认" />
 					<input style="width:80px;" type="button" alt="" id="delbtn" value="取消" />
 				</p>
 			</div>

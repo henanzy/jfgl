@@ -233,7 +233,7 @@ th, td {
 						<option value="2019-2020">2019-2020</option>
 						<option value="2018-2019">2018-2019</option>
 				</select>
-				 <label>交款方式：</label> 
+				 <label>收费方式：</label> 
                 <select id="SFFS">
 						<option value="" selected="selected">--选择收费方式--</option>
 						<option value="坐收">坐收</option>
