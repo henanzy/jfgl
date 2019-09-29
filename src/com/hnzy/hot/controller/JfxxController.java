@@ -84,4 +84,12 @@ public class JfxxController {
 		}
 		return str;
 	}
+	@RequestMapping("findJfze")
+	   @ResponseBody
+		public JSONObject findJfze(String YHBM) throws UnsupportedEncodingException{
+			JSONObject json=new JSONObject();
+			json.put("list", jfxxService.findJfze());			
+			return json;
+		}
+	
 }

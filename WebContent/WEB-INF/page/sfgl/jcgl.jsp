@@ -261,7 +261,37 @@ width:51px;
 
 	<div id="increasedis" class="clearfix" >
 		
-		
+		<!-- <div class="mws-report-container clearfix">
+			
+			<p class="mws-report" href="#" style="font-size: 14px;min-width:800px;height:90px;">
+				<span class="mws-report-icon mws-ic ic-building"></span> 
+				<span class="mws-report-content" style="margin-top: 10px;"> 
+				<span class="mws-report-title"><span>选择小区：
+						<select id="xq" style="width:150px"
+						name="xqName">
+						
+					</select>
+					</span>
+					<span>楼栋号：
+						<select name="ldh" id="ldh" style="width:70px">
+							<option value="" >楼栋</option>
+					</select>
+					</span>
+					
+					
+					
+				</span>
+				</span>
+	
+				<span class="mws-report-title" style="margin-left:10px;"> 入网编码:
+					<input type="text" id="rwbm"  />
+					 &nbsp;&nbsp;&nbsp; 
+					<input type="submit" class="mws-button black" id="search_btn" value="搜索" />
+				</span>
+				
+			</p>
+			
+		</div> -->
 		
 		<div class="mws-panel grid_8 "
 			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:1000px">
@@ -269,7 +299,7 @@ width:51px;
 				<span class="mws-i-24 i-table-1">稽查管理 &nbsp;&nbsp; 选择小区：
 						<select id="xq" style="width:150px"
 						name="xqName">
-						
+						&nbsp;&nbsp; 
 					</select>楼栋号：
 						<select name="ldh" id="ldh" style="width:70px">
 							<option value="" >楼栋</option>
@@ -300,19 +330,19 @@ width:51px;
 			<div class="mws-panel-header">
 				<span class="mws-i-24 i-table-1">稽查反馈</span>
 			</div>
-			<input type="text" style="display:none" id="YHBM"   />
+			
 			<div id="khxx" class="mws-panel-body" style="height:600px; padding:10px;">
 				<p class="khxx_p">
 					<label></label>
-					<label><input type="radio" value="正常" name="JCQK" />正常</label>
-					<label><input type="radio"  value="存在问题" name="JCQK"/>存在问题</label>
+					<label><input type="checkbox"  />正常</label>
+					<label><input type="checkbox"  />存在问题</label>
 					<label></label>
 				</p>
 				<p class="khxx_p">
 				<label></label>
 					<label>
 						<span>稽查问题:</span>
-						<select  class="khxx_input" id="JCWT">
+						<select  class="khxx_input">
 							<option value="私改暖气设备">私改暖气设备</option>
 							<option value="其他">其他</option>
 						</select>
@@ -324,8 +354,8 @@ width:51px;
 				</p>
 				<p class="khxx_p">
 				<label></label>
-					<label><span>稽查日期:</span><input type="date" class="khxx_input" id="JCRQ" value=""  /></label>
-					<label><span>稽查人:</span><select class="khxx_input" id="JCR">
+					<label><span>稽查日期:</span><input type="date" class="khxx_input" id="jcrq" value="" readonly="readonly" /></label>
+					<label><span>稽查人:</span><select class="khxx_input">
 							<option value="张婷婷">张婷婷</option>
 							<option value="李璇">李璇</option>
 						</select></label>
@@ -334,7 +364,7 @@ width:51px;
 				<p class="khxx_p">
 					<label></label>
 					<label style="width:50%;"><span>备注：</span>
-						<textarea id="JCBZ" style="width:100%;height:60px;"  class="khxx_input" rows="" cols=""></textarea>
+						<textarea style="width:100%;height:60px;"  class="khxx_input" rows="" cols=""></textarea>
 					</label>
 					<label></label>
 					<label></label>
@@ -342,16 +372,16 @@ width:51px;
 				
 				<hr style="margin-top:60px;"></hr>
 				
-				<!-- <p class="khxx_p">
+				<p class="khxx_p">
 					<label></label>
-					<label id="CLJG" style="width:50%;">处理结果登记</label>
+					<label style="width:50%;">处理结果登记</label>
 					<label></label>
-				</p> -->
+				</p>
 				<p class="khxx_p">
 				<label></label>
 					<label>
 						<span>处理情况:</span>
-						<select  id="CLQK" class="khxx_input">
+						<select  class="khxx_input">
 							<option value="处理完成">处理完成</option>
 							<option value="未完成">未完成</option>
 						</select>
@@ -363,24 +393,24 @@ width:51px;
 				</p>
 				<p class="khxx_p">
 				<label></label>
-				<label><span>处理结果:</span><select id="CLJG" class="khxx_input">
+				<label><span>处理结果:</span><select class="khxx_input">
 							<option value="封条">封条</option>
 							<option value="其他">其他</option>
 						</select></label>
-					<label><span>处理日期:</span><input type="date" class="khxx_input" id="CLRQ" value=""  /></label>
+					<label><span>稽查日期:</span><input type="date" class="khxx_input" id="jcrq" value="" readonly="readonly" /></label>
 					
 						<label></label>
 				</p>
 				<p class="khxx_p">
 					<label></label>
 					<label style="width:50%;"><span>备注：</span>
-						<textarea id="CLBZ" style="width:100%;height:60px;"  class="khxx_input" rows="" cols=""></textarea>
+						<textarea style="width:100%;height:60px;"  class="khxx_input" rows="" cols=""></textarea>
 					</label>
 					<label></label>
 					<label></label>
 				</p>
 				<p class="khxx_p" style="text-align:center;margin-top:50px;">
-					<input style="width:80px;" type="button" alt="" id="subbtn" onclick="jc()" value="确认" />
+					<input style="width:80px;" type="button" alt="" id="subbtn" value="确认" />
 					<input style="width:80px;" type="button" alt="" id="delbtn" value="取消" />
 				</p>
 			</div>
@@ -465,6 +495,9 @@ var xq;
 <script>
 $(document).ready(function(){
 	
+	$("#jcfkclick").click(function(){
+		$(".jcfk").show();
+	});
 	$("#delbtn").click(function(){
 		$(".jcfk").hide();
 	});

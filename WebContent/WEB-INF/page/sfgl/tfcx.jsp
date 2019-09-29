@@ -105,7 +105,7 @@
 <script type="text/javascript" src="../js/themer.js"></script>
 
 <script type="text/javascript" src="../js/demo.formelements.js"></script>
- <script type="text/javascript" src="../js/wxzf.js"></script> 
+ <script type="text/javascript" src="../js/tfcx.js"></script> 
 <style type="text/css">
 .span-up {
 	border-style: solid;
@@ -233,15 +233,7 @@ th, td {
 						<option value="2019-2020">2019-2020</option>
 						<option value="2018-2019">2018-2019</option>
 				</select>
-				 <label>收费方式：</label> 
-                <select id="SFFS">
-						<option value="" selected="selected">--选择收费方式--</option>
-						<option value="坐收">坐收</option>
-						<option value="银行代收">银行代收</option>
-						<option value="走收">走收</option>
-						<option value="物业代收">物业代收</option>
-						
-				</select><br/><br/>
+				 <br/><br/>
 				户号：<input type="text" name="hh" id="hh" size=6px value="" />
 					&nbsp;&nbsp;&nbsp; 
 				客户名：<input type="text" id="YhName" size=6px
@@ -278,7 +270,11 @@ th, td {
 							
 							<th class="table-th-css">采暖期<span class="span-up"></span> <span
 								class="span-down"></span></th>
+							<th class="table-th-css">用热状态<span class="span-up"></span> <span
+								class="span-down"></span></th>	
 							<th class="table-th-css">用户姓名<span class="span-up"></span> <span
+								class="span-down"></span></th>
+							<th class="table-th-css">联系电话<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							<th class="table-th-css">用户编码<span class="span-up"></span> <span
 								class="span-down"></span></th>
@@ -291,26 +287,22 @@ th, td {
 							<th class="table-th-css">户号<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							
-							<th class="table-th-css">缴费时间<span class="span-up"></span> <span
+							<th class="table-th-css">退款时间<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							<th class="table-th-css">卡号<span class="span-up"></span> <span
 								class="span-down"></span></th>
-							<th class="table-th-css">应收金额<span class="span-up"></span> <span
+							<th class="table-th-css">实收金额<span class="span-up"></span> <span
 								class="span-down"></span></th>
-							<th class="table-th-css">缴费金额<span class="span-up"></span> <span
+							<th class="table-th-css">本次退费<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							
-							<th class="table-th-css">交款方式<span class="span-up"></span> <span
+							<th class="table-th-css">退款方式<span class="span-up"></span> <span
 								class="span-down"></span></th>
-							<th class="table-th-css">计费方式<span class="span-up"></span> <span
-								class="span-down"></span></th>
-							<th class="table-th-css">面积<span class="span-up"></span>
-								<span class="span-down"></span></th>
+							
 
 							<th class="table-th-css">票据号码<span class="span-up"></span> <span
 								class="span-down"></span></th>
-							<th class="table-th-css">流水单号<span class="span-up"></span> <span
-								class="span-down"></span></th>
+							
 							
 						</tr>
 					</thead>

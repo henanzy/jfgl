@@ -7,7 +7,7 @@
 			+ path + "/";
 	
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -98,7 +98,7 @@
 <script type="text/javascript" src="../js/mws.js"></script>
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
-<!-- <script type="text/javascript" src="../js/rwgl/rwsh.js"></script> -->
+ <script type="text/javascript" src="../js/tf.js"></script> 
 
  
  <style>
@@ -136,6 +136,12 @@ display:inline-block;
 	margin-left:10px;
 	width:60%;
 	height:18px;
+}
+.readonly_input{
+margin-left:10px;
+	width:60%;
+	height:18px;
+	background-color:#CCCCCC;
 }
 #khxx p label select.khxx_input{
 	height:24px;
@@ -199,71 +205,73 @@ display:block;
 		<div class="mws-panel grid_8 "
 			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:500px">
 			<div class="mws-panel-header">
-				<span class="mws-i-24 i-table-1">退费信息</span>
+				<span class="mws-i-24 i-table-1">退费</span>
 			</div>
 			
-			<div id="khxx" class="mws-panel-body" style="height:300px; padding:10px;">
+			<div id="khxx" class="mws-panel-body" style="height:400px; padding:10px;">
 				<p class="khxx_p">
-					<label><span>小区名称:</span><input type="text" class="khxx_input" value="金领小区" /></label>
-					<label><span>楼栋号:</span><input type="text" class="khxx_input" value="1号楼" /></label>
-					<label><span>单元号:</span><input type="text" class="khxx_input" value="1单元" /></label>
-					<label><span>户号:</span><input type="text" class="khxx_input" value="101室" /></label>
+				 
+					<label><span>小区名称:</span><input type="text" class="readonly_input" readonly="readonly" id="xq"  /></label>
+					<label><span>楼栋号:</span><input type="text" class="readonly_input" readonly="readonly"  id="ldh" /></label>
+					<label><span>单元号:</span><input type="text" class="readonly_input" readonly="readonly" id="dyh"  /></label>
+					<label><span>户号:</span><input type="text" class="readonly_input"  readonly="readonly" id="hh" /></label>
 				</p>
 				<p class="khxx_p">
-					<label><span>用热状态:</span><input type="text" class="khxx_input" value="正常" /></label>
-					<label><span>客户名称:</span><input type="text" class="khxx_input" value="董新召" /></label>
-					<label><span>客户编码:</span><input type="text" class="khxx_input" value="123456001" /></label>
-					<label><span>客户类型:</span><input type="text" class="khxx_input" value="居民" /></label>
+				    <label><span>客户编码:</span><input type="text" class="khxx_input" id="YHBM"  /></label>
+				    
+					<label><span>客户卡号:</span><input type="text" class="readonly_input"  readonly="readonly" id="IDNum"  /></label>
+					
+					<label><span>客户名称:</span><input type="text" class="readonly_input"  readonly="readonly"  id="yhmc"/></label>
+					
+					<label><span>客户类型:</span><input type="text" class="readonly_input"  readonly="readonly" id="KHLX" /></label>
 					
 				</p>
 				<p class="khxx_p">
-					<label><span>联系电话:</span><input type="text" class="khxx_input" value="13548639715" /></label>
-					<label>
-						<span>收费记录:</span>
-						<select class="khxx_input">
-							<option value="">--选择年度--</option>
-							<option value="2019-2020">2019-2020</option>
-							<option value="2019-2020">2018-2019</option>
+				    <label><span>用热状态:</span>
+				    <select id="YRZT" class="khxx_input">
+							<option value="正常">正常</option>
+							<option value="报停">报停</option>
+							<option value="强停">强停</option>
+							<option value="未供">未供</option>
 						</select>
+				    </label>
+					<label><span>联系电话:</span><input type="text" class="khxx_input" id="LXDH" /></label>
+					<label>
+						<span>采暖期:</span>
+						<input type="text" class="readonly_input"  readonly="readonly" id="CNQ" />
 					</label>
-					<label><span>实收金额:</span><input type="text" class="khxx_input" value="2100.0" /></label>
-					<label><span>本次退费:</span><input type="text" class="khxx_input" value="2100.0" /></label>
+					
+					<label><span>采暖面积:</span><input id="cnmj" type="text" class="readonly_input"  readonly="readonly"  /></label>
 				</p>
+				
 				<p class="khxx_p">
-					<label>
-						<span>退款方式:</span>
-						<input type="checkbox" value="现金" checked="checked" />现金
-						<input type="checkbox" value="支票" />支票
-						<input type="checkbox" value="刷卡" />刷卡
-					</label>
-					<label><span>开票方式:</span>
-						<select class="khxx_input">
-							<option value="机打收据">机打收据</option>
-							<option value="手写收据">手写收据</option>
+					
+					
+					
+					<label><span>实收金额:</span><input id="SSJE" type="text" class="khxx_input" value="" /></label>
+					<label><span>本次退费:</span><input id="BCTF" type="text" class="khxx_input" value="" /></label>
+					<label><span>退款方式:</span>
+						<select id="TKFS" class="khxx_input">
+							<option value="现金">现金</option>
+							<option value="转账">转账</option>
 						</select>
 					</label>
-					<label><span>退费原因:</span>
-						<select class="khxx_input">
-							<option value="充错户">充错户</option>
-							<option value="其他">其他</option>
-						</select>
-					</label>
-					<label><span>退款人:</span><input type=""text"" class="khxx_input" value="系统维护" /></label>
+					<label><span>票据号码:</span><input id="PJHM" type="text" class="khxx_input" value="" /></label>
 					
 				</p>
 				
 				<p class="khxx_p">
-						
-					<label><span>退款日期:</span><input type="date" class="khxx_input" id="tkrq" value="" readonly="readonly" /></label>
-					<label><span>备注:</span><input type="text" class="khxx_input" value="" /></label>
+				    <label><span>退费原因:</span><input id="TFYY" type="text" class="khxx_input" value="" /></label>
+					<label><span>退款人:</span><input type="text" class="readonly_input"  readonly="readonly" id="TKR" value="测试账户" readonly="readonly"/></label>
+					<label><span>退款日期:</span><input type="date" class="readonly_input"  readonly="readonly" id="TKRQ"  readonly="readonly" /></label>
 				</p>
 				<p class="khxx_p" style="text-align:center">
 				
 					<c:if test="${type=='qyyh'}">
-							<input style="width:80px;" type="button" alt="" id="subbtn" value="确认退费" />
+						<input style="width:80px;" type="button" alt="" onclick="tf()" id="subbtn" value="确认" />
 				</c:if>
 				<c:if test="${type=='jtyh'}">
-					<input style="width:80px;"  onclick="jt()" type="button" alt="" id="subbtn" value="确认退费" />
+					<input style="width:80px;" onclick="jt()"type="button" alt="" id="subbtn" value="确认" />
 				</c:if>	
 				</p>
 				
@@ -274,9 +282,10 @@ display:block;
 
 <script>
 $(document).ready(function(){
-		var time = getTIME()
-		$("#tkrq").val(time);
 
+	
+	var date = new Date();
+	$("#TKRQ").val(date.format('yyyy-MM-dd'));
 	function getTIME(){
 		var newtime = new Date();
 		var y = newtime.getFullYear();

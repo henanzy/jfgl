@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnzy.hot.dao.TfxxDao">
+	<resultMap id="TfMap" type="java.util.HashMap"></resultMap>
+	
+	
+	<insert id="InsertTfxx" >
+		insert into J_Tkxx
+		(IDNum,KHBM,YRZT,KHLX,LXDH,CNQ,SSJE,BCTF,TKFS,PJHM,TKRQ,TKR,BZ,TFYY)
+		values(#{IDNum},#{YHBM},#{YRZT},#{KHLX},#{LXDH},#{CNQ},#{SSJE},#{BCTF},#{TKFS},#{PJHM},#{TKRQ},#{TKR},#{BZ},#{TFYY})
+	</insert>
+	
+    <select id="findJfByBm" resultMap="TfMap" >
+	
+	select top 1 * from J_Jfxx  where YHBM=#{YHBM} order by JFSJ desc
+	
+	</select>
+	
+	 <select id="findTfxx" resultMap="TfMap" >
+	
+	select * from J_Tkxx j, T_YhInfo y  where   j.KHBM=y.YHBM
+	
+	    <if test="XqName!=null and XqName!=''">
+			and y.XqName=#{XqName}
+		</if>
+		
+		<if test="BuildNo!=null and BuildNo!=''">
+			and y.BuildNo=#{BuildNo}
+		</if>
+		<if test="CellNO!=null and CellNO!=''">
+			and y.CellNO=#{CellNO}
+		</if>
+		<if test="hh!=null and hh!=''">
+	    and y.HouseNO=#{hh}
+        </if>
+		<if test="YHBM!=null and YHBM!=''">
+			and j.KHBM=#{YHBM}
+		</if>
+		<if test="YhName!=null and YhName!=''">
+			and y.YhName=#{YhName}
+		</if>
+		<if test="IDNum!=null and IDNum!=''">
+			and j.IDNum=#{IDNum}
+		</if>
+		<if test="CNQ!=null and CNQ!=''">
+			and j.CNQ=#{CNQ}
+		</if>
+		
+		 <if test="startTime!=null and startTime!=''">
+	    and j.TKRQ &gt;= #{startTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+	     and j.TKRQ &lt;=#{endTime}
+        </if> 
+	</select> 
+</mapper>

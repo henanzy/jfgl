@@ -304,7 +304,7 @@
 	
 	
 	<select id="findTc" resultMap="YhMap" >
-		select y.id ,y.YhName,y.ValAd,y.yhfl,f.QgID,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,f.Status,y.HeatArea,
+		select y.id ,y.YhName,y.ValAd,y.yhfl,f.QgID,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,f.Status,y.HeatArea,y.YHBM,y.JCQK,
 		f.RoomTemp,f.LockSt,y.IDNum,f.FamKd,f.ValTemp,f.Tqyb,y.SFJF,y.WCAd ,y.Bz,CONVERT(varchar(100),f.RecordTime , 20)as RecordTime
 		from T_YhInfo y ,T_FmInfo f where y.ValAd=f.ValAd and (y.yhrb=0 or y.yhrb=2)
         <if test="xqm!=null and xqm!=''">
@@ -439,5 +439,21 @@
 	     and y.jfsj &lt;=#{endTime}
         </if> 
 	</select>
-	
+	<select id="findQf" resultMap="YhMap" >
+		select y.id ,y.YhName,y.yhfl,f.QgID,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.YHBM,y.JCQK
+		,y.IDNum,f.FamKd ,y.Bz
+		from T_YhInfo y ,T_FmInfo f where y.ValAd=f.ValAd and (y.yhrb=0 or y.yhrb=2)and y.SFJF='否' and f.FamKd>0
+        <if test="xqm!=null and xqm!=''">
+        and y.XqName=#{xqm}
+        </if>
+        <if test="ldh!=null and ldh!=''">
+        and y.BuildNO=#{ldh}
+        </if>
+        <if test="dyh!=null and dyh!=''">
+	    and y.CellNO=#{dyh}
+        </if>
+        <if test="hh!=null and hh!=''">
+	    and y.HouseNO=#{hh}
+        </if>        
+	</select>
 </mapper>

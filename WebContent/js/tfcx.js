@@ -13,35 +13,34 @@ $(document).ready(function(){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
 			arr1[0] = json[i].CNQ;
-			arr1[1] = json[i].YhName;
-			arr1[2] = json[i].YHBM;
-			arr1[3] = json[i].XqName;
-			arr1[4] = json[i].BuildNO;
-			arr1[5] = json[i].CellNO;
-			arr1[6] = json[i].HouseNO;
+			arr1[1] = json[i].YRZT;
+			arr1[2] = json[i].YhName;
+			arr1[3] = json[i].LXDH;
+			arr1[4] = json[i].KHBM;
+			arr1[5] = json[i].XqName;
+			arr1[6] = json[i].BuildNO;
+			arr1[7] = json[i].CellNO;
+			arr1[8] = json[i].HouseNO;
+			arr1[9] = json[i].TKRQ;
+			arr1[10] = json[i].IDNum;
+			arr1[11] = json[i].SSJE;
+			arr1[12] = json[i].BCTF;
+			arr1[13] = json[i].TKFS;
 			
-			arr1[7] = json[i].JFSJ;
-			arr1[8] = json[i].IDNum;
-			arr1[9] = json[i].YSJE;
-			arr1[10] = json[i].JFJE;
-			arr1[11] = json[i].SFFS;
-			arr1[12] = json[i].JIFFS;
-			
-			arr1[13] = json[i].HeatArea;
 			arr1[14] = json[i].PJHM;
-			arr1[15] = json[i].LSDH;
+			
 			
 			shebList.push(arr1);
 		};
 	}
 	var YhList;
 	$.ajax({
-			url : getRootPath()+"/jfxx/findJfxx.action", 
+			url : getRootPath()+"/tfxx/findTfxx.action", 
 			async : false,
 			dataType : "json",
 			data : {
 				
-				"JFTJ":"微信",
+				
 			},
 			success : function(data) {
 				
@@ -274,18 +273,18 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 	var json;
 	compareWordList.length=0;
 	$.ajax({
-		url : getRootPath()+"/jfxx/findJfxx.action", 
+		url : getRootPath()+"/tfxx/findTfxx.action", 
 		async : false,
 		dataType : "json",
 		data : {
 			"CNQ":$("#CNQ").val(),
-			"JFTJ":"微信",
+			
 			"YhName":$("#YhName").val(),
 			"IDNum":$("#IDNum").val(),
 			"YHBM":$("#YHBM").val(),
 			"startTime":$("#startTime").val(),
 			"endTime":$("#endTime").val(),
-			"SFFS":$("#SFFS").val(),
+			
 			"XqName":xq,
 			"BuildNo":ld,
 			"CellNO":dy,
@@ -300,23 +299,21 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 	for (var i = 0 ; i < json.length ; i ++) {
 		var arr1 = [];
 		arr1[0] = json[i].CNQ;
-		arr1[1] = json[i].YhName;
-		arr1[2] = json[i].YHBM;
-		arr1[3] = json[i].XqName;
-		arr1[4] = json[i].BuildNO;
-		arr1[5] = json[i].CellNO;
-		arr1[6] = json[i].HouseNO;
+		arr1[1] = json[i].YRZT;
+		arr1[2] = json[i].YhName;
+		arr1[3] = json[i].LXDH;
+		arr1[4] = json[i].KHBM;
+		arr1[5] = json[i].XqName;
+		arr1[6] = json[i].BuildNO;
+		arr1[7] = json[i].CellNO;
+		arr1[8] = json[i].HouseNO;
+		arr1[9] = json[i].TKRQ;
+		arr1[10] = json[i].IDNum;
+		arr1[11] = json[i].SSJE;
+		arr1[12] = json[i].BCTF;
+		arr1[13] = json[i].TKFS;
 		
-		arr1[7] = json[i].JFSJ;
-		arr1[8] = json[i].IDNum;
-		arr1[9] = json[i].YSJE;
-		arr1[10] = json[i].JFJE;
-		arr1[11] = json[i].SFFS;
-		arr1[12] = json[i].JIFFS;
-		
-		arr1[13] = json[i].HeatArea;
 		arr1[14] = json[i].PJHM;
-		arr1[15] = json[i].LSDH;
 		compareWordList.push(arr1);
 	};
 

@@ -24,12 +24,13 @@ $(document).ready(function(){
 			arr1[8] = json[i].IDNum;
 			arr1[9] = json[i].YSJE;
 			arr1[10] = json[i].JFJE;
-			arr1[11] = json[i].SFFS;
-			arr1[12] = json[i].JIFFS;
+			arr1[11] = json[i].JFTJ;
+			arr1[12] = json[i].SFFS;
+			arr1[13] = json[i].JIFFS;
 			
-			arr1[13] = json[i].HeatArea;
-			arr1[14] = json[i].PJHM;
-			arr1[15] = json[i].LSDH;
+			arr1[14] = json[i].HeatArea;
+			arr1[15] = json[i].PJHM;
+			arr1[16] = json[i].LSDH;
 			
 			shebList.push(arr1);
 		};
@@ -41,7 +42,7 @@ $(document).ready(function(){
 			dataType : "json",
 			data : {
 				
-				"JFTJ":"微信",
+				
 			},
 			success : function(data) {
 				
@@ -279,7 +280,7 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		dataType : "json",
 		data : {
 			"CNQ":$("#CNQ").val(),
-			"JFTJ":"微信",
+			"JFTJ":$("#JFTJ").val(),
 			"YhName":$("#YhName").val(),
 			"IDNum":$("#IDNum").val(),
 			"YHBM":$("#YHBM").val(),
@@ -311,12 +312,13 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		arr1[8] = json[i].IDNum;
 		arr1[9] = json[i].YSJE;
 		arr1[10] = json[i].JFJE;
-		arr1[11] = json[i].SFFS;
-		arr1[12] = json[i].JIFFS;
+		arr1[11] = json[i].JFTJ;
+		arr1[12] = json[i].SFFS;
+		arr1[13] = json[i].JIFFS;
 		
-		arr1[13] = json[i].HeatArea;
-		arr1[14] = json[i].PJHM;
-		arr1[15] = json[i].LSDH;
+		arr1[14] = json[i].HeatArea;
+		arr1[15] = json[i].PJHM;
+		arr1[16] = json[i].LSDH;
 		compareWordList.push(arr1);
 	};
 

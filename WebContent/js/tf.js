@@ -43,20 +43,33 @@ $(function () {
 					$("#dyh").val(map.CellNO);
 					$("#hh").val(map.HouseNO);
 					$("#cnmj").val(map.HeatArea);
-					$("#yhfl").val(map.Yhfl);
+					$("#KHLX").val(map.Yhfl);
 					$("#yhmc").val(map.YhName);
 					$("#IDNum").val(map.IDNum);
 					$("#RWBM").val(map.RWBM);
 					$("#LXDH").val(map.Telephone);
-					$("#yhbl").val("5");
-					$("#dj").val("12");
-					var mj = parseInt(map.HeatArea);
-					var dj = parseFloat($("#dj").val());
-					var yhbl = parseFloat($("#yhbl").val());
-					$("#cnf").val((mj*dj).toFixed(2));
 					
-					$("#yhje").val((mj*dj*yhbl*0.01).toFixed(2));
-					$("#YSJE").val((mj*dj-mj*dj*yhbl*0.01).toFixed(2));
+				}
+				else{
+					alert("用户编码不存在请重新输入")
+				}
+				
+			}
+
+		});
+		
+		$.ajax({
+			url : getRootPath()+"/tfxx/findJfByBm.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"YHBM":$("#YHBM").val(),
+			},
+			success : function(data) {
+				if(data.map.length>0){
+					var map=data.map[0];
+					$("#CNQ").val(map.CNQ);
+					$("#SSJE").val(map.JFJE);
 				}
 				else{
 					alert("用户编码不存在请重新输入")
@@ -66,43 +79,36 @@ $(function () {
 
 		});
 	});
-	$("#JFJE").blur(function(){
-		$("#SYJE").val(($("#JFJE").val()-$("#YSJE").val()).toFixed(2));
-	});
+	
 	
 });
-function jf(){
-	var JFTJ=$("input[name='JFTJ']:checked").val();
-	var SFFS=$("input[name='SFFS']:checked").val();
-	if(isNaN(JFJE)){
-		alert("缴费金额请输入数字")
-		return;
-	}
+function tf(){
+	
 	$.ajax({
-		url : getRootPath()+"/jfxx/InsertJfxx.action", 
+		url : getRootPath()+"/tfxx/InsertTfxx.action", 
 		async : false,
 		dataType : "json",
 		data : {
 			"YHBM":$("#YHBM").val(),
 			"IDNum":$("#IDNum").val(),
-			"JFSJ":$("#JFSJ").val(),
-			"CNQ":$("#CNQ").val(),
-			"JIFFS":$("#JIFFS").val(),
-			"JFTJ":JFTJ,
-			"SFFS":SFFS,
-			
-			"RWBM":$("#RWBM").val(),
-			"JFJE":$("#JFJE").val(),
-			"YSJE":$("#YSJE").val(),
-			"SYJE":$("#SYJE").val(),
-			"SKZH":$("#SKZH").val(),
-			"PJHM":$("#PJHM").val(),
-			"LSDH":$("#LSDH").val(),
+			"YRZT":$("#YRZT").val(),
+			"KHLX":$("#KHLX").val(),
 			"LXDH":$("#LXDH").val(),
+			
+			
+			"CNQ":$("#CNQ").val(),
+			"SSJE":$("#SSJE").val(),
+			"BCTF":$("#BCTF").val(),
+			"TKFS":$("#TKFS").val(),
+			"PJHM":$("#PJHM").val(),
+			"TKRQ":$("#TKRQ").val(),
+			"TKR":$("#TKR").val(),
+			"TFYY":$("#TFYY").val(),
+			
 		},
 		success : function(data) {
 			if(data.msg=="1"){
-				alert("缴费成功！")
+				alert("退费成功！")
 				location.reload();
 			}
 			else{

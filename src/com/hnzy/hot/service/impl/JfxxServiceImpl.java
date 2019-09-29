@@ -30,6 +30,11 @@ public class JfxxServiceImpl implements JfxxService{
 		// TODO Auto-generated method stub
 		return jfxxDao.findYhds(map);
 	}
+	@Override
+	public List<Map<String, Object>> findJfze() {
+		// TODO Auto-generated method stub
+		return jfxxDao.findJfze();
+	}
 
 	
 
