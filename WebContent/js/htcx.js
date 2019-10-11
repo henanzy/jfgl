@@ -14,29 +14,39 @@ $(document).ready(function(){
 			var arr1 = [];
 			arr1[0] = json[i].id;
 			arr1[1] = json[i].SHJG;
-			arr1[2] = json[i].CNQ;
-			arr1[3] = json[i].YRZT;
-			arr1[4] = json[i].YhName;
-			arr1[5] = json[i].LXDH;
-			arr1[6] = json[i].KHBM;
-			arr1[7] = json[i].XqName;
-			arr1[8] = json[i].BuildNO;
-			arr1[9] = json[i].CellNO;
-			arr1[10] = json[i].HouseNO;
-			arr1[11] = json[i].TKRQ;
-			arr1[12] = json[i].IDNum;
-			arr1[13] = json[i].SSJE;
-			arr1[14] = json[i].BCTF;
-			arr1[15] = json[i].TKFS;			
-			arr1[16] = json[i].PJHM;
+			arr1[2] = json[i].IDNum;
+			arr1[3] = json[i].xqName;
+			arr1[4] = json[i].BuildNo;
+			arr1[5] = json[i].CellNO;
+			arr1[6] = json[i].HouseNO;
+			arr1[7] = json[i].YhName;
+			arr1[8] = json[i].YHBM;
+			arr1[9] = json[i].RWBM;
+			arr1[10] = json[i].RWRQ;
+			arr1[11] = json[i].SFRZ;
+			arr1[12] = json[i].SFDB;
+			arr1[13] = json[i].CNSS;
+			arr1[14] = json[i].JZMC;
 			
-			
+			arr1[15] = json[i].JZCG;
+			arr1[16] = json[i].DJ;
+			arr1[17] = json[i].RWFY;
+			arr1[18] = json[i].HTQSRQ;
+			arr1[19] = json[i].HTJSRQ;
+			if(json[i].ht!=null){
+				arr1[20] = json[i].ht;	
+			}else{
+				arr1[20] ="未上传合同"
+			}
 			shebList.push(arr1);
 		};
 	}
+	$(".ht").click(function(){
+		wz_look(this)
+	});
 	var YhList;
 	$.ajax({
-			url : getRootPath()+"/tfxx/findTfxx.action", 
+			url : getRootPath()+"/rwxxCont/rwxx.action", 
 			async : false,
 			dataType : "json",
 			data : {
@@ -45,22 +55,13 @@ $(document).ready(function(){
 			},
 			success : function(data) {
 				
-				YhList=data.list;
+				YhList=data.rwxx;
 				jsArrChange(YhList);
 			}
 
 		});
 
 	tbodydis("",shebList,1)
-	
-
-
-
-	
-	
-	
-
-
 	function search(page){
 		var xq = $('#xq').val();
 		var ld = $('#ldh').val();
@@ -173,21 +174,7 @@ $("#search_btn").click(function(){
 //表格写入函数带分页
 function tbodydis(oldlist,newlist,page){
 	
-	if(oldlist == ""){
-		var opt = [];
-		for(var i = 0; i < newlist.length; i++) {
-			for (var j = 0 ; j <newlist[i].length ; j ++) {
-				if(j == 1){
-					if( opt.indexOf(newlist[i][1]) == -1){
-						opt.push(newlist[i][1]);
-					}
-				}
-			}
-		}
-		for(var i = 0; i < opt.length; i++) {
-			$("#xq").append("<option>"+opt[i]+"</option>");
-		}
-	}
+
 	
 	var current = 1;
 	function pageInit(currentPage, pagesize) {
@@ -208,20 +195,18 @@ function tbodydis(oldlist,newlist,page){
 				}else if(i%2 == 0){
 					html += "<tr class='gradeX even'>";
 				}
-		
+				html += "<td><input class='ht' type='button' value='查看合同' /></td>";
 				html += "<td><input class='shtg'  type='button' value='同意' /><input class='shtg' type='button' value='驳回' /></td>";
+				
 				for (var j = 0 ; j <newlist[i].length ; j ++) {
-					if(j==0){
-
-						html += "<td style='display:none;'>" + newlist[i][j] + "</td>";
-    					
-    				}else{
-    					 html += "<td>" + newlist[i][j] + "</td>"
-    				
-    				}
+					if(j==20||j==0){
+						 html += "<td style='display:none'>" + newlist[i][j] + "</td>"
+					}else{
+						html += "<td>" + newlist[i][j] + "</td>"
+					}
+                 
 				}
 				html += "</tr>"
-			
 			}
 		}
 		sheb_body.innerHTML = html;
@@ -238,9 +223,17 @@ function tbodydis(oldlist,newlist,page){
 			$(this).parent().removeClass("blue").addClass(classname);
 			$("table tbody tr").find('td:eq(' + $(this).index() + ')').removeClass('blue')
 		});
+		$(".ht").click(function(){
+			wz_look(this)
+		});
+		$(".wz_look .close").click(function(){
+			$(".wz_look").hide();
+		});
+		
 		$(".shtg").click(function(){
 			shtg(this);
 		});
+		
 	}
 	
 	select.onchange = function(ev) {
@@ -269,27 +262,34 @@ function tbodydis(oldlist,newlist,page){
 		pageInit(curr, select.value)
 	}
 	pageInit(page, 15);
+	$(".ht").click(function(){
+		wz_look(this)
+	});
+	$(".wz_look .close").click(function(){
+		$(".wz_look").hide();
+	});
 	$(".shtg").click(function(){
 		shtg(this);
 	});
 	
+	
 	function shtg(p){
 		var xintr = $(p).parent().parent().children();
-		var id=xintr[1].innerHTML
+		var id=xintr[2].innerHTML
 		
 		 layer.confirm('是否审核', function(index) {
 			                 $.ajax({
 			                     type: "post",
-			                    url:getRootPath()+"/tfxx/UpdateTfxx.action", 
+			                    url:getRootPath()+"/rwxxCont/UpdateRwxx.action", 
 			                      dataType:'json',
 			                  	data:{	
 			      					"id":id,
 			      					"SHJG":$(p).val(),
 			      				},
-			                      dataType: "json",
+			                     dataType: "json",
 			                      success: function (data) {
-			                    	  layer.close(index);
-			                    	  alert(data.msg);
+			                    	   layer.close(index);
+			                    	   alert(data.msg);
 			                          window.location.reload();
 			                     },
 			  
@@ -303,25 +303,20 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 	var json;
 	compareWordList.length=0;
 	$.ajax({
-		url : getRootPath()+"/tfxx/findTfxx.action", 
+		url : getRootPath()+"/rwxxCont/rwxx.action", 
 		async : false,
 		dataType : "json",
 		data : {
-			"CNQ":$("#CNQ").val(),
-			
-			"YhName":$("#YhName").val(),
-			"IDNum":$("#IDNum").val(),
-			"YHBM":$("#YHBM").val(),
-			"startTime":$("#startTime").val(),
-			"endTime":$("#endTime").val(),
 			
 			"XqName":xq,
 			"BuildNo":ld,
 			"CellNO":dy,
-			"hh":hh,
+			"HouseNo":hh,
+			"startTime":$("#startTime").val(),
+			"endTime":$("#endTime").val(),
 		},
 		success : function(data) {
-		 json=data.list;
+		 json=data.rwxx;
 		
 		}
 	});
@@ -330,22 +325,47 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		var arr1 = [];
 		arr1[0] = json[i].id;
 		arr1[1] = json[i].SHJG;
-		arr1[2] = json[i].CNQ;
-		arr1[3] = json[i].YRZT;
-		arr1[4] = json[i].YhName;
-		arr1[5] = json[i].LXDH;
-		arr1[6] = json[i].KHBM;
-		arr1[7] = json[i].XqName;
-		arr1[8] = json[i].BuildNO;
-		arr1[9] = json[i].CellNO;
-		arr1[10] = json[i].HouseNO;
-		arr1[11] = json[i].TKRQ;
-		arr1[12] = json[i].IDNum;
-		arr1[13] = json[i].SSJE;
-		arr1[14] = json[i].BCTF;
-		arr1[15] = json[i].TKFS;			
-		arr1[16] = json[i].PJHM;
+		arr1[2] = json[i].IDNum;
+		arr1[3] = json[i].xqName;
+		arr1[4] = json[i].BuildNo;
+		arr1[5] = json[i].CellNO;
+		arr1[6] = json[i].HouseNO;
+		arr1[7] = json[i].YhName;
+		arr1[8] = json[i].YHBM;
+		arr1[9] = json[i].RWBM;
+		arr1[10] = json[i].RWRQ;
+		arr1[11] = json[i].SFRZ;
+		arr1[12] = json[i].SFDB;
+		arr1[13] = json[i].CNSS;
+		arr1[14] = json[i].JZMC;
+		
+		arr1[15] = json[i].JZCG;
+		arr1[16] = json[i].DJ;
+		arr1[17] = json[i].RWFY;
+		arr1[18] = json[i].HTQSRQ;
+		arr1[19] = json[i].HTJSRQ;
+		if(json[i].ht!=null){
+			arr1[20] = json[i].ht;	
+		}else{
+			arr1[20] ="未上传合同"
+		}
 		compareWordList.push(arr1);
 	};
 
 }	
+function wz_look(p){
+	$(".wz_look").show();
+	var xintd = $(p).parent().parent().children();
+	//修改数据
+	/*var changenewsList = [];
+	for(var x = 1 ; x < 5 ; x ++){
+		if(x == 1){
+			changenewsList.push(xintd[x].childNodes[0].innerHTML);
+			continue;
+		}
+		changenewsList.push(xintd[x].innerHTML);
+	}*/
+	
+	$(".wz_look_content").html(xintd[22].innerHTML);
+	
+}

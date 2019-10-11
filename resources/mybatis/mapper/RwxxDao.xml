@@ -26,12 +26,37 @@
 		
 	</select> 
 	<insert id="InsertDrwxx">
-	insert into J_Rwxx(RWBM,YHBM,IDNum,LXR,LXDH,SFRZ,SFDB,CNSS,JZMC,JZYT,JZCG,BZ,HTQSRQ,HTJSRQ,DJ,RWFY)
-	values (#{RWBM},#{YHBM},#{IDNum},#{LXR},#{LXDH},#{SFRZ},#{SFDB},#{CNSS},#{JZMC},#{JZYT},#{JZCG},#{BZ},#{HTQSRQ},#{HTJSRQ},#{DJ},#{RWFY}) 
+	insert into J_Rwxx(RWBM,YHBM,IDNum,LXR,LXDH,SFRZ,SFDB,CNSS,JZMC,JZYT,JZCG,BZ,HTQSRQ,HTJSRQ,DJ,RWFY,ht,RWRQ,SHJG)
+	values (#{RWBM},#{YHBM},#{IDNum},#{LXR},#{LXDH},#{SFRZ},#{SFDB},#{CNSS},#{JZMC},#{JZYT},#{JZCG},#{BZ},#{HTQSRQ},#{HTJSRQ},#{DJ},#{RWFY},#{ht},#{RWRQ},'未审核') 
 	
 	</insert>
 	<select id="findRw"  resultMap="rwMap">
-	select RWBM,y.YHBM,y.IDNum,LXR,LXDH,SFRZ,SFDB,CNSS,JZMC,JZYT,JZCG,J_Rwxx.BZ,HTQSRQ,HTJSRQ,DJ,RWFY,xqName,BuildNo,CellNO,HouseNO
+	select J_Rwxx.id, SHJG,RWBM,y.YHBM,y.IDNum,LXR,LXDH,SFRZ,SFDB,CNSS,JZMC,JZYT,JZCG,J_Rwxx.BZ,HTQSRQ,HTJSRQ,DJ,RWFY,xqName,BuildNo,CellNO,HouseNO,y.YhName,J_Rwxx.RWFY, ht
 	 from J_Rwxx ,T_YhInfo y where J_Rwxx.YHBM=y.YHBM 
+	 
+	   <if test="XqName!=null and XqName!=''">
+			and XqName=#{XqName}
+		</if>
+		
+		<if test="BuildNo!=null and BuildNo!=''">
+			and BuildNo=#{BuildNo}
+		</if>
+		<if test="CellNo!=null and CellNo!=''">
+			and CellNO=#{CellNo}
+		</if>
+		<if test="HouseNo!=null and HouseNo!=''">
+	      and HouseNO=#{HouseNo}
+        </if>
+        <if test="startTime!=null and startTime!=''">
+	    and RWRQ &gt;= #{startTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+	     and RWRQ &lt;=#{endTime}
+        </if> 
+        order by J_Rwxx.id desc
 	</select>
+	<update id="UpdateRwxx">
+	
+	update J_Rwxx set SHJG=#{SHJG} ,SHR=#{SHR} where id=#{id}
+	</update>
 </mapper>

@@ -103,6 +103,10 @@
 <script type="text/javascript" src="../js/mws.js"></script>
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
+<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../js/layui/layui.js"></script>
+<script type="text/javascript" src="../js/layui/layui.all.js"></script>
+<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />
 
 <script type="text/javascript" src="../js/demo.formelements.js"></script>
  <script type="text/javascript" src="../js/tfcx.js"></script> 
@@ -118,7 +122,15 @@
 	top: 14px;
 	right: 6px;
 }
-
+input{
+	border-radius:4px;
+		background-color:rgba(43,45,49,0.8);
+		color:#fff;
+		cursor:pointer;
+		text-align:center;
+		padding:0 4px;
+		
+	}
 .span-down {
 	border-style: solid;
 	border-width: 5px 5px 0px 5px;
@@ -163,7 +175,15 @@
 	-khtml-border-radius: 6px;
 	border-radius: 6px;
 }
-
+.shtg{
+	border:none;
+	background-color:rgb(60,61,61);
+	width:40px;
+	height:24px;
+	margin-right:6px;
+	color:#fff;
+	border-radius:3px;
+}
 nav li, select {
 	height: 24px;
 	line-height: 24px;
@@ -268,6 +288,8 @@ th, td {
 					<thead>
 						<tr>
 							
+							<th>审核</th>
+							<th>审核状态</th>
 							<th class="table-th-css">采暖期<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							<th class="table-th-css">用热状态<span class="span-up"></span> <span

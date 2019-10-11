@@ -147,7 +147,7 @@ swfobject.embedSWF("cti.swf", "callcenter", "350", "80", "9.0.0", "cti.swf", fla
    else    
 %>
  --%>
-<script type="text/html" id="pswModel">
+ <script type="text/html" id="pswModel">
     <form id="pswForm" class="layui-form model-form" action="" method="PUT">
 
      
@@ -175,11 +175,12 @@ swfobject.embedSWF("cti.swf", "callcenter", "350", "80", "9.0.0", "cti.swf", fla
         
         <div class="layui-form-item model-form-footer" style="margin-left:130px">
             <button class="layui-btn layui-btn-primary" type="button" id="pswCancel">取消</button>
-            <button class="layui-btn layui-btn-normal" id="pswSubmit" >修改</button>
+            <button class="layui-btn layui-btn-normal" type="button" id="pswSubmit" >修改</button>
         </div>
     </form>
 
 </script>
+
 <script type="text/html" id="YhModel">
 
 <form id="addYhForm" class="layui-form model-form" action="" method="PUT">
@@ -200,6 +201,11 @@ swfobject.embedSWF("cti.swf", "callcenter", "350", "80", "9.0.0", "cti.swf", fla
                       lay-verify="required|pass" required/>
            </div>
        </div>
+
+     
+    
+
+     
        
        <div class="layui-form-item model-form-footer" style="margin-left:130px">
            <button class="layui-btn layui-btn-primary" type="button" id="adYhCancel">取消</button>
@@ -208,42 +214,20 @@ swfobject.embedSWF("cti.swf", "callcenter", "350", "80", "9.0.0", "cti.swf", fla
    </form>
 </script>
 <script type="text/javascript">
-
-<%-- 
-var int=self.setInterval("clock()",3600000);
-function clock()
-{
-	$.ajax({
-		url : "<%=basePath%>KfgdCon/selJjgq.action", 
-		async : false,
-		dataType : "json",
-		data : {
-			
-		},
-		success : function(data) {
-			
-			if(data.gqgd>0){
-				alert("有"+data.gqgd+"条工单即将逾期，请尽快处理！")
-			}
-		
-		}
-
-	});
-} --%>
-
-
-//新增用户
 function xzyh(flag){
+	var form = layui.form
+   
 	if(flag=="1"){
 		layer.msg("用户名已存在");
 	}
 	 layer.open({
 	        type: 1,
 	        title: "新增用户",
-	        area: '400px',
+	        area: ['400px', '500px'] ,
 	        offset: '120px',
 	        content: $("#YhModel").html()
 	    });
+	 form.render();
 	 $("#addYhForm")[0].reset();
 	    $("#adYhCancel").click(function () {
 	        layer.closeAll();
@@ -252,6 +236,9 @@ function xzyh(flag){
 	    $("#addYhSubmit").click(function () {
 	    	var username = $('#username').val();
 			var password = $('#password').val();
+			var type = $('#type').val();
+			var ssgs = $('#ssgs').val();
+			
 			if(username==""||password==""){
 				alert("用户名或密码不为空!");
 				return false;
@@ -263,21 +250,23 @@ function xzyh(flag){
 					data : {
 						"username" : username,
 						"password" : password,
+						"type" : type,
+						"ssgs" : ssgs,
 					},
 					success : function(data) {
 	
 						msg = data.msg
 						if(msg=="1"){
 							setTimeout(function () {
-								layer.msg("添加成功");
+								alert("添加成功");
 		                    }, 2500);
 							
 						}else{
 								setTimeout(function () {
-									layer.msg("用户名已存在!");
+									alert("用户名已存在!");
 			                    }, 2000);
 								layer.closeAll();
-								xzyh(1)
+								//xzyh(1)
 						}
 					}
 
@@ -285,11 +274,10 @@ function xzyh(flag){
 	    });
 }
 
-//修改密码
 function xgmm(flag) {
-	if(flag=="1"){
+	 if(flag=="1"){
 		layer.msg("原密码输入错误");
-	}
+	} 
     layer.open({
         type: 1,
         title: "修改密码",
@@ -319,27 +307,18 @@ function xgmm(flag) {
 					"oldpassword" : oldpassword,
 					"newpassword" : newpassword,
 					"username" : username,
-					"id" :id,
+					
 				},
 				success : function(data) {
-					msg = data.msg
-					if(msg=="1"){
-						
-						
-						
-						setTimeout(function () {
-							layer.msg("修改成功");
-	                    }, 2500);
-						
+					
+					msg = data
+					if(msg=="0"){				
+							alert("修改成功!");	
+							window.location.href="<%=basePath%>user/toLogin.action"; 
 					}else{
-						
-							
-							setTimeout(function () {
-								layer.msg("原密码输入错误");
-		                    }, 2500);
-							
-							layer.closeAll();
-							xgmm("1");
+					alert("原密码输入错误");
+
+							//xgmm(0);
 						
 					}
 				}
@@ -352,54 +331,7 @@ function xgmm(flag) {
 }
 
 
-//弹屏JS代码，函数名称不能修改
-function gosearch(thestr)
-{
-	
-  if(thestr!=""){ 
-   if(thestr=="CTI连接中断")
-   {        
-   }
-   else
-   {  
-	   
-    var arrTmp = thestr.split("|");  // 分隔信息
-   
-    //数组中第1位表示是否是来电信息，只有是"1"才表示是来电信息，"2"表示其它信息
-    //数组中第2位表示分机号
-    //数组中第3位表示来电号码
-    //数组中第4位表示来电流程
-    //数组中第5位表示来电时间 
-    //数组中第6位表示用户按键 
-    //数组中第7位表示用户自己定义参数，可在IVR接口查询时返回
-    //数组中第8位表示用户在IVR流程中输入的内容,多个参数之间用@分隔
-    //数组中第9位表示此次通话的录音文件名
-    //数组中第10位表示此次通话的IVR的名称
-    //数组中第11位表示此次通话的外线通道号
-    //数组中第12位表示此次通话的分机通道号  
-    if(arrTmp[0]=="1")  //处理来电或弹屏信息
-    {
-      if(1==1)//弹屏
-      {
-          document.form1.mobile.value=thestr;
-          document.form1.submit();
-      }
-    }   
-   }    
-  }
-}
 
- function callExternal(thetel)
-{
-  if(1==1)
-  {
-     swfobject.getObjectById('cti').callTel(thetel);//通过swfobject.js，调用flash中的呼叫函数
-  }
-  if(1==0)
-  {
-    document.cti.callTel(thetel);//普通代码，调用flash中的呼叫函数
-  }
-} 
 </script>
 
 
@@ -739,13 +671,17 @@ function sjbb(){
 					<img src="../example/profile.jpg" alt="User Photo" />
 				</div>
 				<div id="mws-user-functions">
-					<div id="mws-username">Hello,${UserName}</div>
+				
+					<div id="mws-username"></div>
 					<ul>
-					    <li><a href="#" onclick="xgmm(0)">更改密码</a></li>
+					 <li><a href="#" onclick="xgmm(0)">更改密码</a></li>
+                        <li><a href="#" onclick="xzyh(0)">用户注册</a></li>
+                        
+					   <!--  <li><a href="#" onclick="xgmm(0)">更改密码</a></li>
                         <li><a href="#" onclick="xzyh(0)">用户注册</a></li>
                        <li><a href="http://192.144.169.217:8090/zhineng/user/toLogin.action">登录</a></li>
 						<li><a href="http://192.144.169.217:8090/zhineng/user/toLogin.action">退出</a></li>
-						<li><a href="http://192.144.169.217:8090/zhineng/user/ZHome.action">退到主页面</a></li>
+						<li><a href="http://192.144.169.217:8090/zhineng/user/ZHome.action">退到主页面</a></li> -->
 					</ul>
 				</div>
 			</div>
@@ -800,7 +736,9 @@ function sjbb(){
 
 
 	<script type="text/javascript">
-
+	var UserName="<%=request.getSession().getAttribute("UserName")%>"
+	console.log("<%=request.getSession().getAttribute("UserName")%>");
+	$("#mws-username").html("Hello,"+UserName);
 	function doit(){
 		$('#Conframel').contents().find(".ac_kf li a").tab();
 	}

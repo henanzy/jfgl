@@ -191,7 +191,7 @@ $("#search_btn").click(function(){
 	$("#table_body").empty();
 	search();
 	});
-
+search();
 });
 function search(){
 	var xq = $('#xq').val();

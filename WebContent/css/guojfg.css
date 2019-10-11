@@ -7,11 +7,22 @@ ul li{
 	list-style:none;
 }
 
+.dirlist_line {
+	width: 100%;
+	height: 36px;
+	line-height: 36px;
+	border-bottom: 2px solid #2b2d31;
+	font-size: 16px;
+	color: #2b2d31;
+	position: relative;
+	margin-bottom: 30px;
+}
 
 
 /*国家法规 */
 
 .national_new{
+	margin-top:30px;
 	width:100%;
 }
 
@@ -97,7 +108,7 @@ td a:hover{
     	border-radius: 13px;
 		position:absolute;
 		top:36px;
-		right:7%;
+		right:17%;
 		line-height: 24px;
    		text-align: center;
    		font-size: 18px;
@@ -110,8 +121,8 @@ td a:hover{
 	
 .na_crea_body,
 .na_modify_body{
-		width:80%;
-		height:600px;
+		width:60%;
+		height:700px;
 		margin:50px auto;
 		text-align:left;
 		background-color:#fcfcfc;
@@ -128,7 +139,7 @@ td a:hover{
 	
 	.na_crea form,
 	.na_modify form{
-		width:70%;
+		width:85%;
 		margin:0 auto;
 	}
 	
@@ -263,7 +274,7 @@ td a:hover{
 .wz_look_body div p{
 	width:100%;
 	margin-top:-10px;
-	text-align:right;
+	text-align:left;
 }
 .wz_look_body div .wz_look_autor,
 .wz_look_body div .wz_look_time{
@@ -275,7 +286,7 @@ td a:hover{
 
 .wz_look_body .wz_look_content{
 	display:block;
-	width: 76%;
+	width: 86%;
 	height:600px;
 	min-height:100px;
 	margin:0px auto;

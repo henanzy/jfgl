@@ -7,15 +7,25 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.hnzy.hot.pojo.User;
 import com.hnzy.hot.pojo.YhMessage;
+import com.hnzy.hot.service.UserService;
 import com.hnzy.hot.util.JSONSerializer;
+import com.hnzy.hot.util.MD5Util;
+import com.hnzy.hot.util.StringUtil;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("user")
 public class UserController {
-
+	@Autowired
+	private UserService userServer;
 	//跳转到登录页面
 		@RequestMapping("/toLogin")
 		public String tologin(){
@@ -37,7 +47,7 @@ public class UserController {
 		
 		//来电弹屏和首页
 		@RequestMapping("/home" )
-    	public String home(HttpSession session,String mobile,HttpServletRequest request,String type,String gs) throws UnsupportedEncodingException{
+    	public String home(HttpSession session,String mobile,HttpServletRequest request,String type,String gs,String UserName) throws UnsupportedEncodingException{
 			List<YhMessage> findData = new ArrayList();
     		/*List<Map<String, Object>> YhList=dataService.find(null,null,null,null);
     		request.setAttribute("YhList", JSONSerializer.serialize(YhList));*/
@@ -60,11 +70,84 @@ public class UserController {
     		}
     		session.setAttribute("type",type);
     		session.setAttribute("gs",gs);
+    		/*session.setAttribute("UserName",UserName);*/
     		request.setAttribute("YhList", JSONSerializer.serialize(findData));
     		return "home";
     	}
+		@ResponseBody
+		@RequestMapping("/login")
+		public JSONObject login(HttpSession session,String username,String password,String type,HttpServletRequest request) throws UnsupportedEncodingException{
+			JSONObject jsonObject= new JSONObject();
+			if (StringUtil.isNoEmpty(username) && StringUtil.isNoEmpty(password)) {
+				username=new String(username.getBytes("ISO-8859-1"),"utf-8")+"";
+				password=new String(password.getBytes("ISO-8859-1"),"utf-8")+"";
+				password=MD5Util.string2MD5(password);				
+				User info = userServer.findUserByNameAndMD5(username, password);			
+				if(info!=null){										
+						request.getSession().setAttribute("admins", info);
+						request.getSession().setAttribute("UserName", username);
+					
+						request.getSession().setAttribute("PassWord", info.getPassword());
+						request.getSession().setAttribute("ID", info.getId());												
+						jsonObject.put("msg","0");																			
+			}else {
 
-    	
+					jsonObject.put("msg", "1"); 
+				}
+
+			}
+			return jsonObject;
+		}
+		@RequestMapping("updapwd")
+		@ResponseBody
+		public String updapwd(HttpSession session,HttpServletRequest request,String oldpassword ,String newpassword,String username) throws UnsupportedEncodingException {
+//			JSONObject jsonObject=new JSONObject();
+			       username=new String(username.getBytes("ISO-8859-1"),"utf-8");
+					
+					String password11=MD5Util.string2MD5(oldpassword);
+					String password12=MD5Util.string2MD5(newpassword);	
+					String msg="";
+					Integer ID=(Integer) session.getAttribute("ID");
+
+					System.out.println(password11);
+					System.out.println(userServer.findUserPass(ID));
+					
+						if (password11.equalsIgnoreCase(userServer.findUserPass(ID))) {  
+							User user =new User();
+							user.setId(ID);
+							user.setUserName(username);
+							user.setPassword(password12);
+							userServer.update(user);
+							msg="0";
+						}else{
+							msg="1";
+						} 
+
+					return msg;
+		}
+		
+		//新增登录用户
+		@ResponseBody
+		@RequestMapping("addYh")
+		public JSONObject addYh(HttpServletRequest request,String username,String password,String type,String ssgs) throws UnsupportedEncodingException{
+			 username=new String(username.getBytes("ISO-8859-1"),"utf-8");
+			 type=new String(type.getBytes("ISO-8859-1"),"utf-8");
+			 ssgs=new String(ssgs.getBytes("ISO-8859-1"),"utf-8");
+			JSONObject json=new JSONObject();
+			 //根据用户名字查找用户是否存在
+			 User user=userServer.findByName(username);
+			 if(user!=null){
+				 //用户名称已存在
+				 json.put("msg","0");
+			 }else{
+				  password=MD5Util.string2MD5(password);
+				 userServer.InsUsePass(username, password,type);
+				 json.put("msg","1");
+			 }
+			 
+			return json;
+			
+		}	
     	@RequestMapping("/left")
     	public String left(HttpServletRequest reqeust){
     		return "left";

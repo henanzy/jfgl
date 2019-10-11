@@ -215,11 +215,7 @@ display:block;
 				</div>
 			</div>
 			
-			<div style="border:1px solid #333;padding:6px;background-color:#fff;position:absolute;top:70px;right:30px">
-				<p style="border-bottom:1px dashed #333;"><span style="display:inline-block;width:70px;">金领小区：</span><span>13864.3(元)</span></p>
-				<p style="border-bottom:1px dashed #333;"><span style="display:inline-block;width:70px;">天鹅堡：</span><span>8617.8(元)</span></p>
-				<p><span style="display:inline-block;width:70px;">上村花苑：</span><span>4386.2(元)</span></p>
-			</div>
+			
 			
 		</div>
 
@@ -233,11 +229,7 @@ display:block;
 				</div>
 			</div>
 			
-			<div style="border:1px solid #333;padding:6px;background-color:#fff;position:absolute;top:70px;right:30px">
-				<p style="border-bottom:1px dashed #333;"><span style="display:inline-block;width:70px;">金领小区：</span><span>667(人)</span></p>
-				<p style="border-bottom:1px dashed #333;"><span style="display:inline-block;width:70px;">天鹅堡：</span><span>281(人)</span></p>
-				<p><span style="display:inline-block;width:70px;">上村花苑：</span><span>497(人)</span></p>
-			</div>
+			
 			
 		</div>
 		

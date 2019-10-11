@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,5 +84,21 @@ public class TfxxController {
 			}
 		}
 		return str;
+	}
+	
+	@RequestMapping("UpdateTfxx")
+	@ResponseBody
+	public JSONObject rwxx(HttpSession session,String SHJG,String SHR,String id){
+		JSONObject json=new JSONObject();
+		
+		if(session.getAttribute("UserName")==null){
+			json.put("msg", "请使用具有权限的用户进行审核");
+			
+		}else{
+			tfxxService.UpdateTfxx(SHJG, (String) session.getAttribute("UserName"), id);
+			json.put("msg", "审核成功");
+		}
+		
+		return json;
 	}
 }

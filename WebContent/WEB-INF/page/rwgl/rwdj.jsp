@@ -98,7 +98,12 @@
 <script type="text/javascript" src="../js/mws.js"></script>
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/guojfg.css" media="screen" />
+<script type="text/javascript" src="../js/release/wangEditor.js"></script>
 
+
+	<link rel="stylesheet" type="text/css"
+	href="../js/release/wangEditor.css" media="screen" />
 
  
  <style>
@@ -183,6 +188,27 @@ display:block;
 	color:#fff;
 	border-radius:3px;
 }
+.ht{
+	border:none;
+	background-color:rgb(60,61,61);
+	width:60px;
+	height:24px;
+	margin-right:6px;
+	color:#fff;
+	border-radius:3px;
+}
+#htsc{
+	border:none;
+	background-color:rgb(60,61,61);
+	width:60px;
+	height:24px;
+	margin-right:6px;
+	color:#fff;
+	border-radius:3px;
+}
+th, td {
+	white-space: nowrap;
+}
  </style>
   <script type="text/javascript">
  
@@ -218,7 +244,7 @@ display:block;
 				<span class="mws-report-title" style="margin-left:10px;">
 				 户号:<input type="text" id="houseNo"  />
 					 &nbsp;&nbsp;&nbsp; 
-					<input type="submit" class="mws-button black" id="search_btn" onclick="rwSer()" value="搜索" />
+					<input type="submit" class="mws-button black" id="search_btn" value="搜索" />
 				</span>
 			</p>
 			
@@ -264,7 +290,7 @@ display:block;
 					<label><span>竣工日期:</span><input type="date" class="khxx_input" vlaue="" /></label>
 				</p> -->
 				<p class="khxx_p">
-                <label><span>入网日期:</span><input type="date" id="rwDate" class="khxx_input" vlaue="" /></label> 
+                <label><span>入网日期:</span><input type="date" id="RWRQ" class="khxx_input" vlaue="" /></label> 
 					<label>
 						<span>是否入住:</span>
 						<select class="khxx_input" id="sfrz">
@@ -303,20 +329,12 @@ display:block;
 				    <label><span>用户卡号:</span><input type="text" id="IDNum" class="khxx_input" vlaue="" /></label>
 				</p>
 				
-				<!-- <div class="khxx_div">
-					<div class="htpz_title">合同拍照:</div>
-					<div class="htpz_content">
-					
-						<img src="../images/background/photo.png" />
-					</div>
-				</div> -->
+				 
 				<p class="khxx_p" style="text-align:center">
-				<%-- <c:if test="${type=='qyyh'}">
+				
+				    <input style="width:80px;"  type="button" id="htsc" value="合同上传" />
 					<input style="width:80px;" onclick="jt()" type="button" id="subbtn" value="确认" />
-				</c:if>
-				<c:if test="${type=='jtyh'}"> --%>
-					<input style="width:80px;" onclick="jt()" type="button" id="subbtn" value="确认" />
-				<%-- </c:if>	 --%>
+				
 				</p>
 				
 			</div>
@@ -339,8 +357,9 @@ display:block;
 							<th>楼栋号</th>
 							<th>单元号</th>
 							<th>户号</th>
-							<th>联系电话</th>
+							
 							<th>用户名称</th>
+							
 							<th>用户编码</th>
 							<th>入网编码</th>
 							<th>入网日期</th>
@@ -348,12 +367,13 @@ display:block;
 							<th>是否低保</th>
 							<th>采暖设施</th>
 							<th>建筑名称</th>
-							<th>建筑用户</th>
+							
 							<th>建筑层高</th>
 							<th>入网单价</th>
 							<th>入网费用</th>
 							<th>合同起始</th>
 							<th>合同结束</th>
+							<th>查看合同</th>
 					</thead>
 					<tbody id="xinword_body">
 						
@@ -383,8 +403,57 @@ display:block;
                      
             </ul>
          </nav> 
-
+<div class="na_crea" style="min-width:1000px;overflow-x: hidden;">
+			<div class="na_crea_body">
+				<span class="close"></span>
+				<h5>合同上传</h5>
+				<form action="addZsk.action"  method="post">
+					
+					<div id="E" style="height:600px"></div>
+					
+					<textarea name="contents" id="ueditorContent" style="width:100%; height:200px;display:none" ></textarea>
+					
+					
+		            <p style="text-align:center"><input  type="button" id="close" value="确认" /></p>
+				
+				</form>
+			</div>
+		</div>         
+<div class="wz_look" style="min-width:1000px;overflow-x: hidden;">
+			<div class="wz_look_body">
+				<span class="close"></span>
+					
+					<div style=" overflow-y:auto; overflow-x:auto; " class="wz_look_content" readonly="readonly"></div>
+					
+			</div>
+</div>
 	<script type="text/javascript">
+	
+	var E = window.wangEditor;
+    var editor = new E('#E');
+    var $ueditorContent = $('#ueditorContent');
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $ueditorContent.val(html);
+    };
+    editor.customConfig.uploadImgServer = '<%=basePath%>/rwxxCont/fileUp.action' ;
+    editor.customConfig.uploadFileName = 'img';
+    editor.customConfig.uploadImgHooks = {
+            // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+            customInsert: function (insertImg, result, editor) {
+                // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果：
+                var url = result.url;
+                
+                insertImg(url);
+            },
+          },
+    editor.create();
+    $ueditorContent.val(editor.txt.html());
+    
+    
+	</script>
+<script type="text/javascript">
+
 var ssgs="<%=request.getSession().getAttribute("gs")%>";
 var strs= new Array(); //定义一数组 
   strs=ssgs.split(","); //字符分割 
@@ -396,7 +465,7 @@ for (i=0;i<strs.length ;i++ )
 
 } 
   function jt(){
-debugger;
+
 	  var IDNum=$("#IDNum").val();
 	  var XqName=$("#XqName").val();
 		var BuildNO=$("#BuildNO").val();
@@ -412,11 +481,14 @@ debugger;
 		var jzwmc=$("#jzwmc").val();
 		var jzwyt=$("#jzwyt").val();
 		var jzwcg=$("#jzwcg").val();
+		var RWRQ=$("#RWRQ").val();
 		var bz=$("#bz").val();
 		var rwfy=$("#rwfy").val();
 		var TelePhone=$("#TelePhone").val();
 		var HTQSRQ=$("#HTQSRQ").val();
 		var HTJSRQ=$("#HTJSRQ").val();
+		var ht=$("#ueditorContent").val();
+		
 		var DJ=$("#dj").val();
 		 $.ajax({
 				url : "<%=basePath%>rwxxCont/InsertrRw.action", 
@@ -444,6 +516,7 @@ debugger;
 					"HTQSRQ":HTQSRQ,
 					"HTJSRQ":HTJSRQ,
 					"DJ":DJ,
+					"ht":ht,
 				},
 				success : function(data) {
 					location.reload();
@@ -453,60 +526,10 @@ debugger;
   }
 </script>
 <script type="text/javascript">
- function rwSer(){
-	var xq=$("#xq").val();
-	var ldh=$("#ldh").val();
-	var dyh=$("#dyh").val();
-	var houseNo=$("#houseNo").val();
-	 $.ajax({
-			url : "<%=basePath%>rwxxCont/rwSer.action", 
-			async : false,
-			dataType : "json",
-			data : {
-				"XqName":xq,
-				"BuildNo":ldh,
-				"CellNo":dyh,
-				"HouseNo":houseNo,
-			},
-			success : function(data) {
-				debugger;
-				var rwxx=data.rwxx;
-				var YHBM=rwxx.YHBM;
-				var TelePhone=rwxx.Telephone;
-				var BuildNO=rwxx.BuildNO;
-				var XqName=rwxx.XqName;
-				var CellNO=rwxx.CellNO;
-				var HouseNO=rwxx.HouseNO;
-				var rwbm=rwxx.rwbm;
-				var IDNum=rwxx.IDNum;
-				$("#YHBM").val(YHBM)
-				$("#TelePhone").val(TelePhone)
-				$("#BuildNO").val(BuildNO)
-				$("#XqName").val(XqName)
-				$("#CellNO").val(CellNO)
-				$("#HouseNO").val(HouseNO)
-				$("#rwbm").val(rwbm)
-				$("#IDNum").val(IDNum)
-			}
-
-		});	
-}
  
- var rwxx;
- $.ajax({
-		url : "<%=basePath%>rwxxCont/rwxx.action", 
-		async : false,
-		dataType : "json",
-		data : {
-			
-		},
-		success : function(data) {
-			debugger;
-			var opt="";
-			 rwxx=data.rwxx;
-		}
+ 
 
-	});
+
  
 	
 var xq;

@@ -282,7 +282,7 @@ ul.ac_kf li a:hover {
 						<li><a onclick="sfmxcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;收费明细查询</a></li>
 						<li><a onclick="xqsfhz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;小区收费汇总</a></li>
 						<li><a onclick="rsfhz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;日收费汇总</a></li>
-						<li><a onclick="xrwcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;新入网查询</a></li>
+						<li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;新入网查询</a></li>
 						<li><a onclick="mjbg()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;面积变更查询</a></li>
 						<li><a onclick="lsndqf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;历史年度欠费查询</a></li>
 						<li><a onclick="dqyhlb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;当前用户类别查询</a></li>

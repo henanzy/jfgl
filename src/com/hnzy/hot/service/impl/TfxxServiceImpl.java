@@ -33,6 +33,12 @@ public class TfxxServiceImpl implements TfxxService{
 		// TODO Auto-generated method stub
 		return tfxxDao.findJfByBm(YHBM);
 	}
+
+	@Override
+	public void UpdateTfxx(String SHJG, String SHR, String id) {
+		// TODO Auto-generated method stub
+		tfxxDao.UpdateTfxx(SHJG, SHR, id);
+	}
 	
 
 	

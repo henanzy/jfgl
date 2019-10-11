@@ -6,8 +6,8 @@
 	
 	<insert id="InsertTfxx" >
 		insert into J_Tkxx
-		(IDNum,KHBM,YRZT,KHLX,LXDH,CNQ,SSJE,BCTF,TKFS,PJHM,TKRQ,TKR,BZ,TFYY)
-		values(#{IDNum},#{YHBM},#{YRZT},#{KHLX},#{LXDH},#{CNQ},#{SSJE},#{BCTF},#{TKFS},#{PJHM},#{TKRQ},#{TKR},#{BZ},#{TFYY})
+		(IDNum,KHBM,YRZT,KHLX,LXDH,CNQ,SSJE,BCTF,TKFS,PJHM,TKRQ,TKR,BZ,TFYY,SHJG)
+		values(#{IDNum},#{YHBM},#{YRZT},#{KHLX},#{LXDH},#{CNQ},#{SSJE},#{BCTF},#{TKFS},#{PJHM},#{TKRQ},#{TKR},#{BZ},#{TFYY},'未审核')
 	</insert>
 	
     <select id="findJfByBm" resultMap="TfMap" >
@@ -53,4 +53,8 @@
 	     and j.TKRQ &lt;=#{endTime}
         </if> 
 	</select> 
+	<update id="UpdateTfxx">
+	
+	update J_Tkxx set SHJG=#{SHJG} ,SHR=#{SHR} where id=#{id}
+	</update>
 </mapper>

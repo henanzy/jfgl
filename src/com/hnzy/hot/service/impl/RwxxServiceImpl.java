@@ -28,9 +28,15 @@ public class RwxxServiceImpl implements RwxxService {
 	}
 
 	@Override
-	public List<Map<String, String>> findRw(String XqName, String BuildNo, String CellNo, String HouseNo) {
+	public List<Map<String, String>> findRw(String XqName, String BuildNo, String CellNo, String HouseNo,String startTime,String endTime) {
 		// TODO Auto-generated method stub
-		return rwxxdao.findRw(XqName, BuildNo, CellNo, HouseNo);
+		return rwxxdao.findRw(XqName, BuildNo, CellNo, HouseNo,startTime,endTime);
+	}
+
+	@Override
+	public void UpdateRwxx(String SHJG, String SHR, String id) {
+		// TODO Auto-generated method stub
+		 rwxxdao.UpdateRwxx(SHJG, SHR, id);
 	}
 	
 }

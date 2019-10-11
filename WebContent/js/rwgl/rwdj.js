@@ -1,12 +1,99 @@
+Date.prototype.format = function foramate(fmt)   
+	{ //author: meizz   
+	  var o = {   
+	    "M+" : this.getMonth()+1,                 //月份   
+	    "d+" : this.getDate(),                    //日   
+	    "h+" : this.getHours(),                   //小时   
+	    "m+" : this.getMinutes(),                 //分   
+	    "s+" : this.getSeconds(),                 //秒   
+	    "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+	    "S"  : this.getMilliseconds()             //毫秒   
+	  };   
+	  if(/(y+)/.test(fmt))   
+	    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+	  for(var k in o)   
+	    if(new RegExp("("+ k +")").test(fmt))   
+	  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+	  return fmt;   
+	} 
+function getRootPath(){      
+	var curWwwPath=window.document.location.href;      
+    var pathName=window.document.location.pathname;      
+    var pos=curWwwPath.indexOf(pathName); 
+    var localhostPaht=curWwwPath.substring(0,pos);      
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);      
+    return(localhostPaht+projectName);  
+} 
 $(document).ready(function(){
 //  表格
+	var date = new Date();
+	$("#RWRQ").val(date.format('yyyy-MM-dd'));
+	$("#search_btn").click(function(){
+		var xq=$("#xq").val();
+		var ldh=$("#ldh").val();
+		var dyh=$("#dyh").val();
+		var houseNo=$("#houseNo").val();
+		 $.ajax({
+				url : getRootPath()+"/rwxxCont/rwSer.action", 
+				async : false,
+				dataType : "json",
+				data : {
+					"XqName":xq,
+					"BuildNo":ldh,
+					"CellNo":dyh,
+					"HouseNo":houseNo,
+				},
+				success : function(data) {
+					
+					var rwxx=data.rwxx;
+					var YHBM=rwxx.YHBM;
+					var TelePhone=rwxx.Telephone;
+					var BuildNO=rwxx.BuildNO;
+					var XqName=rwxx.XqName;
+					var CellNO=rwxx.CellNO;
+					var HouseNO=rwxx.HouseNO;
+					var rwbm=rwxx.rwbm;
+					var IDNum=rwxx.IDNum;
+					$("#YHBM").val(YHBM)
+					$("#TelePhone").val(TelePhone)
+					$("#BuildNO").val(BuildNO)
+					$("#XqName").val(XqName)
+					$("#CellNO").val(CellNO)
+					$("#HouseNO").val(HouseNO)
+					$("#rwbm").val(rwbm)
+					$("#IDNum").val(IDNum)
+				}
 
+			});	
+		 var rwxx;
+		 $.ajax({
+				url : getRootPath()+"/rwxxCont/rwxx.action", 
+				async : false,
+				dataType : "json",
+				data : {
+					"XqName":xq,
+					"BuildNo":ldh,
+					"CellNo":dyh,
+					"HouseNo":houseNo,
+				},
+				success : function(data) {
+					
+					var opt="";
+					 rwxx=data.rwxx;
+				}
+
+			});
+		 
+		 jsArrChange(rwxx);
+		 tbodydis("",qgxxList)
+	});
+	
 	var qgxxList=[];
 	function jsArrChange(json){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
 			arr1[0] = json[i].IDNum;
-			arr1[1] = json[i].XqName;
+			arr1[1] = json[i].xqName;
 			arr1[2] = json[i].BuildNo;
 			arr1[3] = json[i].CellNO;
 			arr1[4] = json[i].HouseNO;
@@ -18,143 +105,51 @@ $(document).ready(function(){
 			arr1[10] = json[i].SFDB;
 			arr1[11] = json[i].CNSS;
 			arr1[12] = json[i].JZMC;
-			arr1[13] = json[i].JZYT;
-			arr1[14] = json[i].JZCG;
-			arr1[15] = json[i].DJ;
+			
+			arr1[13] = json[i].JZCG;
+			arr1[14] = json[i].DJ;
+			arr1[15] = json[i].RWFY;
 			arr1[16] = json[i].HTQSRQ;
 			arr1[17] = json[i].HTJSRQ;
-			arr1[17] = json[i].BZ;
+			if(json[i].ht!=null){
+				arr1[18] = json[i].ht;	
+			}else{
+				arr1[18] ="未上传合同"
+			}
+			
 			qgxxList.push(arr1);
 		};
 	}
-	debugger;
-	jsArrChange(rwxx);
-	tbodydis("",qgxxList)
-	
-/*	//新增按钮
-	$("#increase_btn").click(function(){
-		$("#increase_word").show();
-	});
-
-	
-	//关闭新增
-	$(".close").click(function(){
-		$("#increase_word").hide();
-		$("#change_word").hide();
-	});*/
-	
-});
-
-$("#search_btn").click(function(){
-	/*layer.msg('数据加载中...', {
-		icon: 16,
-		shade: 0.01
-		
-		})*/
-		
-	
-	var xq = $('#xq').val();
-	var ld = $('#ldh').val();
-	var dy = $('#dyh').val();
-	var hh = $('#hh').val();
-	var compareWordList = [];
 	
 	
 	
-		compareWord(xq,ld,dy,hh,compareWordList);
-		qgxxList=compareWordList;
-	$("#qgxx_body").empty();
-
-	for(var x = 0;x < compareWordList.length;x ++){
-		
-		var newWordElemnet = "";
-		if(x%2 == 1){
-			newWordElemnet = "<tr class='gradeX odd'>";
-		}else if(x%2 == 0){
-			newWordElemnet = "<tr class='gradeX even'>";
-		}
-	
-		for(var y = 0;y < compareWordList[x].length;y ++){
-			
-			
-
-				newWordElemnet += "<td>" + compareWordList[x][y] + "</td>"
-			
-		}
-		
-		
-		$("#qgxx_body").append(newWordElemnet);
-		
-	}
-	
-	tbodydis(qgxxList,compareWordList);
-	
-
-
-	
-});
-
-function compareWord(xq,ld,dy,hh,compareWordList){
-		
-		var json;
-		compareWordList.length=0;
-		$.ajax({
-			url : "findYh.action", 
-			async : false,
-			dataType : "json",
-			data : {
-				"xqm":xq,
-				"ldh":ld,
-				"dyh":dy,
-				"hh":hh,
-				"yhfl":$("#yhfl").val(),
-				
-			},
-			success : function(data) {
-			 json=data.list;
-			
-			}
+	$("#htsc").click(function(){
+		$(".na_crea").show();
+		$("#close").click(function(){
+			$(".na_crea").hide();
 		});
+	});
+	
+	$(".na_crea .close").click(function(){
+		$(".na_crea").hide();
+	});
+	
+	$("#close").click(function(){
+		$(".na_crea").hide();
+	});
+	$(".ht").click(function(){
+		wz_look(this)
+	});
+});
 
-		for (var i = 0 ; i < json.length ; i ++) {
-			var arr1 = [];
-			arr1[0] = json[i].id;
-			arr1[1] = json[i].YhName;
-			arr1[2] = json[i].XqName;
-			arr1[3] = json[i].BuildNO;
-			arr1[4] = json[i].CellNO;
-			arr1[5] = json[i].HouseNO;
-			arr1[6] = json[i].ValAd;
-			arr1[7] = json[i].WCAd;
-			arr1[8] = json[i].QgID;
-			arr1[9] = json[i].Status;
-			arr1[10] = json[i].yhfl;
-			arr1[11] = json[i].SFJF;
-			arr1[12] = json[i].RoomTemp;
-			arr1[13] = json[i].ValTemp;
-			arr1[14] = json[i].Bz;
-			compareWordList.push(arr1);
-		};
-		
-	}	
+
+
+
 	
 //表格写入函数带分页
 function tbodydis(oldlist,newlist){
 	
-	if(oldlist == ""){
-		var opt = [];
-		for(var i = 0; i < newlist.length; i++) {
-			for (var j = 0 ; j <newlist[i].length ; j ++) {
-				if(j == 1){
-					if( opt.indexOf(newlist[i][1]) == -1){
-						opt.push(newlist[i][1]);
-					}
-				}
-			}
-		}
-		
-	}
-	
+	$("#xinword_body").empty();
 	var current = 1;
 	function pageInit(currentPage, pagesize) {
 		current = currentPage; // 将当前页存储全局变量
@@ -177,11 +172,18 @@ function tbodydis(oldlist,newlist){
 				
 
 				for (var j = 0 ; j <newlist[i].length ; j ++) {
-                  html += "<td>" + newlist[i][j] + "</td>"
+					if(j==18){
+						 html += "<td style='display:none'>" + newlist[i][j] + "</td>"
+					}else{
+						html += "<td>" + newlist[i][j] + "</td>"
+					}
+                  
 				}
+				
+				html += "<td><input class='ht' type='button' value='查看合同' /></td>";
 			}
 		}
-		debugger;
+		
 		xinword_body.innerHTML = html;
 
 	
@@ -208,7 +210,12 @@ function tbodydis(oldlist,newlist){
 		$(".xinjgd_del").click(function(){
 			xin_del(this);
 		});
-		
+		$(".ht").click(function(){
+			wz_look(this)
+		});
+		$(".wz_look .close").click(function(){
+			$(".wz_look").hide();
+		});
 	}
 	
 	select.onchange = function(ev) {
@@ -239,28 +246,8 @@ function tbodydis(oldlist,newlist){
 	pageInit(1, 15);
 	
 	
-	$("#word_increase_btn").click(function(){
-		//获取到新增表单的信息
-		 $.ajax({
-             type: "post",
-            url: "findFm.action",
-              dataType:'json',
-          	data:{	
-					"ValAd":$("#ValAd1").val(),
-				},
-             dataType: "json",
-              success: function (data) {
-            	  var flag=data.flag;
-            	  if(flag==0){
-            		  $("#insert").submit();
-            		  alert("添加成功");
-            		  $("#increase_word").hide(); 
-            	  }else{
-            		  alert("阀门地址已存在，请重新输入");
-            	  }
-             },
-
-         })
+	$(".ht").click(function(){
+		wz_look(this)
 	});
 	//关闭新增
 	$(".close").click(function(){
@@ -271,6 +258,9 @@ function tbodydis(oldlist,newlist){
 
 		$("#increase_word").show();
 	});
+	$(".wz_look .close").click(function(){
+		$(".wz_look").hide();
+	});
 	//修改按钮
 	$(".xinjgd_change").click(function(){
 		xin_change(this);
@@ -278,149 +268,21 @@ function tbodydis(oldlist,newlist){
 	$(".xinjgd_del").click(function(){
 		xin_del(this);
 	});
-	$("#word_change_btn").click(function(){
-		 $.ajax({
-             type: "post",
-            url: "findFm.action",
-              dataType:'json',
-          	data:{	
-					"ValAd":$("#ValAd2").val(),
-				},
-             dataType: "json",
-              success: function (data) {
-            	  var flag=data.flag;
-            	  if(flag==0||valad==$("#ValAd2").val()){
-            		  $("#update").submit();
-            		  alert("修改成功");
-            		  $("#change_word").hide(); 
-            	  }else{
-            		  alert("阀门地址已存在，请重新输入");
-            	  }
-             },
 
-         })
-        
-		
-		/*alert(increaseValue);*/
-		
-	});
-	var valad;
-	function xin_change(p){
-		$("#change_word").show();
-		
-		
-
-		
-		 
-		var xintr = $(p).parent().parent().children();
-		//修改数据
-		var changewordList = [];
-		var flag=[0,1,2,3,4,5,6,8,10,14]
-		for(var x = 0 ; x < 15 ; x ++){
-			if(flag.includes(x)){
-				changewordList.push(xintr[x].innerHTML);
-			}			
+}
+function wz_look(p){
+	$(".wz_look").show();
+	var xintd = $(p).parent().parent().children();
+	//修改数据
+	/*var changenewsList = [];
+	for(var x = 1 ; x < 5 ; x ++){
+		if(x == 1){
+			changenewsList.push(xintd[x].childNodes[0].innerHTML);
+			continue;
 		}
-		
-		var changeInput = $("#change_word .change_word_input");
-		for(var i = 0;i < changeInput.length;i ++){
-			if(i==2){
-				 $.ajax({
-						url : "findXq.action", 
-						async : false,
-						dataType : "json",
-						data : {
-							
-						},
-						success : function(data) {
-							
-							var opt="";
-							 xq=data.Xq;
-							
-							 for(var i=0; i<xq.length; i++){
-									
-									
-									$("#xq2").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
-									
-								}
-						}
-
-					});
-			}
-			
-			if(i==3){
-				 $.ajax({
-						url : "findLd.action", 
-						async : false,
-						dataType : "json",
-						data : {
-							"xqm" : $("#xq2").val(),
-						},
-						success : function(data) {
-							$("#ldh2 option:gt(0)").remove();
-							$("#dyh2 option:gt(0)").remove();
-							$("#hh2 option:gt(0)").remove();
-							var ld=data.Ld;
-							for(var i=0; i<ld.length; i++){
-								
-								$("#ldh2").append("<option value='"+ld[i].BuildNo+"'>"+ld[i].BuildNo+"</option>");
-							}	
-						}
-
-					});
-			}
-			if(i==4){
-				$.ajax({
-					url : "findDy.action", 
-					async : false,
-					dataType : "json",
-					data : {
-						"xqm" : $("#xq2").val(),
-						"ldh" : $("#ldh2").val(),
-					},
-					success : function(data) {
-						$("#dyh2 option:gt(0)").remove();
-						$("#hh2 option:gt(0)").remove();
-						var dy=data.Dy;
-						for(var i=0; i<dy.length; i++){
-							
-							$("#dyh2").append("<option value='"+dy[i].CellNo+"'>"+dy[i].CellNo+"</option>");
-						}	
-					}
-
-				});
-			}
-				$("#change_word .change_word_input")[i].value = changewordList[i];
-			
-			
-		}
-		
-		valad=$("#ValAd2").val();
-	}
+		changenewsList.push(xintd[x].innerHTML);
+	}*/
 	
-
+	$(".wz_look_content").html(xintd[18].innerHTML);
 	
-
-
-	function xin_del(p){
-		var xintr = $(p).parent().parent().children();
-		var id=xintr[6].innerHTML
-		
-		 layer.confirm('确认删除么', function(index) {
-			                 $.ajax({
-			                     type: "post",
-			                    url: "DeleteYh.action",
-			                      dataType:'json',
-			                  	data:{	
-			      					"id":id,
-			      				},
-			                     dataType: "json",
-			                      success: function (data) {
-			                    	   layer.close(index);
-			                          window.location.reload();
-			                     },
-			  
-			                 })
-			              });
-	}
 }

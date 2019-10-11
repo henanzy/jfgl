@@ -74,7 +74,7 @@ $(function () {
 function jf(){
 	var JFTJ=$("input[name='JFTJ']:checked").val();
 	var SFFS=$("input[name='SFFS']:checked").val();
-	if(isNaN(JFJE)){
+	if(!isNaN(JFJE)){
 		alert("缴费金额请输入数字")
 		return;
 	}

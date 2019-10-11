@@ -436,7 +436,12 @@ var xq;
 			
 			 for(var i=0; i<xq.length; i++){
 					
-					$("#xq").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
+				 if(xq[i].XqName.indexOf("嘉和广场")>-1)
+					{
+					$("#xq").append("<option value='"+xq[i].XqName+"' selected	>"+xq[i].XqName+"</option>");
+					}else{
+						$("#xq").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
+					}
 					
 				}
 		}
@@ -466,30 +471,29 @@ var xq;
 		
 		
 	});
- 
- $("#ldh").change(function(){
-	 $.ajax({
-			url : "<%=basePath%>yhInfo/findDy.action", 
-			async : false,
-			dataType : "json",
-			data : {
-				"xqm" : $("#xq").val(),
-				"ldh" : $("#ldh").val(),
-			},
-			success : function(data) {
-				$("#dyh option:gt(0)").remove();
-				$("#hh option:gt(0)").remove();
-				var dy=data.Dy;
-				for(var i=0; i<dy.length; i++){
-					
-					$("#dyh").append("<option value='"+dy[i].CellNo+"'>"+dy[i].CellNo+"</option>");
-				}	
-			}
+ $.ajax({
+		url : "<%=basePath%>yhInfo/findLd.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			"xqm" : $("#xq").val(),
+		},
+		success : function(data) {
+			$("#ldh option:gt(0)").remove();
+			$("#dyh option:gt(0)").remove();
+			$("#hh option:gt(0)").remove();
+			var ld=data.Ld;
+			for(var i=0; i<ld.length; i++){
+				 if(ld[i].BuildNo=="1"){
+					 $("#ldh").append("<option value='"+ld[i].BuildNo+"' selected>"+ld[i].BuildNo+"</option>");
+				 }else{
+				$("#ldh").append("<option value='"+ld[i].BuildNo+"'>"+ld[i].BuildNo+"</option>");
+				 }
+			}	
+		}
 
-		});
-		
-		
 	});
+
 
  </script>
 <script>
