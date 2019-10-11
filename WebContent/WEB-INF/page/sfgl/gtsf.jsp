@@ -191,7 +191,7 @@ display:block;
 }
 
  </style>
- 
+  <script type="text/javascript" src="../js/LodopFuncs.js"></script>
  <script type="text/javascript">
  var type="<%=request.getSession().getAttribute("type")%>";
 </script>
@@ -252,7 +252,7 @@ display:block;
 					
 					
 					<label><span>实收金额:</span><input id="JFJE" type="text" class="khxx_input" value="" /></label>
-					<label><span>剩余金额:</span><input id="SYJE" type="text" class="readonly_input"  readonly="readonly" value="" /></label>
+					<label style="display:none" ><span>剩余金额:</span><input id="SYJE" type="text" class="readonly_input" readonly="readonly" value="" /></label>
 					<label><span>计费方式:</span>
 						<select class="khxx_input" id="JIFFS">
 							<option value="面积">面积</option>
@@ -293,12 +293,8 @@ display:block;
 				</p>
 				<p class="khxx_p" style="text-align:center">
 				
-					<c:if test="${type=='qyyh'}">
-						<input style="width:80px;" type="button" alt="" onclick="jf()" id="subbtn" value="确认" />
-				</c:if>
-				<c:if test="${type=='jtyh'}">
-					<input style="width:80px;" onclick="jt()"type="button" alt="" id="subbtn" value="确认" />
-				</c:if>	
+						<input style="width:80px;" type="button" alt="" onclick="jf()" id="subbtn" value="确认" />	
+						<input style="width:80px;" type="button" alt="" onclick="dy()" value="打印" />						
 				</p>
 				
 			</div>
@@ -307,8 +303,22 @@ display:block;
 	</div>
 
 <script>
+var  LODOP;
+function dy() {	
+	LODOP=getLodop(); 
+	LODOP.SET_PRINT_PAGESIZE(1, 700,1000,"");
+	LODOP.SET_PRINT_STYLE("FontSize",11);
+	LODOP.ADD_PRINT_TEXT(10,10,100,25,"郭德强");
+	LODOP.SET_PRINT_STYLEA(2,"FontName","隶书");
+	LODOP.SET_PRINT_STYLEA(2,"FontSize",15);
+	LODOP.ADD_PRINT_TEXT(10,10,100,25,"科学家");
+	LODOP.ADD_PRINT_TEXT(10,10,100,25,"地址：中国北京社会科学院附近东大街西胡同");
+	LODOP.ADD_PRINT_TEXT(10,10,100,25,"电话：010-88811888");
+	      
+	LODOP.PREVIEW();	       
+};
 $(document).ready(function(){
-
+	
 	
 	var date = new Date();
 	$("#JFSJ").val(date.format('yyyy-MM-dd'));

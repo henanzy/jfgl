@@ -267,12 +267,10 @@ display:block;
 				</p>
 				<p class="khxx_p" style="text-align:center">
 				
-					<c:if test="${type=='qyyh'}">
+					
 						<input style="width:80px;" type="button" alt="" onclick="tf()" id="subbtn" value="确认" />
-				</c:if>
-				<c:if test="${type=='jtyh'}">
-					<input style="width:80px;" onclick="jt()"type="button" alt="" id="subbtn" value="确认" />
-				</c:if>	
+			
+				
 				</p>
 				
 			</div>

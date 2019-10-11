@@ -1,8 +1,11 @@
 package com.hnzy.hot.controller;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,16 +142,23 @@ public class RwxxController {
 			@RequestParam("img") List<MultipartFile> list) throws IOException {
 		String path = this.getClass().getClassLoader().getResource("/").getPath();
 
-		path = "D:/apache-tomcat-8090/webapps/jfgl/images/img";
+		path = "D:/apache-tomcat-8090/webapps/img";
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload sfu = new ServletFileUpload(factory);
 		sfu.setHeaderEncoding("UTF-8"); // 处理中文问题
 		sfu.setSizeMax(1024 * 1024);
 		String fileName = "";
+		
 		try {
+			int i=0;
 			for (MultipartFile item : list) {
-				fileName = UUID.randomUUID().toString() + item.getName();
+				Date date = new Date(); 
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss") ; 
+				String JFRQ = dateFormat.format(date);
+				fileName = JFRQ+ item.getName()+i;
+				
 				item.transferTo(new File(path + "/" + fileName + ".jpg"));
+				i++;
 			}
 
 		} catch (Exception e) {
@@ -159,7 +169,7 @@ public class RwxxController {
 
 		JSONObject json = new JSONObject();
 
-		String imgUrl = "../images/img/" + fileName + ".jpg";
+		String imgUrl = "http://192.144.169.217:8090/img/" + fileName + ".jpg";
 
 		json.put("errno", 0);
 
@@ -184,5 +194,19 @@ public class RwxxController {
 		
 		return json;
 	}
+	@RequestMapping("gpy")
+	@ResponseBody
+	public JSONObject geiYinpin (HttpServletRequest request){
 	
+		JSONObject json=new JSONObject();
+		
+		try {
+			//System.out.println(url);
+			Desktop.getDesktop().open(new File("C:/Users/Public/Desktop/得力拍照.lnk"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return json;
+	}
 }

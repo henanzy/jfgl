@@ -25,6 +25,9 @@ public class TfxxController {
 	@Autowired
 	public TfxxService tfxxService;
 	
+	@Autowired
+	public JfxxService jfxxService;
+	
 	@RequestMapping("findJfByBm")
 	   @ResponseBody
 		public JSONObject findJfByBm(String YHBM) throws UnsupportedEncodingException{
@@ -88,7 +91,7 @@ public class TfxxController {
 	
 	@RequestMapping("UpdateTfxx")
 	@ResponseBody
-	public JSONObject rwxx(HttpSession session,String SHJG,String SHR,String id){
+	public JSONObject rwxx(HttpSession session,String SHJG,String SHR,String id,String YHBM){
 		JSONObject json=new JSONObject();
 		
 		if(session.getAttribute("UserName")==null){
@@ -96,6 +99,9 @@ public class TfxxController {
 			
 		}else{
 			tfxxService.UpdateTfxx(SHJG, (String) session.getAttribute("UserName"), id);
+			if(SHJG.equals("同意")){
+				jfxxService.UpdateJfxx("否", YHBM,null);
+			}
 			json.put("msg", "审核成功");
 		}
 		

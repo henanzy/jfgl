@@ -35,6 +35,11 @@ public class JfxxServiceImpl implements JfxxService{
 		// TODO Auto-generated method stub
 		return jfxxDao.findJfze();
 	}
+	@Override
+	public void UpdateJfxx(String JFBS, String YHBM,String JFRQ) {
+		// TODO Auto-generated method stub
+		jfxxDao.UpdateJfxx(JFBS, YHBM,JFRQ);
+	}
 
 	
 

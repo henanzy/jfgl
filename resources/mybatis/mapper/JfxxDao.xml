@@ -62,4 +62,13 @@
 	select y.XqName ,sum(JFJE) as je from J_Jfxx j,T_YhInfo y where j.YHBM=y.YHBM group by y.XqName
 	
 	</select>
+	
+	<insert id="UpdateJfxx" >
+		update T_YhInfo set JFBS =#{JFBS}
+		 
+		<if test="JFRQ!=null and JFRQ!=''">
+	     ,JFRQ =#{JFRQ}
+        </if> 
+		where YHBM=#{YHBM}
+	</insert>
 </mapper>

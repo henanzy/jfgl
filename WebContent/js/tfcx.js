@@ -225,7 +225,6 @@ function tbodydis(oldlist,newlist,page){
 			}
 		}
 		sheb_body.innerHTML = html;
-
 	
 		
 	
@@ -276,6 +275,7 @@ function tbodydis(oldlist,newlist,page){
 	function shtg(p){
 		var xintr = $(p).parent().parent().children();
 		var id=xintr[1].innerHTML
+		var YHBM=xintr[7].innerHTML
 		
 		 layer.confirm('是否审核', function(index) {
 			                 $.ajax({
@@ -285,6 +285,7 @@ function tbodydis(oldlist,newlist,page){
 			                  	data:{	
 			      					"id":id,
 			      					"SHJG":$(p).val(),
+			      					"YHBM":YHBM,
 			      				},
 			                      dataType: "json",
 			                      success: function (data) {

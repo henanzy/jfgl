@@ -1,10 +1,15 @@
 package com.hnzy.hot.controller;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +43,9 @@ public class JfxxController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			Date date = new Date();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss") ; 
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd") ; 
 			String jfsj = dateFormat.format(date);
+			String JFRQ = dateFormat1.format(date);
 			map.put("YHBM",getUtf8(YHBM));map.put("IDNum",getUtf8(IDNum));
 			map.put("JFSJ",getUtf8(JFSJ));map.put("CNQ",getUtf8(CNQ));
 			map.put("JIFFS",getUtf8(JIFFS));map.put("JFTJ",getUtf8(JFTJ));
@@ -48,6 +55,7 @@ public class JfxxController {
 			map.put("LSDH",getUtf8(jfsj));map.put("LXDH",getUtf8(LXDH));
 			map.put("SFFS",getUtf8(SFFS));
 			jfxxService.InsertJfxx(map);
+			jfxxService.UpdateJfxx("是", YHBM,JFRQ);
 			json.put("msg", "1");
 			return json;
 		}

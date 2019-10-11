@@ -494,86 +494,128 @@ function xgmm(flag) {
 </style>
 
  <script type="text/javascript">
-
-
-function tongjfx2(){// 
-	    window.open("<%=basePath%>KfgdCon/gdtj.action","Conframe");
-	} 
-function yhxx(){// 
-	    window.open("<%=basePath%>yhmsg/findAll.action","Conframe");
-	} 
-function jzq(){// 
-	    window.open("<%=basePath%>JzqCon/find.action","Conframe");
-	} 
-
-function fp(){// 
-	    window.open("<%=basePath%>FpCon/findFp.action","Conframe");
-}
-
-function glbxx(){// 
-	    window.open("<%=basePath%>glb/findAll.action","Conframe");
-
-	} 
-function dj(){
-	    window.open("<%=basePath%>DjCon/findDj.action","Conframe");
-	} 
-function canssz(){// 
-	    window.open("<%=basePath%>user/canssz.action","Conframe");
-	} 
-	/* 知识库 */
-function qiytl(){// 
-    window.open("<%=basePath%>ZskCon/getQytl.action?type=企业条例", "Conframe");
-} 
-function guojfg(){// 
-	window.open("<%=basePath%>ZskCon/getQytl.action?type=国家法规", "Conframe");
-} 
-function hangyzs(){// 
-	window.open("<%=basePath%>ZskCon/getQytl.action?type=行业知识", "Conframe");
-} 
-function xitsm(){// 
-	window.open("<%=basePath%>ZskCon/getQytl.action?type=系统说明", "Conframe");
-} 
-function wentjd(){// 
-	window.open("<%=basePath%>ZskCon/getQytl.action?type=问题解答", "Conframe");
-} 
- 	/* 员工定位 */
-function shisdw(){// 
-	window.open("<%=basePath%>user/shisdw.action","Conframe");
-} 
-function lisgj(){// 
-	window.open("<%=basePath%>user/lisgj.action","Conframe");
-} 
-
-	/* 设备管理 */
-function sbgl(){// 
-	window.open("<%=basePath%>Data/sbgl.action","Conframe");
-} 
-	
-function cggl(){// 
-	window.open("<%=basePath%>cg/findAll.action","Conframe");
-} 	
-
-function jfgl(){// 
-	window.open("<%=basePath%>jf/jfgl.action","Conframe");
-}
-
-function jfls(){// 
-	window.open("<%=basePath%>jf/jfls.action","Conframe");
-} 	
-
-
-/*日志信息*/
-function rzxx(){
-	window.open("<%=basePath%>RzCon/find.action","Conframe");	
-}
-/*异常信息*/
-function ycxx(){
-	window.open("<%=basePath%>YcCon/findyc.action?bj=01","Conframe");	
-}
-
-function sjbb(){
-	window.open("<%=basePath%>Data/sjbb.action","Conframe");	
-}
+ /* 稽查管理 */
+ function jcgl(){// 
+ 	window.open("<%=basePath%>user/jcgl.action","Conframe");
+ }
+ /* 清欠中心*/
+ function qqzx(){// 
+ 	window.open("<%=basePath%>user/qqzx.action","Conframe");
+ }
+ /* 采暖变更*/
+ function cnbg(){// 
+ 	window.open("<%=basePath%>user/cnbg.action","Conframe");
+ }
+ /* 客户管理 */
+ function khgl(){// 
+ 	window.open("<%=basePath%>user/khgl.action","Conframe");
+ }
+ /* 收费明细查询 */
+ function sfmxcx(){// 
+ 	window.open("<%=basePath%>user/sfmxcx.action","Conframe");
+ }
+ /* 新入网 */
+ function xrwcx(){// 
+ 	window.open("<%=basePath%>user/xrwcx.action","Conframe");
+ }
+ /* 日收费 */
+ function rsfhz(){// 
+ 	window.open("<%=basePath%>user/rsfhz.action","Conframe");
+ }
+ /* 小区收费 */
+ function xqsfhz(){// 
+ 	window.open("<%=basePath%>user/xqsfhz.action","Conframe");
+ }
+ /* 当前用户类别 */
+ function dqyhlb(){// 
+ 	window.open("<%=basePath%>user/dqyhlb.action","Conframe");
+ }
+ /* 历史欠费查询 */
+ function lsndqf(){// 
+ 	window.open("<%=basePath%>user/lsndqf.action","Conframe");
+ }
+ /* 面积变更 */
+ function mjbg(){// 
+ 	window.open("<%=basePath%>user/mjbg.action","Conframe");
+ }
+ /* 统计图表 */
+ function tjtb(){// 
+ 	window.open("<%=basePath%>user/tjtb.action","Conframe");
+ }
+ /* 系统设置 */
+ function xtsz(){// 
+ 	window.open("<%=basePath%>user/xtsz.action","Conframe");
+ }
+ /* 柜台收费 */
+ function gtsf(){// 
+ 	window.open("<%=basePath%>user/gtsf.action","Conframe");
+ }
+ /* 银行代收 */
+ function yhds(){// 
+ 	window.open("<%=basePath%>user/yhds.action","Conframe");
+ }
+ /* 微信支付*/
+ function wxzf(){// 
+ 	window.open("<%=basePath%>user/wxzf.action","Conframe");
+ }
+ /* 支付宝支付*/
+ function zfbzf(){// 
+ 	window.open("<%=basePath%>user/zfbzf.action","Conframe");
+ }
+ /*退费 */
+ function tf(){// 
+ 	window.open("<%=basePath%>user/tf.action","Conframe");
+ }
+ /*离线收费 */
+ function lxsf(){// 
+ 	window.open("<%=basePath%>user/lxsf.action","Conframe");
+ }
+ /* 合同模板 */
+ function htmb(){// 
+ 	window.open("<%=basePath%>user/htmb.action","Conframe");
+ }
+ /* 合同查询 */
+ function htcx(){// 
+ 	window.open("<%=basePath%>user/htcx.action","Conframe");
+ }
+ /* 入网审核 */
+ function rwsh(){// 
+ 	window.open("<%=basePath%>user/rwsh.action","Conframe");
+ } 
+ /* 批量录入 */
+ function pllr(){// 
+ 	window.open("<%=basePath%>user/pllr.action","Conframe");
+ } 
+ /* 入网登记*/
+ function rwdj(){// 
+ 	window.open("<%=basePath%>user/rwdj.action","Conframe");
+ } 
+ /* 知识库 */
+ function qiytl(){// 
+     window.open("<%=basePath%>user/qiytl.action?type=企业条例", "Conframe");
+ } 
+ function guojfg(){// 
+ 	window.open("<%=basePath%>user/guojfg.action?type=国家法规", "Conframe");
+ } 
+ function hangyzs(){// 
+ 	window.open("<%=basePath%>user/hangyzs.action?type=行业知识", "Conframe");
+ } 
+ function xitsm(){// 
+ 	window.open("<%=basePath%>user/xitsm.action?type=系统说明", "Conframe");
+ } 
+ function wentjd(){// 
+ 	window.open("<%=basePath%>user/wentjd.action?type=问题解答", "Conframe");
+ } 
+  	/* 员工定位 */
+ function shisdw(){// 
+ 	window.open("<%=basePath%>user/shisdw.action","Conframe");
+ } 
+ function lisgj(){// 
+ 	window.open("<%=basePath%>user/lisgj.action","Conframe");
+ } 
+ function tfcx(){// 
+ 	window.open("<%=basePath%>user/tfcx.action","Conframe");
+ }
 </script>
 
 

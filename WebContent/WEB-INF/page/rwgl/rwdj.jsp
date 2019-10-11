@@ -114,6 +114,10 @@
 html,body{
 	height:110%;
 }
+input{
+border-width:2px;
+border-color:black;
+}
 .mws-report {
 	width: 98% !important;
 	min-width: 170px;
@@ -143,6 +147,12 @@ display:inline-block;
 	margin-left:10px;
 	width:60%;
 	height:18px;
+}
+.readonly_input{
+margin-left:10px;
+	width:60%;
+	height:18px;
+	background-color:#CCCCCC;
 }
 #khxx p label select.khxx_input{
 	height:24px;
@@ -206,6 +216,15 @@ display:block;
 	color:#fff;
 	border-radius:3px;
 }
+#htpz{
+	border:none;
+	background-color:rgb(60,61,61);
+	width:60px;
+	height:24px;
+	margin-right:6px;
+	color:#fff;
+	border-radius:3px;
+}
 th, td {
 	white-space: nowrap;
 }
@@ -257,14 +276,14 @@ th, td {
 			
 			<div id="khxx" class="mws-panel-body" style="height:330px; padding:10px;">
 				<p class="khxx_p">
-					<label><span>小区名称:</span><input type="text"  id="XqName" class="khxx_input" vlaue="" /></label>
-					<label><span>楼栋号:</span><input type="text" id="BuildNO" class="khxx_input" vlaue="" /></label>
-					<label><span>单元号:</span><input type="text" id="CellNO" class="khxx_input" vlaue="" /></label>
-					<label><span>户号:</span><input type="text" id="HouseNO" class="khxx_input" vlaue="" /></label>
+					<label><span>小区名称:</span><input type="text"  id="XqName" class="readonly_input" readonly="readonly" vlaue="" /></label>
+					<label><span>楼栋号:</span><input type="text" id="BuildNO" class="readonly_input" readonly="readonly" vlaue="" /></label>
+					<label><span>单元号:</span><input type="text" id="CellNO" class="readonly_input" readonly="readonly" vlaue="" /></label>
+					<label><span>户号:</span><input type="text" id="HouseNO" class="readonly_input" readonly="readonly" vlaue="" /></label>
 				</p>
 				<p class="khxx_p">
-					<label><span>用户名称:</span><input type="text" id="yhName" class="khxx_input" vlaue="" /></label>
-					<label><span>用户编码:</span><input type="text" id="YHBM" class="khxx_input" vlaue="" /></label>
+					<label><span>用户名称:</span><input type="text" id="yhName"class="readonly_input" readonly="readonly" vlaue="" /></label>
+					<label><span>用户编码:</span><input type="text" id="YHBM" class="readonly_input" readonly="readonly" vlaue="" /></label>
 					<label><span>入网编码:</span><input type="text" id="rwbm" class="khxx_input" vlaue="" /></label>
 					<label><span>联系电话:</span><input type="text" id="TelePhone" class="khxx_input" vlaue="" /></label>
 				</p>
@@ -332,6 +351,7 @@ th, td {
 				 
 				<p class="khxx_p" style="text-align:center">
 				
+				  
 				    <input style="width:80px;"  type="button" id="htsc" value="合同上传" />
 					<input style="width:80px;" onclick="jt()" type="button" id="subbtn" value="确认" />
 				
@@ -406,7 +426,8 @@ th, td {
 <div class="na_crea" style="min-width:1000px;overflow-x: hidden;">
 			<div class="na_crea_body">
 				<span class="close"></span>
-				<h5>合同上传</h5>
+				<h5> <input style="width:80px;"  type="button" id="htpz" onclick="bf()" value="合同拍照" /></h5>
+				<br>
 				<form action="addZsk.action"  method="post">
 					
 					<div id="E" style="height:600px"></div>
@@ -428,7 +449,22 @@ th, td {
 			</div>
 </div>
 	<script type="text/javascript">
-	
+	function bf(){
+		
+		$.ajax({
+				url:"<%=basePath%>rwxxCont/gpy.action",
+				async:false,
+				dataType:"json",
+				data:{	
+					
+				},
+				success:function(data){
+					
+				}
+				
+			});	
+	}
+	var YHBM=$("#YHBM").val();
 	var E = window.wangEditor;
     var editor = new E('#E');
     var $ueditorContent = $('#ueditorContent');

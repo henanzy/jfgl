@@ -366,7 +366,7 @@ th, td {
 			<div class="wz_look_body">
 				<span class="close"></span>
 					
-					<div style=" overflow-y:auto; overflow-x:auto; " class="wz_look_content" readonly="readonly"></div>
+				<div style=" overflow-y:auto; overflow-x:auto; " class="wz_look_content" readonly="readonly"></div>
 					
 	</div>
 </div>

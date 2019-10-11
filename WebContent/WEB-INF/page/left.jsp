@@ -251,11 +251,11 @@ ul.ac_kf li a:hover {
 					<ul class="ac_kf">
 						<li><a class="first-a" onclick="rwdj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;入网登记</a></li>
 						<li><a onclick="pllr()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;批量录入</a></li>
-						<li><a onclick="rwsh()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;入网审核</a></li>
+						<li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;入网审核</a></li>
 						<li class="active"><a href="#"><nobr style="font-size: 20px;">+</nobr>&nbsp;入网合同</a>
 							<ul>
 								<li><a onclick="htmb()" target="Conframel">&nbsp;&nbsp;&nbsp;>&nbsp;合同模板</a></li>
-								<li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;>&nbsp;合同查询</a></li>
+								<!-- <li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;>&nbsp;合同查询</a></li> -->
 							</ul></li>
 					</ul>
 				</li>

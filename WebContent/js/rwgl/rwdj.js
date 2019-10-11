@@ -54,7 +54,9 @@ $(document).ready(function(){
 					var HouseNO=rwxx.HouseNO;
 					var rwbm=rwxx.rwbm;
 					var IDNum=rwxx.IDNum;
+					var YhName=rwxx.YhName;
 					$("#YHBM").val(YHBM)
+					$("#yhName").val(YhName)
 					$("#TelePhone").val(TelePhone)
 					$("#BuildNO").val(BuildNO)
 					$("#XqName").val(XqName)
