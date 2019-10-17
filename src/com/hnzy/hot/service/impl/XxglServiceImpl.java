@@ -101,6 +101,18 @@ public class XxglServiceImpl implements XxglService{
 		return xxglDao.cgqDz();
 	}
 
+	@Override
+	public void deleteJfxx(String YHBM) {
+		// TODO Auto-generated method stub
+		xxglDao.deleteJfxx(YHBM);
+	}
+
+	@Override
+	public void deleteRwxx(String YHBM) {
+		// TODO Auto-generated method stub
+		xxglDao.deleteRwxx(YHBM);
+	}
+
 
 	
 }

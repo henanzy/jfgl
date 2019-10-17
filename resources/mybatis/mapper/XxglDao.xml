@@ -154,4 +154,11 @@ delete from dcgq
 		where
 		id=#{id}
 </update>
+
+<delete id="deleteJfxx">
+delete from J_Jfxx where YHBM=#{YHBM}
+</delete>
+<delete id="deleteRwxx">
+delete from J_Rwxx where YHBM=#{YHBM}
+</delete>
 </mapper>

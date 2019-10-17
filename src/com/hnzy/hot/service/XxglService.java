@@ -34,4 +34,6 @@ public interface XxglService {
 	   public void DeleteCgqDz(String id);
 	   
 	   public List<Map<String, Object>> cgqDz();
+	   public void deleteJfxx(String YHBM);
+	   public void deleteRwxx(String YHBM);
 }

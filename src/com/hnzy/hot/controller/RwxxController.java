@@ -38,6 +38,8 @@ public class RwxxController {
 	@Autowired
 	private RwxxService rwxxService;
 	@Autowired
+	private XxglService XxglService;
+	@Autowired
 	private XxglService xxglService;
 	//查询楼栋
 	@RequestMapping("findLd")
@@ -214,4 +216,17 @@ public class RwxxController {
 		} 
 		return json;
 	}
+	
+	
+	//删除收费明细查询
+	@RequestMapping("rwxxDelete")
+	@ResponseBody
+	public JSONObject delete(String YHBM){
+		JSONObject json=new JSONObject();
+		XxglService.deleteJfxx(YHBM);
+		XxglService.deleteRwxx(YHBM);
+		return json;
+		
+	}
+	
 }
