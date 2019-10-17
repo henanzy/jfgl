@@ -53,13 +53,6 @@ $(document).ready(function(){
 		});
 
 	tbodydis("",shebList,1)
-	
-
-
-
-	
-	
-	
 
 
 	function search(page){
@@ -221,12 +214,15 @@ function tbodydis(oldlist,newlist,page){
     				/*s*/
                  
 				}
-			
+				html += "<td><input class='xinjgd_del' type='button' value='删除' /></td></tr>";
 			}
 		}
 		sheb_body.innerHTML = html;
 
-	
+		//删除按钮
+		$(".xinjgd_del").click(function(){
+			xin_del(this);
+		});
 		
 	
 		var classname = "";
@@ -240,7 +236,8 @@ function tbodydis(oldlist,newlist,page){
 		});
 		
 	}
-	
+
+
 	select.onchange = function(ev) {
 		pageInit(1, this.value)
 	}
@@ -268,6 +265,26 @@ function tbodydis(oldlist,newlist,page){
 	}
 	pageInit(page, 15);
 
+}
+function xin_del(p){
+	var xintr = $(p).parent().parent().children();
+	var YHBM=xintr[2].innerHTML
+	 layer.confirm('确认删除么', function(index) {
+		                 $.ajax({
+		                     type: "post",
+		                    url: getRootPath()+"/rwxxCont/rwxxDelete.action",
+		                      dataType:'json',
+		                  	data:{	
+		      					"YHBM":YHBM,
+		      				},
+		                     dataType: "json",
+		                      success: function (data) {
+		                    	   layer.close(index);
+		                          window.location.reload();
+		                     },
+		  
+		                 })
+		              });
 }
 
 function compareWord(xq,ld,dy,hh,compareWordList){

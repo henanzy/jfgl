@@ -95,7 +95,10 @@
 <script type="text/javascript" src="../plugins/spinner/ui.spinner.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
 
-
+<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />	
+<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../js/layui/layui.js"></script>
+<script type="text/javascript" src="../js/layui/layui.all.js"></script>
 <script type="text/javascript" src="../plugins/elrte/js/elrte.min.js"></script>
 <script type="text/javascript"
 	src="../plugins/elfinder/js/elfinder.min.js"></script>
@@ -140,7 +143,17 @@
 	position: relative !important;
 	top: 0;
 }
-
+.xinjgd_del{
+		margin-top:8px;
+		margin-left:20px;
+		border:none;
+		background-color:rgb(60,61,61);
+		width:60px;
+		height:24px;
+		margin-right:6px;
+		color:#fff;
+		border-radius:4px;
+	}
 .mws-report {
 	width: 98% !important;
 	min-width: 170px;
@@ -321,6 +334,8 @@ th, td {
 							<th class="table-th-css">票据号码<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							<th class="table-th-css">流水单号<span class="span-up"></span> <span
+								class="span-down"></span></th>
+								<th class="table-th-css">操作<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							
 						</tr>
