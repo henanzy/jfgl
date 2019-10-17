@@ -120,13 +120,12 @@
 	</delete>
 	
 	<select id="findYh" resultMap="YhMap" >
-		select y.id ,y.YhName,y.ValAd,y.yhfl,f.QgID,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,f.Status,y.HeatArea,
-		f.RoomTemp,f.LockSt,y.IDNum,f.FamKd,f.ValTemp,f.Tqyb,y.SFJF,y.WCAd ,y.Bz,CONVERT(varchar(100),f.RecordTime , 20)as RecordTime,
-		f.MTemSet,f.LTemSet
-		from T_YhInfo y ,T_FmInfo f where y.ValAd=f.ValAd and (y.yhrb=0 or y.yhrb=2)
+		select y.id ,y.YhName,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.Bz,y.Telephone,YHBM
+		from T_YhInfo y  where 1=1
         <if test="xqm!=null and xqm!=''">
         and y.XqName=#{xqm}
         </if>
+        
         <if test="ldh!=null and ldh!=''">
         and y.BuildNO=#{ldh}
         </if>
@@ -139,29 +138,11 @@
         <if test="yhfl!=null and yhfl!=''">
 	    and y.yhfl=#{yhfl}
         </if>
-        
-        <if test="FamKd1!=null and FamKd1!=''">
-	    and  f.FamKd &gt;= #{FamKd1}
-        </if>
-        <if test="FamKd2!=null and FamKd2!=''">
-	    and  f.FamKd &lt;= #{FamKd2}
-        </if>
-        
-        <if test="RoomTemp1!=null and RoomTemp1!=''">
-	    and  f.RoomTemp &gt;= #{RoomTemp1}
-        </if>
-        <if test="RoomTemp2!=null and RoomTemp2!=''">
-	    and  f.RoomTemp &lt;= #{RoomTemp2}
-        </if>
-        
-        <if test="ValTemp1!=null and ValTemp1!=''">
-	    and  f.ValTemp &gt;= #{ValTemp1}
-        </if>
-        <if test="ValTemp2!=null and ValTemp2!=''">
-	    and  f.ValTemp &lt;= #{ValTemp2}
-        </if>
         <if test="sfjf!=null and sfjf!=''">
 	    and y.SFJF=#{sfjf}
+        </if>
+         <if test="YHBM!=null and YHBM!=''">
+        and y.YHBM=#{YHBM}
         </if>
         <if test="xqm!=null and xqm!=''">
         order by y.BuildNO asc,y.CellNO asc, y.HouseNO asc
@@ -178,8 +159,8 @@
 	
 	<insert id="InsertYh" >
 		insert into T_YhInfo
-		(YhName,XqName,BuildNO,CellNO,HouseNO,ValAd,Bz,yhfl,yhrb)
-		values(#{YhName},#{XqName},#{BuildNO},#{CellNO},#{HouseNO},#{ValAd},#{Bz},#{yhfl},'0')
+		(YhName,XqName,BuildNO,CellNO,HouseNO,YHBM,Bz,Telephone,yhrb,HeatArea)
+		values(#{YhName},#{XqName},#{BuildNO},#{CellNO},#{HouseNO},#{YHBM},#{Bz},#{LXDH},'0',#{HeatArea})
 	</insert>
 	
 	<update id="UpdateFm">
@@ -190,7 +171,7 @@
 	
 	<update id="UpdateYh">
 		update T_YhInfo set
-		ValAd=#{ValAd},YhName=#{YhName},XqName=#{XqName},BuildNO=#{BuildNO},CellNO=#{CellNO},HouseNO=#{HouseNO},Bz=#{Bz},yhfl=#{yhfl}
+		YHBM=#{YHBM},YhName=#{YhName},XqName=#{XqName},BuildNO=#{BuildNO},CellNO=#{CellNO},HouseNO=#{HouseNO},Bz=#{Bz},HeatArea=#{HeatArea},Telephone=#{LXDH}
 		where ID=#{id}
 	</update>
 	

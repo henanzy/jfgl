@@ -13,7 +13,11 @@ $(document).ready(function(){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
 			arr1[0] = json[i].id;
-			arr1[1] = json[i].SHJG;
+			if(json[i].cl!=null){
+				arr1[1] = json[i].cl;	
+			}else{
+				arr1[1] ="未上传合同"
+			}
 			arr1[2] = json[i].CNQ;
 			arr1[3] = json[i].YRZT;
 			arr1[4] = json[i].YhName;
@@ -34,6 +38,12 @@ $(document).ready(function(){
 			shebList.push(arr1);
 		};
 	}
+	$(".ht").click(function(){
+		wz_look(this)
+	});
+	$(".wz_look .close").click(function(){
+		$(".wz_look").hide();
+	});
 	var YhList;
 	$.ajax({
 			url : getRootPath()+"/tfxx/findTfxx.action", 
@@ -209,9 +219,9 @@ function tbodydis(oldlist,newlist,page){
 					html += "<tr class='gradeX even'>";
 				}
 		
-				html += "<td><input class='shtg'  type='button' value='同意' /><input class='shtg' type='button' value='驳回' /></td>";
+				html += "<td><input class='ht' type='button' value='查看材料' /></td>";
 				for (var j = 0 ; j <newlist[i].length ; j ++) {
-					if(j==0){
+					if(j==0||j==1){
 
 						html += "<td style='display:none;'>" + newlist[i][j] + "</td>";
     					
@@ -239,6 +249,12 @@ function tbodydis(oldlist,newlist,page){
 		});
 		$(".shtg").click(function(){
 			shtg(this);
+		});
+		$(".ht").click(function(){
+			wz_look(this)
+		});
+		$(".wz_look .close").click(function(){
+			$(".wz_look").hide();
 		});
 	}
 	
@@ -271,7 +287,12 @@ function tbodydis(oldlist,newlist,page){
 	$(".shtg").click(function(){
 		shtg(this);
 	});
-	
+	$(".ht").click(function(){
+		wz_look(this)
+	});
+	$(".wz_look .close").click(function(){
+		$(".wz_look").hide();
+	});
 	function shtg(p){
 		var xintr = $(p).parent().parent().children();
 		var id=xintr[1].innerHTML
@@ -330,7 +351,11 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 	for (var i = 0 ; i < json.length ; i ++) {
 		var arr1 = [];
 		arr1[0] = json[i].id;
-		arr1[1] = json[i].SHJG;
+		if(json[i].cl!=null){
+			arr1[1] = json[i].cl;	
+		}else{
+			arr1[1] ="未上传合同"
+		}
 		arr1[2] = json[i].CNQ;
 		arr1[3] = json[i].YRZT;
 		arr1[4] = json[i].YhName;
@@ -350,3 +375,11 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 	};
 
 }	
+function wz_look(p){
+	$(".wz_look").show();
+	var xintd = $(p).parent().parent().children();
+	
+	
+	$(".wz_look_content").html(xintd[2].innerHTML);
+	
+}

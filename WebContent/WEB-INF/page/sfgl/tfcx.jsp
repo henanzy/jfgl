@@ -107,7 +107,8 @@
 <script type="text/javascript" src="../js/layui/layui.js"></script>
 <script type="text/javascript" src="../js/layui/layui.all.js"></script>
 <link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />
-
+ <link rel="stylesheet" type="text/css" href="../css/guojfg.css" media="screen" />
+<script type="text/javascript" src="../js/release/wangEditor.js"></script>
 <script type="text/javascript" src="../js/demo.formelements.js"></script>
  <script type="text/javascript" src="../js/tfcx.js"></script> 
 <style type="text/css">
@@ -199,6 +200,15 @@ nav li, select {
 th, td {
 	white-space: nowrap;
 }
+.ht{
+	border:none;
+	background-color:rgb(60,61,61);
+	width:60px;
+	height:24px;
+	margin-right:6px;
+	color:#fff;
+	border-radius:3px;
+}
 </style>
 
 <script>
@@ -288,8 +298,8 @@ th, td {
 					<thead>
 						<tr>
 							
-							<th>审核</th>
-							<th>审核状态</th>
+							<th>查看材料</th>
+							
 							<th class="table-th-css">采暖期<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							<th class="table-th-css">用热状态<span class="span-up"></span> <span
@@ -361,6 +371,14 @@ th, td {
 		</nav>
 
 	</div>
+	<div class="wz_look" style="min-width:1000px;overflow-x: hidden;">
+			<div class="wz_look_body">
+				<span class="close"></span>
+					
+				<div style=" overflow-y:auto; overflow-x:auto; " class="wz_look_content" readonly="readonly"></div>
+					
+	</div>
+</div>
 </body>
 <script type="text/javascript">
 

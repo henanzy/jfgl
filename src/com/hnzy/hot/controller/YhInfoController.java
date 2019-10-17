@@ -35,11 +35,8 @@ public class YhInfoController {
 	
 	@RequestMapping("/yezxx")
     public String yezxx(HttpSession session){
-		String type =(String) session.getAttribute("type");
-		if("jtyh".equals(type)){
-			return "ZhiNeng/yonghu/yezxx_jt";
-		}
-    	return "ZhiNeng/yonghu/yezxx";
+		
+    	return "yezxx";
     }
 	//查询楼栋
 	@RequestMapping("findLd")
@@ -158,7 +155,7 @@ public class YhInfoController {
    @RequestMapping("findYh")
 	@ResponseBody
 	public JSONObject findYh(String xqm,String ldh,String dyh,String hh,String yhfl,String FamKd1,String FamKd2,String RoomTemp1,
-			String RoomTemp2,String ValTemp1,String ValTemp2) throws UnsupportedEncodingException{
+			String RoomTemp2,String ValTemp1,String ValTemp2,String YHBM) throws UnsupportedEncodingException{
 		JSONObject json=new JSONObject();
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(xqm!=null){
@@ -173,6 +170,7 @@ public class YhInfoController {
 		map.put("ldh", ldh);
 		map.put("dyh", dyh);
 		map.put("hh", hh);
+		map.put("YHBM", YHBM);
 		map.put("yhfl", yhfl);
 		map.put("FamKd1", FamKd1);
 		map.put("FamKd2", FamKd2);
@@ -189,26 +187,26 @@ public class YhInfoController {
    
    @RequestMapping("InsertYh")
 	
-	public String InsertYh(String YhName,String XqName,String BuildNO,String yhfl,
-			String CellNO,String HouseNO,String ValAd,String Bz,String QgID){
+	public String InsertYh(String YhName,String XqName,String BuildNO,
+			String CellNO,String HouseNO,String Bz,String YHBM,String LXDH,String HeatArea){
 		
 	Map<String, Object> map =new  HashMap<String, Object>();
 	map.put("YhName", YhName);
 	map.put("XqName", XqName);
 	
 	map.put("BuildNO", BuildNO);
-	map.put("yhfl", yhfl);
+	map.put("YHBM", YHBM);
 	
 	
 	map.put("CellNO", CellNO);
 	map.put("HouseNO", HouseNO);
-	map.put("ValAd", ValAd);
+	map.put("LXDH", LXDH);
 	map.put("Bz", Bz);
-	Map<String, Object> map1 =new  HashMap<String, Object>();
-	map1.put("ValAd", ValAd);
-	map1.put("QgID", QgID);
+	
+	map.put("HeatArea", HeatArea);
+	
 	yhInfoService.InsertYh(map);
-	yhInfoService.InsertFm(map1);
+	
 		return "redirect:yezxx.action";
 		
 	}
@@ -216,27 +214,25 @@ public class YhInfoController {
    
    @RequestMapping("UpdateYh")
 	
-	public String UpdateYh(String YhName,String XqName,String BuildNO,String yhfl,
-			String CellNO,String HouseNO,String ValAd,String Bz,String QgID,String id){
+	public String UpdateYh(String YhName,String XqName,String BuildNO,
+			String CellNO,String HouseNO,String Bz,String YHBM,String LXDH,String HeatArea,String id){
 		
 	Map<String, Object> map =new  HashMap<String, Object>();
 	map.put("YhName", YhName);
 	map.put("XqName", XqName);
 	
 	map.put("BuildNO", BuildNO);
+	map.put("YHBM", YHBM);
 	
-	map.put("yhfl", yhfl);
 	
 	map.put("CellNO", CellNO);
 	map.put("HouseNO", HouseNO);
-	map.put("ValAd", ValAd);
-	map.put("id", id);
+	map.put("LXDH", LXDH);
 	map.put("Bz", Bz);
-	Map<String, Object> map1 =new  HashMap<String, Object>();
-	map1.put("ValAd", ValAd);
-	map1.put("QgID", QgID);
+	map.put("id", id);
+	map.put("HeatArea", HeatArea);
 	yhInfoService.UpdateYh(map);
-	yhInfoService.UpdateFm(map1);
+	
 		return "redirect:yezxx.action";
 		
 	}

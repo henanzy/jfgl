@@ -99,14 +99,28 @@
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
  <script type="text/javascript" src="../js/tf.js"></script> 
-
+<link rel="stylesheet" type="text/css" href="../css/guojfg.css" media="screen" />
+<script type="text/javascript" src="../js/release/wangEditor.js"></script>
+<script type="text/javascript" src="../js/LodopFuncs.js"></script>
+<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../js/layui/layui.js"></script>
+<script type="text/javascript" src="../js/layui/layui.all.js"></script>
+<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />
  
  <style>
  *{
 	margin:0;
 	padding:0;
 }
-
+#htsc{
+	border:none;
+	background-color:rgb(60,61,61);
+	width:60px;
+	height:24px;
+	margin-right:6px;
+	color:#fff;
+	border-radius:3px;
+}
 .mws-report {
 	width: 98% !important;
 	min-width: 170px;
@@ -200,7 +214,32 @@ display:block;
 
 	<div id="increasedis" class="clearfix" style="overflow-x: hidden;">
 		
-		
+		<div class="mws-report-container clearfix">
+			
+			<p class="mws-report" href="#" style="font-size: 14px;min-width:800px;height:90px;">
+				<span class="mws-report-icon mws-ic ic-building"></span> 
+				<span class="mws-report-content" style="margin-top: 10px;"> 
+				
+				<span class="mws-report-title"> 选择小区 :
+					<select id="xq" style="width: 150px" name="xqName">
+                          <option value="" selected="selected">--选择小区--</option>
+					</select>
+				</span> <span>楼栋号： <select name="ldh" id="ldh" style="width: 70px">
+							<option value="">--楼栋--</option>
+					</select>
+				</span> <span>单元号： <select name="dyh" id="dyh" style="width: 70px">
+							<option value="">--单元--</option>
+					</select>
+				</span>
+	
+				<span class="mws-report-title" style="margin-left:10px;">
+				 户号:<input type="text" id="houseNo"  />
+					 &nbsp;&nbsp;&nbsp; 
+					<input type="submit" class="mws-button black" id="search_btn" value="搜索" />
+				</span>
+			</p>
+			
+		</div>
 		
 		<div class="mws-panel grid_8 "
 			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:500px">
@@ -211,30 +250,23 @@ display:block;
 			<div id="khxx" class="mws-panel-body" style="height:400px; padding:10px;">
 				<p class="khxx_p">
 				 
-					<label><span>小区名称:</span><input type="text" class="readonly_input" readonly="readonly" id="xq"  /></label>
-					<label><span>楼栋号:</span><input type="text" class="readonly_input" readonly="readonly"  id="ldh" /></label>
-					<label><span>单元号:</span><input type="text" class="readonly_input" readonly="readonly" id="dyh"  /></label>
-					<label><span>户号:</span><input type="text" class="readonly_input"  readonly="readonly" id="hh" /></label>
+					<label><span>小区名称:</span><input type="text"  id="XqName" class="readonly_input" readonly="readonly" vlaue="" /></label>
+					<label><span>楼栋号:</span><input type="text" id="BuildNO" class="readonly_input" readonly="readonly" vlaue="" /></label>
+					<label><span>单元号:</span><input type="text" id="CellNO" class="readonly_input" readonly="readonly" vlaue="" /></label>
+					<label><span>户号:</span><input type="text" id="HouseNO" class="readonly_input" readonly="readonly" vlaue="" /></label>
 				</p>
 				<p class="khxx_p">
-				    <label><span>客户编码:</span><input type="text" class="khxx_input" id="YHBM"  /></label>
+				    <label><span>客户编码:</span><input type="text" class="readonly_input" id="YHBM"  /></label>
 				    
-					<label><span>客户卡号:</span><input type="text" class="readonly_input"  readonly="readonly" id="IDNum"  /></label>
+					
 					
 					<label><span>客户名称:</span><input type="text" class="readonly_input"  readonly="readonly"  id="yhmc"/></label>
 					
-					<label><span>客户类型:</span><input type="text" class="readonly_input"  readonly="readonly" id="KHLX" /></label>
+				
 					
 				</p>
 				<p class="khxx_p">
-				    <label><span>用热状态:</span>
-				    <select id="YRZT" class="khxx_input">
-							<option value="正常">正常</option>
-							<option value="报停">报停</option>
-							<option value="强停">强停</option>
-							<option value="未供">未供</option>
-						</select>
-				    </label>
+				    
 					<label><span>联系电话:</span><input type="text" class="khxx_input" id="LXDH" /></label>
 					<label>
 						<span>采暖期:</span>
@@ -262,14 +294,14 @@ display:block;
 				
 				<p class="khxx_p">
 				    <label><span>退费原因:</span><input id="TFYY" type="text" class="khxx_input" value="" /></label>
-					<label><span>退款人:</span><input type="text" class="readonly_input"  readonly="readonly" id="TKR" value="测试账户" readonly="readonly"/></label>
+					
 					<label><span>退款日期:</span><input type="date" class="readonly_input"  readonly="readonly" id="TKRQ"  readonly="readonly" /></label>
 				</p>
 				<p class="khxx_p" style="text-align:center">
 				
 					
 						<input style="width:80px;" type="button" alt="" onclick="tf()" id="subbtn" value="确认" />
-			
+			            <input style="width:80px;"  type="button" id="htsc" value="材料上传" />
 				
 				</p>
 				
@@ -277,7 +309,128 @@ display:block;
 		</div>
 		
 	</div>
+<div class="na_crea" style="min-width:1000px;overflow-x: hidden;">
+			<div class="na_crea_body">
+				<span class="close"></span>
+				
+				
+				<form action="addZsk.action"  method="post">
+					
+					<div id="E" style="height:600px"></div>
+					
+					<textarea name="contents" id="ueditorContent" style="width:100%; height:200px;display:none" ></textarea>
+					
+					
+		            <p style="text-align:center"><input  type="button" id="close" value="确认" /></p>
+				
+				</form>
+			</div>
+		</div>         
+<div class="wz_look" style="min-width:1000px;overflow-x: hidden;">
+			<div class="wz_look_body">
+				<span class="close"></span>
+					
+					<div style=" overflow-y:auto; overflow-x:auto; " class="wz_look_content" readonly="readonly"></div>
+					
+			</div>
+</div>	
+<script type="text/javascript">
+var E = window.wangEditor;
+var editor = new E('#E');
+var $ueditorContent = $('#ueditorContent');
+editor.customConfig.onchange = function (html) {
+    // 监控变化，同步更新到 textarea
+    $ueditorContent.val(html);
+};
+editor.customConfig.uploadImgServer = '<%=basePath%>/rwxxCont/fileUp.action' ;
+editor.customConfig.uploadFileName = 'img';
+editor.customConfig.uploadImgHooks = {
+        // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+        customInsert: function (insertImg, result, editor) {
+            // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果：
+            var url = result.url;
+            
+            insertImg(url);
+        },
+      },
+editor.create();
+$ueditorContent.val(editor.txt.html());
+ 
 
+
+ 
+	
+var xq;
+
+ $.ajax({
+		url : "<%=basePath%>yhInfo/findXq.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			
+		},
+		success : function(data) {
+			
+			var opt="";
+			 xq=data.Xq;
+			
+			 for(var i=0; i<xq.length; i++){
+					
+				 $("#xq").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
+				}
+		}
+
+	});
+ 
+ $("#xq").change(function(){
+	 $.ajax({
+			url : "<%=basePath%>yhInfo/findLd.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"xqm" : $("#xq").val(),
+			},
+			success : function(data) {
+				$("#ldh option:gt(0)").remove();
+				$("#dyh option:gt(0)").remove();
+				$("#hh option:gt(0)").remove();
+				var ld=data.Ld;
+				for(var i=0; i<ld.length; i++){
+					
+					$("#ldh").append("<option value='"+ld[i].BuildNo+"'>"+ld[i].BuildNo+"</option>");
+				}	
+			}
+
+		});
+		
+		
+	});
+ 
+ $("#ldh").change(function(){
+	 $.ajax({
+			url : "<%=basePath%>yhInfo/findDy.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"xqm" : $("#xq").val(),
+				"ldh" : $("#ldh").val(),
+			},
+			success : function(data) {
+				$("#dyh option:gt(0)").remove();
+				$("#hh option:gt(0)").remove();
+				var dy=data.Dy;
+				for(var i=0; i<dy.length; i++){
+					
+					$("#dyh").append("<option value='"+dy[i].CellNo+"'>"+dy[i].CellNo+"</option>");
+				}	
+			}
+
+		});
+		
+		
+	});
+
+ </script>
 <script>
 $(document).ready(function(){
 

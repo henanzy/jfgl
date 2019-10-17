@@ -100,7 +100,11 @@
 <script type="text/javascript" src="../js/themer.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/guojfg.css" media="screen" />
 <script type="text/javascript" src="../js/release/wangEditor.js"></script>
-
+<script type="text/javascript" src="../js/LodopFuncs.js"></script>
+<script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../js/layui/layui.js"></script>
+<script type="text/javascript" src="../js/layui/layui.all.js"></script>
+<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />
 
 	<link rel="stylesheet" type="text/css"
 	href="../js/release/wangEditor.css" media="screen" />
@@ -198,6 +202,15 @@ display:block;
 	color:#fff;
 	border-radius:3px;
 }
+#dayin{
+	border:none;
+	background-color:rgb(60,61,61);
+	width:60px;
+	height:24px;
+	margin-right:6px;
+	color:#fff;
+	border-radius:3px;
+}
 .ht{
 	border:none;
 	background-color:rgb(60,61,61);
@@ -284,27 +297,7 @@ th, td {
 					<label><span>入网编码:</span><input type="text" id="rwbm" class="khxx_input" vlaue="" /></label>
 					<label><span>联系电话:</span><input type="text" id="TelePhone" class="khxx_input" vlaue="" /></label>
 				</p>
-				<!-- <p class="khxx_p">
-					<label><span>联系电话:</span><input type="text" class="khxx_input" vlaue="" /></label>
-					<label>
-						<span>房屋类型:</span>
-						<select class="khxx_input">
-							<option value="民用住宅">民用住宅</option>
-							<option value="商用">商用</option>
-							<option value="公建">公建</option>
-							<option value="其他">其他</option>
-						</select>
-					</label>
-					<label>
-						<span>所属换热站:</span>
-						<select class="khxx_input">
-							<option value="天鹅堡换热站">天鹅堡换热站</option>
-							<option value="砥柱大厦换热站">砥柱大厦换热站</option>
-							<option value="金领小区换热站">金领小区换热站</option>
-						</select>
-					</label>
-					<label><span>竣工日期:</span><input type="date" class="khxx_input" vlaue="" /></label>
-				</p> -->
+				
 				<p class="khxx_p">
                 <label><span>入网日期:</span><input type="date" id="RWRQ" class="khxx_input" vlaue="" /></label> 
 					<label>
@@ -323,26 +316,59 @@ th, td {
 					<label>
 						<span>采暖设施:</span>
 						<select class="khxx_input" id="cnss">
-							<option value="地暖">地暖</option>
-							<option value="散热器">散热器</option>
+						    <option value="散热片">散热片</option>
+							<option value="地暖">地暖</option>							
 							<option value="风机盘管">风机盘管</option>
 						</select>
 					</label>
 				</p>
-				<p class="khxx_p">
-					<label><span>建筑物名称:</span><input type="text" id="jzwmc" class="khxx_input" vlaue="" /></label>
-					<label><span>建筑物用途:</span><input type="text" id="jzwyt" class="khxx_input" vlaue="" /></label>
-					<label><span>建筑层高:</span><input type="text" id="jzwcg" class="khxx_input" vlaue="" /></label>
-					<label><span>备注:</span><input type="text" id="bz" class="khxx_input" vlaue="" /></label>
-				</p>
+				
 				<p class="khxx_p">
 				    <label><span>入网单价:</span><input type="text" id="dj" class="khxx_input" vlaue="" /></label>
-					<label><span>入网费用:</span><input type="text" id="rwfy" class="khxx_input" vlaue="" /></label>
+					
 					<label><span>合同起始:</span><input type="date" id="HTQSRQ" class="khxx_input" vlaue="" /></label>
 					<label><span>入网结束:</span><input type="date" id="HTJSRQ" class="khxx_input" vlaue="" /></label>
 				</p>
 				<p class="khxx_p">
-				    <label><span>用户卡号:</span><input type="text" id="IDNum" class="khxx_input" vlaue="" /></label>
+				<label><span>采暖面积:</span><input id="cnmj" type="text" class="khxx_input"  readonly="readonly"  /></label>
+				<label><span>应收金额:</span><input id="YSJE" type="text" class="readonly_input"  readonly="readonly" value="" /></label>
+					
+					
+					<label><span>实收金额:</span><input id="JFJE" type="text" class="khxx_input" value="" /></label>
+					<label style="display:none" ><span>剩余金额:</span><input id="SYJE" type="text" class="readonly_input" readonly="readonly" value="" /></label>
+					<label><span>计费方式:</span>
+						<select class="khxx_input" id="JIFFS">
+							<option value="面积">面积</option>
+							<option value="流量">流量</option>
+						</select>
+					</label>
+				</p>
+			<p class="khxx_p">
+			<label>
+						<span>采暖期:</span>
+						<select id="CNQ" class="khxx_input">
+							
+							<option value="2019-2020">2019-2020</option>
+							<option value="2018-2019">2018-2019</option>
+						</select>
+					</label>
+				<label >
+						<span>交款方式:</span>
+						<input type="radio" name="JFTJ" value="现金" checked="checked" />现金						
+						<input type="radio" name="JFTJ" value="刷卡" />刷卡
+						
+						<input type="radio" name="JFTJ" value="微信" />微信
+						<input type="radio" name="JFTJ" value="支付宝" />支付宝
+					</label>
+				<label >
+						<span>收费方式:</span>
+						<input type="radio" name="SFFS" value="柜台收费" checked="checked" />柜台收费
+						<input type="radio" name="SFFS" value="银行代收" />银行代收
+						<input type="radio" name="SFFS" value="走收" />走收
+						
+						<input type="radio" name="SFFS" value="物业代售" />物业代收
+					</label>
+					<label><span>收款日期:</span><input type="date" class="readonly_input"  readonly="readonly" id="JFSJ"  readonly="readonly" /></label>
 				</p>
 				
 				 
@@ -351,75 +377,16 @@ th, td {
 				  
 				    <input style="width:80px;"  type="button" id="htsc" value="合同上传" />
 					<input style="width:80px;" onclick="jt()" type="button" id="subbtn" value="确认" />
+					<input style="width:80px;" type="button" alt=""  id="dayin" onclick="dy()" value="打印" />
 				
 				</p>
-				
+				<input id="lsdh"  type="text" style="display:none" />
 			</div>
 		</div>
 		
-		<div class="mws-panel grid_8 "
-			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:500px">
-			<div class="mws-panel-header">
-				<span class="mws-i-24 i-table-1">新增入网客户</span>
-			</div>
-			
-			<div id="xincreate_table_body" class="mws-panel-body"
-				style="overflow:scroll !important; height: 600px;">
-				<table class="mws-table">
-					<thead>
-						<tr>
-							<!-- <th class="table-th-css">操作人<span class="span-up"></span> <span class="span-down"></span></th> -->
-							<th>用户卡号</th>
-							<th>小区名称</th>
-							<th>楼栋号</th>
-							<th>单元号</th>
-							<th>户号</th>
-							
-							<th>用户名称</th>
-							
-							<th>用户编码</th>
-							<th>入网编码</th>
-							<th>入网日期</th>
-							<th>是否入住</th>
-							<th>是否低保</th>
-							<th>采暖设施</th>
-							<th>建筑名称</th>
-							
-							<th>建筑层高</th>
-							<th>入网单价</th>
-							<th>入网费用</th>
-							<th>合同起始</th>
-							<th>合同结束</th>
-							<th>查看合同</th>
-					</thead>
-					<tbody id="xinword_body">
-						
-				
-					</tbody>
-				</table>
-			</div>
-		</div>
 		
-		 <nav style="width:100%;">
-            <ul style="width:500px;display:flex;justify-content:space-between;margin:0 auto;" >
-            	
-                <li id="first">首页</li>
-                <li id="last">上一页</li>
-                <li id="next">下一页</li>
-                <li id="end">尾页</li>   
-                <li id="curpage">当前第<span id="currentNum" ></span>页 /共<span id='pages'></span>页</li>
-                <li>共<span id="num"></span></li>
-                
-                    <select name="" id="select" >
-                        <option value="10">10</option>
-                        <option value="15"  selected = "selected">15</option>
-                        <option value="20" >20</option>
-                        <option value="25">25</option>
-                        <option value="30">30</option>
-                    </select>
-                     
-            </ul>
-         </nav> 
+		
+		 
 <div class="na_crea" style="min-width:1000px;overflow-x: hidden;">
 			<div class="na_crea_body">
 				<span class="close"></span>
@@ -446,6 +413,77 @@ th, td {
 			</div>
 </div>
 	<script type="text/javascript">
+	var  LODOP;
+	
+	function dy() {	
+		var xq=$("#XqName").val();
+
+		var ld=$("#BuildNO").val();
+		var dy=$("#CellNO").val();
+		var hh=$("#HouseNO").val();
+		var lsdh=$("#lsdh").val();
+		var YHBM=$("#YHBM").val();
+		var mj=$("#cnmj").val();
+		var JIFFS=$("#JIFFS").val();
+		var JFJE=$("#JFJE").val();
+		var SFFS=$("input[name='SFFS']:checked").val();
+		var JFSJ=$("#JFSJ").val();
+		var UserName="<%=request.getSession().getAttribute("UserName")%>"
+		LODOP=getLodop(); 
+		
+		LODOP.SET_PRINT_PAGESIZE(1, 800,3400,"");
+		LODOP.ADD_PRINT_IMAGE(340,110,250,250,"<img src='../images/cwz.gif' width=120px height=120px/>");
+		LODOP.SET_PRINT_STYLE("FontSize",15);
+		LODOP.ADD_PRINT_TEXT(10,80,400,45,"南乐普惠热力");
+		LODOP.ADD_PRINT_TEXT(30,5,400,45,"--------------------------");
+		LODOP.SET_PRINT_STYLE("FontName","隶书");
+		LODOP.SET_PRINT_STYLE("FontSize",10);
+		LODOP.ADD_PRINT_TEXT(65,110,180,45,"缴费小票");
+		LODOP.ADD_PRINT_TEXT(90,5,400,45,"-------------------------------------");
+		LODOP.ADD_PRINT_TEXT(115,10,300,25,"流水单号:  "+lsdh);
+		LODOP.ADD_PRINT_TEXT(140,10,300,25,"用户编码:  "+YHBM);
+		LODOP.ADD_PRINT_TEXT(165,10,300,25,"小区    :  "+xq);
+		LODOP.ADD_PRINT_TEXT(190,10,300,25,"楼栋    :  "+ld+"   单元："+dy+"   户号："+hh);
+		LODOP.ADD_PRINT_TEXT(215,10,300,25,"住户面积:  "+mj+"㎡");
+		LODOP.ADD_PRINT_TEXT(240,10,300,25,"计费方式:  "+JIFFS+"收费");
+		LODOP.ADD_PRINT_TEXT(265,10,400,25,"缴费金额:  "+JFJE+"元     ");
+		LODOP.ADD_PRINT_TEXT(290,10,400,25,"缴费日期:  "+JFSJ);
+		LODOP.ADD_PRINT_TEXT(315,10,400,25,"缴费方式:  "+SFFS);
+		LODOP.ADD_PRINT_TEXT(340,10,400,25,"收费员  :  "+UserName);
+		LODOP.SET_PRINT_STYLE("FontSize",7);
+		LODOP.ADD_PRINT_TEXT(450,90,400,25,"*本票据仅作为收费证明，不作为收据使用");
+		
+		
+		LODOP.ADD_PRINT_IMAGE(960,110,250,250,"<img src='../images/cwz.gif'  width=120px height=120px/>");
+		LODOP.SET_PRINT_STYLE("FontSize",15);
+		LODOP.ADD_PRINT_TEXT(630,80,400,45,"南乐普惠热力");
+		LODOP.ADD_PRINT_TEXT(660,5,400,45,"--------------------------");
+		LODOP.SET_PRINT_STYLE("FontName","隶书");
+		LODOP.SET_PRINT_STYLE("FontSize",10);
+		LODOP.ADD_PRINT_TEXT(685,110,180,45,"缴费小票");
+		LODOP.ADD_PRINT_TEXT(710,5,400,45,"-------------------------------------");
+		LODOP.ADD_PRINT_TEXT(735,10,300,25,"流水单号:  "+lsdh);
+		LODOP.ADD_PRINT_TEXT(760,10,300,25,"用户编码:  "+YHBM);
+		LODOP.ADD_PRINT_TEXT(785,10,300,25,"小区    :  "+xq);
+		LODOP.ADD_PRINT_TEXT(810,10,300,25,"楼栋    :  "+ld+"   单元："+dy+"   户号："+hh);
+		LODOP.ADD_PRINT_TEXT(835,10,300,25,"住户面积:  "+mj+"㎡");
+		LODOP.ADD_PRINT_TEXT(860,10,300,25,"计费方式:  "+JIFFS+"收费");
+		LODOP.ADD_PRINT_TEXT(885,10,400,25,"缴费金额:  "+JFJE+"元     ");
+		LODOP.ADD_PRINT_TEXT(910,10,400,25,"缴费日期:  "+JFSJ);
+		LODOP.ADD_PRINT_TEXT(935,10,400,25,"缴费方式:  "+SFFS);
+		LODOP.ADD_PRINT_TEXT(960,10,400,25,"收费员  :  "+UserName);
+		LODOP.SET_PRINT_STYLE("FontSize",12);
+		LODOP.ADD_PRINT_TEXT(1020,10,400,25,"客户签字 :____________");
+		LODOP.SET_PRINT_STYLE("FontSize",7);
+		LODOP.ADD_PRINT_TEXT(1070,90,400,25,"*本票据仅作为收费证明，不作为收据使用");
+		
+		
+		
+		
+		
+		      
+		LODOP.PREVIEW();	       
+	};
 	function bf(){
 		
 		$.ajax({
@@ -487,18 +525,16 @@ th, td {
 	</script>
 <script type="text/javascript">
 
-var ssgs="<%=request.getSession().getAttribute("gs")%>";
-var strs= new Array(); //定义一数组 
-  strs=ssgs.split(","); //字符分割 
-for (i=0;i<strs.length ;i++ ) 
-{ 
- var s=strs[i];
- 
-  $("#ssgs").append("<option value='"+s+"'>"+s+"</option>");
-
-} 
   function jt(){
-
+	  layer.confirm('是否缴费', function(index) {
+	  layer.close(index);
+	  var JFTJ=$("input[name='JFTJ']:checked").val();
+		var SFFS=$("input[name='SFFS']:checked").val();
+		var JFJE=$("#JFJE").val();
+		if(isNaN(JFJE)){
+			alert("缴费金额请输入数字")
+			return;
+		}
 	  var IDNum=$("#IDNum").val();
 	  var XqName=$("#XqName").val();
 		var BuildNO=$("#BuildNO").val();
@@ -523,6 +559,41 @@ for (i=0;i<strs.length ;i++ )
 		var ht=$("#ueditorContent").val();
 		
 		var DJ=$("#dj").val();
+		$.ajax({
+			url : getRootPath()+"/jfxx/InsertJfxx.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"YHBM":$("#YHBM").val(),
+				"IDNum":$("#IDNum").val(),
+				"JFSJ":$("#JFSJ").val(),
+				"CNQ":$("#CNQ").val(),
+				"JIFFS":$("#JIFFS").val(),
+				"JFTJ":JFTJ,
+				"SFFS":SFFS,
+				
+				"RWBM":$("#rwbm").val(),
+				"JFJE":$("#JFJE").val(),
+				"YSJE":$("#YSJE").val(),
+				"SYJE":$("#SYJE").val(),
+				
+				"PJHM":$("#PJHM").val(),
+				
+				"LXDH":$("#TelePhone").val(),
+			},
+			success : function(data) {
+				if(data.msg=="1"){
+					alert("缴费成功！")
+					$("#lsdh").val(data.lsdh)
+				}
+				else{
+					alert("请登录后操作")
+					return;
+				}
+				
+			}
+
+		});
 		 $.ajax({
 				url : "<%=basePath%>rwxxCont/InsertrRw.action", 
 				async : false,
@@ -552,10 +623,12 @@ for (i=0;i<strs.length ;i++ )
 					"ht":ht,
 				},
 				success : function(data) {
-					location.reload();
+				
 				}
 
 			});	
+		 
+	  });
   }
 </script>
 <script type="text/javascript">

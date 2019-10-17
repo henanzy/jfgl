@@ -6,8 +6,8 @@
 	
 	<insert id="InsertTfxx" >
 		insert into J_Tkxx
-		(IDNum,KHBM,YRZT,KHLX,LXDH,CNQ,SSJE,BCTF,TKFS,PJHM,TKRQ,TKR,BZ,TFYY,SHJG)
-		values(#{IDNum},#{YHBM},#{YRZT},#{KHLX},#{LXDH},#{CNQ},#{SSJE},#{BCTF},#{TKFS},#{PJHM},#{TKRQ},#{TKR},#{BZ},#{TFYY},'未审核')
+		(IDNum,KHBM,YRZT,KHLX,LXDH,CNQ,SSJE,BCTF,TKFS,PJHM,TKRQ,TKR,BZ,TFYY,SHJG,cl)
+		values(#{IDNum},#{YHBM},#{YRZT},#{KHLX},#{LXDH},#{CNQ},#{SSJE},#{BCTF},#{TKFS},#{PJHM},#{TKRQ},#{TKR},#{BZ},#{TFYY},'未审核',#{cl})
 	</insert>
 	
     <select id="findJfByBm" resultMap="TfMap" >

@@ -26,64 +26,101 @@ function getRootPath(){
     return(localhostPaht+projectName);  
 } 
 $(function () {
-	$("#YHBM").blur(function(){
+	$("#search_btn").click(function(){
+		$("#dj").val("19");
+		var xq=$("#xq").val();
+		var ldh=$("#ldh").val();
+		var dyh=$("#dyh").val();
+		var houseNo=$("#houseNo").val();
 		
-		$.ajax({
-			url : getRootPath()+"/jfxx/findYhByBm.action", 
-			async : false,
-			dataType : "json",
-			data : {
-				"YHBM":$("#YHBM").val(),
-			},
-			success : function(data) {
-				if(data.map.length>0){
-					var map=data.map[0];
-					$("#xq").val(map.XqName);
-					$("#ldh").val(map.BuildNO);
-					$("#dyh").val(map.CellNO);
-					$("#hh").val(map.HouseNO);
-					$("#cnmj").val(map.HeatArea);
-					$("#KHLX").val(map.Yhfl);
-					$("#yhmc").val(map.YhName);
-					$("#IDNum").val(map.IDNum);
-					$("#RWBM").val(map.RWBM);
-					$("#LXDH").val(map.Telephone);
+		 $.ajax({
+				url : getRootPath()+"/rwxxCont/rwSer.action", 
+				async : false,
+				dataType : "json",
+				data : {
+					"XqName":xq,
+					"BuildNo":ldh,
+					"CellNo":dyh,
+					"HouseNo":houseNo,
+				},
+				success : function(data) {
 					
-				}
-				else{
-					alert("用户编码不存在请重新输入")
-				}
-				
-			}
+					var rwxx=data.rwxx;
+					var YHBM=rwxx.YHBM;
+					
+					$("#YHBM").val(YHBM)
+					$.ajax({
+						url : getRootPath()+"/jfxx/findYhByBm.action", 
+						async : false,
+						dataType : "json",
+						data : {
+							"YHBM":YHBM,
+						},
+						success : function(data) {
+							if(data.map.length>0){
+								var map=data.map[0];
+								$("#XqName").val(map.XqName);
+								$("#BuildNO").val(map.BuildNO);
+								$("#CellNO").val(map.CellNO);
+								$("#HouseNO").val(map.HouseNO);
+								$("#cnmj").val(map.HeatArea);
+								$("#KHLX").val(map.Yhfl);
+								$("#yhmc").val(map.YhName);
+								$("#IDNum").val(map.IDNum);
+								$("#RWBM").val(map.RWBM);
+								$("#LXDH").val(map.Telephone);
+								
+							}
+							
+							
+						}
 
-		});
+					});
+					
+					$.ajax({
+						url : getRootPath()+"/tfxx/findJfByBm.action", 
+						async : false,
+						dataType : "json",
+						data : {
+							"YHBM":YHBM,
+						},
+						success : function(data) {
+							if(data.map.length>0){
+								var map=data.map[0];
+								$("#CNQ").val(map.CNQ);
+								$("#SSJE").val(map.JFJE);
+							}
+							
+							
+						}
+
+					});
+				}
+
+			});	
+		 
+		 
 		
-		$.ajax({
-			url : getRootPath()+"/tfxx/findJfByBm.action", 
-			async : false,
-			dataType : "json",
-			data : {
-				"YHBM":$("#YHBM").val(),
-			},
-			success : function(data) {
-				if(data.map.length>0){
-					var map=data.map[0];
-					$("#CNQ").val(map.CNQ);
-					$("#SSJE").val(map.JFJE);
-				}
-				else{
-					alert("用户编码不存在请重新输入")
-				}
-				
-			}
-
+	});
+	$("#htsc").click(function(){
+		$(".na_crea").show();
+		$("#close").click(function(){
+			$(".na_crea").hide();
 		});
 	});
-	
+	$(".na_crea .close").click(function(){
+		$(".na_crea").hide();
+	});
 	
 });
 function tf(){
-	
+	var cl=$("#ueditorContent").val();
+	layer.confirm('是否退费', function(index) {
+		 layer.close(index);
+		 if($("#YHBM").val()==""||$("#YHBM").val()==null){
+			 alert("该用户没有用户编码!请完善资料");
+			 return;
+		 }
 	$.ajax({
 		url : getRootPath()+"/tfxx/InsertTfxx.action", 
 		async : false,
@@ -95,7 +132,7 @@ function tf(){
 			"KHLX":$("#KHLX").val(),
 			"LXDH":$("#LXDH").val(),
 			
-			
+			"cl":cl,
 			"CNQ":$("#CNQ").val(),
 			"SSJE":$("#SSJE").val(),
 			"BCTF":$("#BCTF").val(),
@@ -109,7 +146,7 @@ function tf(){
 		success : function(data) {
 			if(data.msg=="1"){
 				alert("退费成功！")
-				location.reload();
+				
 			}
 			else{
 				alert("系统错误，请稍后再试")
@@ -118,6 +155,7 @@ function tf(){
 		}
 
 	});
+});
 }
 
 

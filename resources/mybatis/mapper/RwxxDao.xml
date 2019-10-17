@@ -7,7 +7,7 @@
 	
 	 <select id="findrwxx" resultMap="rwMap" >
 	
-	select YhName,BuildNO,CellNO,HouseNO,XqName,YHBM,Telephone,IDNum from T_YhInfo 
+	select YhName,BuildNO,CellNO,HouseNO,XqName,YHBM,Telephone,IDNum ,HeatArea from T_YhInfo 
 	where 1=1
 	
 	    <if test="XqName!=null and XqName!=''">

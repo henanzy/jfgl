@@ -41,7 +41,7 @@ public class TfxxController {
 	@RequestMapping("InsertTfxx")
 	   @ResponseBody
 		public JSONObject InsertJfxx(HttpSession session,String YHBM,String IDNum,String YRZT,String KHLX,String LXDH,String CNQ,String SSJE,
-				String BCTF,String TKFS,String PJHM,String TKRQ,String TKR,String BZ,String TFYY) throws UnsupportedEncodingException{
+				String BCTF,String TKFS,String PJHM,String TKRQ,String TKR,String BZ,String TFYY,String cl) throws UnsupportedEncodingException{
 			JSONObject json=new JSONObject();
 			Map<String, Object> map = new HashMap<String, Object>();
 			
@@ -52,8 +52,9 @@ public class TfxxController {
 			map.put("TKFS",getUtf8(TKFS));map.put("PJHM",getUtf8(PJHM));
 			map.put("TKRQ",getUtf8(TKRQ));map.put("TKR",getUtf8(TKR));
 			map.put("BZ",getUtf8(BZ));map.put("TFYY",getUtf8(TFYY));
-			
+			map.put("cl",getUtf8(cl));
 			xxglService.InsertRz(TKR, "退费登记 用户编码："+getUtf8(YHBM)+"  金额"+BCTF, new Date());
+			jfxxService.UpdateJfxx("否", YHBM,null);
 			tfxxService.InsertTfxx(map);
 			json.put("msg", "1");
 			return json;

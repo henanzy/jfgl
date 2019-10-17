@@ -6,20 +6,16 @@ $(document).ready(function(){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
 			arr1[0] = json[i].id;
-			arr1[1] = json[i].YhName;
-			arr1[2] = json[i].XqName;
-			arr1[3] = json[i].BuildNO;
-			arr1[4] = json[i].CellNO;
-			arr1[5] = json[i].HouseNO;
-			arr1[6] = json[i].ValAd;
-			arr1[7] = json[i].WCAd;
-			arr1[8] = json[i].QgID;
-			arr1[9] = json[i].Status;
-			arr1[10] = json[i].yhfl;
-			arr1[11] = json[i].SFJF;
-			arr1[12] = json[i].RoomTemp;
-			arr1[13] = json[i].ValTemp;
-			arr1[14] = json[i].Bz;
+			arr1[1] = json[i].YHBM;
+			arr1[2] = json[i].YhName;
+			arr1[3] = json[i].XqName;
+			arr1[4] = json[i].BuildNO;
+			arr1[5] = json[i].CellNO;
+			arr1[6] = json[i].HouseNO;
+			arr1[7] = json[i].HeatArea;
+			arr1[8] = json[i].Telephone;
+			
+			arr1[9] = json[i].Bz;
 			qgxxList.push(arr1);
 		};
 	}
@@ -102,7 +98,7 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 				"ldh":ld,
 				"dyh":dy,
 				"hh":hh,
-				"yhfl":$("#yhfl").val(),
+				"YHBM":$("#YHBM").val(),
 				
 			},
 			success : function(data) {
@@ -114,20 +110,16 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
 			arr1[0] = json[i].id;
-			arr1[1] = json[i].YhName;
-			arr1[2] = json[i].XqName;
-			arr1[3] = json[i].BuildNO;
-			arr1[4] = json[i].CellNO;
-			arr1[5] = json[i].HouseNO;
-			arr1[6] = json[i].ValAd;
-			arr1[7] = json[i].WCAd;
-			arr1[8] = json[i].QgID;
-			arr1[9] = json[i].Status;
-			arr1[10] = json[i].yhfl;
-			arr1[11] = json[i].SFJF;
-			arr1[12] = json[i].RoomTemp;
-			arr1[13] = json[i].ValTemp;
-			arr1[14] = json[i].Bz;
+			arr1[1] = json[i].YHBM;
+			arr1[2] = json[i].YhName;
+			arr1[3] = json[i].XqName;
+			arr1[4] = json[i].BuildNO;
+			arr1[5] = json[i].CellNO;
+			arr1[6] = json[i].HouseNO;
+			arr1[7] = json[i].HeatArea;
+			arr1[8] = json[i].Telephone;
+			
+			arr1[9] = json[i].Bz;
 			compareWordList.push(arr1);
 		};
 		
@@ -242,26 +234,9 @@ function tbodydis(oldlist,newlist){
 	
 	$("#word_increase_btn").click(function(){
 		//获取到新增表单的信息
-		 $.ajax({
-             type: "post",
-            url: "findFm.action",
-              dataType:'json',
-          	data:{	
-					"ValAd":$("#ValAd1").val(),
-				},
-             dataType: "json",
-              success: function (data) {
-            	  var flag=data.flag;
-            	  if(flag==0){
-            		  $("#insert").submit();
-            		  alert("添加成功");
-            		  $("#increase_word").hide(); 
-            	  }else{
-            		  alert("阀门地址已存在，请重新输入");
-            	  }
-             },
-
-         })
+		 $("#insert").submit();
+		  
+		  $("#increase_word").hide(); 
 	});
 	//关闭新增
 	$(".close").click(function(){
@@ -280,32 +255,15 @@ function tbodydis(oldlist,newlist){
 		xin_del(this);
 	});
 	$("#word_change_btn").click(function(){
-		 $.ajax({
-             type: "post",
-            url: "findFm.action",
-              dataType:'json',
-          	data:{	
-					"ValAd":$("#ValAd2").val(),
-				},
-             dataType: "json",
-              success: function (data) {
-            	  var flag=data.flag;
-            	  if(flag==0||valad==$("#ValAd2").val()){
-            		  $("#update").submit();
-            		  alert("修改成功");
-            		  $("#change_word").hide(); 
-            	  }else{
-            		  alert("阀门地址已存在，请重新输入");
-            	  }
-             },
-
-         })
+		$("#update").submit();
+		
+		  $("#change_word").hide(); 
         
 		
 		/*alert(increaseValue);*/
 		
 	});
-	var valad;
+	
 	function xin_change(p){
 		$("#change_word").show();
 		
@@ -316,16 +274,16 @@ function tbodydis(oldlist,newlist){
 		var xintr = $(p).parent().parent().children();
 		//修改数据
 		var changewordList = [];
-		var flag=[0,1,2,3,4,5,6,8,10,14]
-		for(var x = 0 ; x < 15 ; x ++){
-			if(flag.includes(x)){
+		
+		for(var x = 0 ; x < 10 ; x ++){
+			
 				changewordList.push(xintr[x].innerHTML);
-			}			
+					
 		}
 		
 		var changeInput = $("#change_word .change_word_input");
 		for(var i = 0;i < changeInput.length;i ++){
-			if(i==2){
+			if(i==3){
 				 $.ajax({
 						url : "findXq.action", 
 						async : false,
@@ -349,7 +307,7 @@ function tbodydis(oldlist,newlist){
 					});
 			}
 			
-			if(i==3){
+			if(i==4){
 				 $.ajax({
 						url : "findLd.action", 
 						async : false,
@@ -370,7 +328,7 @@ function tbodydis(oldlist,newlist){
 
 					});
 			}
-			if(i==4){
+			if(i==5){
 				$.ajax({
 					url : "findDy.action", 
 					async : false,
@@ -396,7 +354,7 @@ function tbodydis(oldlist,newlist){
 			
 		}
 		
-		valad=$("#ValAd2").val();
+		
 	}
 	
 
@@ -405,7 +363,7 @@ function tbodydis(oldlist,newlist){
 
 	function xin_del(p){
 		var xintr = $(p).parent().parent().children();
-		var id=xintr[6].innerHTML
+		var id=xintr[0].innerHTML
 		
 		 layer.confirm('确认删除么', function(index) {
 			                 $.ajax({
