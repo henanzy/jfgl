@@ -244,10 +244,7 @@ th, td {
 			<p class="mws-report" href="#" style="font-size: 14px;min-width:800px;height:90px;">
 				<span class="mws-report-icon mws-ic ic-building"></span> 
 				<span class="mws-report-content" style="margin-top: 10px;"> 
-				<span>选择公司：
-     				<select id="ssgs" style="width:150px" name="ssgs">
-    				 </select>
-    				 </span>
+				
 				<span class="mws-report-title"> 选择小区 :
 					<select id="xq" style="width: 150px" name="xqName">
                           <option value="" selected="selected">--选择小区--</option>

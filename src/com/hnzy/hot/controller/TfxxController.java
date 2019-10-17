@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hnzy.hot.service.JfxxService;
 import com.hnzy.hot.service.TfxxService;
+import com.hnzy.hot.service.XxglService;
 
 import net.sf.json.JSONObject;
 
@@ -24,7 +25,8 @@ import net.sf.json.JSONObject;
 public class TfxxController {
 	@Autowired
 	public TfxxService tfxxService;
-	
+	@Autowired
+	private XxglService xxglService;
 	@Autowired
 	public JfxxService jfxxService;
 	
@@ -38,7 +40,7 @@ public class TfxxController {
 	
 	@RequestMapping("InsertTfxx")
 	   @ResponseBody
-		public JSONObject InsertJfxx(String YHBM,String IDNum,String YRZT,String KHLX,String LXDH,String CNQ,String SSJE,
+		public JSONObject InsertJfxx(HttpSession session,String YHBM,String IDNum,String YRZT,String KHLX,String LXDH,String CNQ,String SSJE,
 				String BCTF,String TKFS,String PJHM,String TKRQ,String TKR,String BZ,String TFYY) throws UnsupportedEncodingException{
 			JSONObject json=new JSONObject();
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -51,6 +53,7 @@ public class TfxxController {
 			map.put("TKRQ",getUtf8(TKRQ));map.put("TKR",getUtf8(TKR));
 			map.put("BZ",getUtf8(BZ));map.put("TFYY",getUtf8(TFYY));
 			
+			xxglService.InsertRz(TKR, "退费登记 用户编码："+getUtf8(YHBM)+"  金额"+BCTF, new Date());
 			tfxxService.InsertTfxx(map);
 			json.put("msg", "1");
 			return json;
@@ -94,7 +97,7 @@ public class TfxxController {
 	public JSONObject rwxx(HttpSession session,String SHJG,String SHR,String id,String YHBM){
 		JSONObject json=new JSONObject();
 		
-		if(session.getAttribute("UserName")==null){
+		if(session.getAttribute("UserName")!="phrl"){
 			json.put("msg", "请使用具有权限的用户进行审核");
 			
 		}else{
@@ -102,6 +105,7 @@ public class TfxxController {
 			if(SHJG.equals("同意")){
 				jfxxService.UpdateJfxx("否", YHBM,null);
 			}
+			xxglService.InsertRz((String) session.getAttribute("UserName"), "退费审核 "+SHJG+"  用户编码："+YHBM, new Date());
 			json.put("msg", "审核成功");
 		}
 		

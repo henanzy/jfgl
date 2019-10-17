@@ -177,7 +177,7 @@ display:block;
     -khtml-opacity: 0.5;  
     opacity: 0.5;  
 }
-
+#dayin,
 #subbtn,
 .checkinp,
 .stateinp{
@@ -270,7 +270,7 @@ display:block;
 					<label><span>票据号码:</span><input id="PJHM" type="text" class="khxx_input" value="" /></label>
 					<label style="width:40%">
 						<span>收费方式:</span>
-						<input type="radio" name="SFFS" value="坐收" checked="checked" />坐收
+						<input type="radio" name="SFFS" value="柜台收费" checked="checked" />柜台收费
 						<input type="radio" name="SFFS" value="银行代收" />银行代收
 						<input type="radio" name="SFFS" value="走收" />走收
 						
@@ -294,9 +294,9 @@ display:block;
 				<p class="khxx_p" style="text-align:center">
 				
 						<input style="width:80px;" type="button" alt="" onclick="jf()" id="subbtn" value="确认" />	
-						<input style="width:80px;" type="button" alt="" onclick="dy()" value="打印" />						
+						<input style="width:80px;" type="button" alt=""  id="dayin" onclick="dy()" value="打印" />						
 				</p>
-				
+				<input id="lsdh"  type="text" style="display:none" />
 			</div>
 		</div>
 		
@@ -305,15 +305,71 @@ display:block;
 <script>
 var  LODOP;
 function dy() {	
+	var xq=$("#xq").val();
+
+	var ld=$("#ldh").val();
+	var dy=$("#dyh").val();
+	var hh=$("#hh").val();
+	var lsdh=$("#lsdh").val();
+	var YHBM=$("#YHBM").val();
+	var mj=$("#cnmj").val();
+	var JIFFS=$("#JIFFS").val();
+	var JFJE=$("#JFJE").val();
+	var SFFS=$("input[name='SFFS']:checked").val();
+	var JFSJ=$("#JFSJ").val();
+	var UserName="<%=request.getSession().getAttribute("UserName")%>"
 	LODOP=getLodop(); 
-	LODOP.SET_PRINT_PAGESIZE(1, 700,1000,"");
-	LODOP.SET_PRINT_STYLE("FontSize",11);
-	LODOP.ADD_PRINT_TEXT(10,10,100,25,"郭德强");
-	LODOP.SET_PRINT_STYLEA(2,"FontName","隶书");
-	LODOP.SET_PRINT_STYLEA(2,"FontSize",15);
-	LODOP.ADD_PRINT_TEXT(10,10,100,25,"科学家");
-	LODOP.ADD_PRINT_TEXT(10,10,100,25,"地址：中国北京社会科学院附近东大街西胡同");
-	LODOP.ADD_PRINT_TEXT(10,10,100,25,"电话：010-88811888");
+	
+	LODOP.SET_PRINT_PAGESIZE(1, 800,3400,"");
+	LODOP.ADD_PRINT_IMAGE(340,110,250,250,"<img src='../images/cwz.gif' width=120px height=120px/>");
+	LODOP.SET_PRINT_STYLE("FontSize",15);
+	LODOP.ADD_PRINT_TEXT(10,80,400,45,"南乐普惠热力");
+	LODOP.ADD_PRINT_TEXT(30,5,400,45,"--------------------------");
+	LODOP.SET_PRINT_STYLE("FontName","隶书");
+	LODOP.SET_PRINT_STYLE("FontSize",10);
+	LODOP.ADD_PRINT_TEXT(65,110,180,45,"缴费小票");
+	LODOP.ADD_PRINT_TEXT(90,5,400,45,"-------------------------------------");
+	LODOP.ADD_PRINT_TEXT(115,10,300,25,"流水单号:  "+lsdh);
+	LODOP.ADD_PRINT_TEXT(140,10,300,25,"用户编码:  "+YHBM);
+	LODOP.ADD_PRINT_TEXT(165,10,300,25,"小区    :  "+xq);
+	LODOP.ADD_PRINT_TEXT(190,10,300,25,"楼栋    :  "+ld+"   单元："+dy+"   户号："+hh);
+	LODOP.ADD_PRINT_TEXT(215,10,300,25,"住户面积:  "+mj+"㎡");
+	LODOP.ADD_PRINT_TEXT(240,10,300,25,"计费方式:  "+JIFFS+"收费");
+	LODOP.ADD_PRINT_TEXT(265,10,400,25,"缴费金额:  "+JFJE+"元     ");
+	LODOP.ADD_PRINT_TEXT(290,10,400,25,"缴费日期:  "+JFSJ);
+	LODOP.ADD_PRINT_TEXT(315,10,400,25,"缴费方式:  "+SFFS);
+	LODOP.ADD_PRINT_TEXT(340,10,400,25,"收费员  :  "+UserName);
+	LODOP.SET_PRINT_STYLE("FontSize",7);
+	LODOP.ADD_PRINT_TEXT(450,90,400,25,"*本票据仅作为收费证明，不作为收据使用");
+	
+	
+	LODOP.ADD_PRINT_IMAGE(960,110,250,250,"<img src='../images/cwz.gif'  width=120px height=120px/>");
+	LODOP.SET_PRINT_STYLE("FontSize",15);
+	LODOP.ADD_PRINT_TEXT(630,80,400,45,"南乐普惠热力");
+	LODOP.ADD_PRINT_TEXT(660,5,400,45,"--------------------------");
+	LODOP.SET_PRINT_STYLE("FontName","隶书");
+	LODOP.SET_PRINT_STYLE("FontSize",10);
+	LODOP.ADD_PRINT_TEXT(685,110,180,45,"缴费小票");
+	LODOP.ADD_PRINT_TEXT(710,5,400,45,"-------------------------------------");
+	LODOP.ADD_PRINT_TEXT(735,10,300,25,"流水单号:  "+lsdh);
+	LODOP.ADD_PRINT_TEXT(760,10,300,25,"用户编码:  "+YHBM);
+	LODOP.ADD_PRINT_TEXT(785,10,300,25,"小区    :  "+xq);
+	LODOP.ADD_PRINT_TEXT(810,10,300,25,"楼栋    :  "+ld+"   单元："+dy+"   户号："+hh);
+	LODOP.ADD_PRINT_TEXT(835,10,300,25,"住户面积:  "+mj+"㎡");
+	LODOP.ADD_PRINT_TEXT(860,10,300,25,"计费方式:  "+JIFFS+"收费");
+	LODOP.ADD_PRINT_TEXT(885,10,400,25,"缴费金额:  "+JFJE+"元     ");
+	LODOP.ADD_PRINT_TEXT(910,10,400,25,"缴费日期:  "+JFSJ);
+	LODOP.ADD_PRINT_TEXT(935,10,400,25,"缴费方式:  "+SFFS);
+	LODOP.ADD_PRINT_TEXT(960,10,400,25,"收费员  :  "+UserName);
+	LODOP.SET_PRINT_STYLE("FontSize",12);
+	LODOP.ADD_PRINT_TEXT(1020,10,400,25,"客户签字 :____________");
+	LODOP.SET_PRINT_STYLE("FontSize",7);
+	LODOP.ADD_PRINT_TEXT(1070,90,400,25,"*本票据仅作为收费证明，不作为收据使用");
+	
+	
+	
+	
+	
 	      
 	LODOP.PREVIEW();	       
 };

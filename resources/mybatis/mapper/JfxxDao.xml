@@ -71,4 +71,9 @@
         </if> 
 		where YHBM=#{YHBM}
 	</insert>
+	<select id="findSfx" resultMap="JfMap" >
+	
+	select jg from J_SFXX where sfx=#{sfx}
+	
+	</select>
 </mapper>

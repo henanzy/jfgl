@@ -26,6 +26,21 @@ function getRootPath(){
     return(localhostPaht+projectName);  
 } 
 $(function () {
+	
+	$.ajax({
+		url : getRootPath()+"/jfxx/findSfx.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			"sfx":"单价",
+		},
+		success : function(data) {
+			var map = data.map;
+			$("#dj").val(map.jg);
+			
+		}
+
+	});
 	$("#YHBM").blur(function(){
 		
 		$.ajax({
@@ -48,8 +63,8 @@ $(function () {
 					$("#IDNum").val(map.IDNum);
 					$("#RWBM").val(map.RWBM);
 					$("#LXDH").val(map.Telephone);
-					$("#yhbl").val("5");
-					$("#dj").val("12");
+					$("#yhbl").val("0");
+					/*$("#dj").val("19");*/
 					var mj = parseInt(map.HeatArea);
 					var dj = parseFloat($("#dj").val());
 					var yhbl = parseFloat($("#yhbl").val());
@@ -103,10 +118,10 @@ function jf(){
 		success : function(data) {
 			if(data.msg=="1"){
 				alert("缴费成功！")
-				location.reload();
+				$("#lsdh").val(data.lsdh)
 			}
 			else{
-				alert("系统错误，请稍后再试")
+				alert("请登录后操作")
 			}
 			
 		}

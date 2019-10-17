@@ -455,7 +455,7 @@ public class YhInfoController {
    
    @RequestMapping("findQf")
 	@ResponseBody
-	public JSONObject findQf(String xqm,String ldh,String dyh,String hh) throws UnsupportedEncodingException{
+	public JSONObject findQf(String xqm,String ldh,String dyh,String hh,String JFBS) throws UnsupportedEncodingException{
 		JSONObject json=new JSONObject();
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(xqm!=null){
@@ -465,8 +465,20 @@ public class YhInfoController {
 		map.put("ldh", ldh);
 		map.put("dyh", dyh);		
 		map.put("hh", hh);
+		map.put("JFBS",getUtf8( JFBS));
 		
 		json.put("list", yhInfoService.findQf(map));
 		return json;
+	}
+   private String getUtf8(String str){
+		if(str!=null){
+			try {
+				str=new String(str.getBytes("ISO-8859-1"),"utf-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return str;
 	}
 }

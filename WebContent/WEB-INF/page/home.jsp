@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
+	String ip =request.getScheme()+ "://"+request.getServerName()+ ":" + request.getServerPort()+"/";
 %>
 
 
@@ -632,27 +632,7 @@ function xgmm(flag) {
 				<li></li>
 			</ul>
 		</div>
-			<ul id="demo_menu1" class="sidebar-menu">
-			<li style="margin-left: 0px;"><a
-				href="http://192.144.169.217:8090/zhineng/user/home.action">换热站管理</a></li>
-					<li style="margin-left: 0px;"><a
-				href="http://192.144.169.217:8090/rebiao/user/home.action">热表集抄</a></li>
-				<li style="margin-left: 0px;"><a
-				href="http://192.144.169.217:8090/zhineng/user/home.action?fl=nhjk">智能入户</a></li>
-			  <li style="margin-left: 0px;"><a
-				href="http://192.144.169.217:8090/kefu/user/home.action">客服系统</a></li>
-			<li style="margin-left: 0px;"><a
-				href="http://192.144.169.217:8090/zykt/user/home.action">缴费管理</a></li>
 			
-				<!-- <li style="margin-left: 0px;">
-					<a href="http://localhost:8080/zhishi/user/home.action">知识库</a>
-				</li> -->
-			</ul>
-		
-		
-		<div id="demo_menu2">
-			<img src="../images/background/menu.png" />
-		</div>
 
 		<div id="demo_menu3">
 			<ul class="tree">
@@ -718,12 +698,13 @@ function xgmm(flag) {
 					<ul>
 					 <li><a href="#" onclick="xgmm(0)">更改密码</a></li>
                         <li><a href="#" onclick="xzyh(0)">用户注册</a></li>
-                        
+                        <li><a href="<%=ip%>jfgl/user/toLogin.action">登录</a></li>
+                        <li><a href="<%=ip%>kefu/user/home.action">客服系统</a></li>
 					   <!--  <li><a href="#" onclick="xgmm(0)">更改密码</a></li>
                         <li><a href="#" onclick="xzyh(0)">用户注册</a></li>
                        <li><a href="http://192.144.169.217:8090/zhineng/user/toLogin.action">登录</a></li>
 						<li><a href="http://192.144.169.217:8090/zhineng/user/toLogin.action">退出</a></li>
-						<li><a href="http://192.144.169.217:8090/zhineng/user/ZHome.action">退到主页面</a></li> -->
+						<li><a href="http://192.144.169.217:8090/jfgl/user/ZHome.action">退到主页面</a></li> -->
 					</ul>
 				</div>
 			</div>

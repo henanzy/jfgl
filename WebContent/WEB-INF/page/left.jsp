@@ -222,7 +222,9 @@ function lisgj(){//
 function tfcx(){// 
 	window.open("<%=basePath%>user/tfcx.action","Conframe");
 }
-
+function czrz(){// 
+	window.open("<%=basePath%>user/czrz.action","Conframe");
+}
 </script>
 
 
@@ -267,7 +269,7 @@ ul.ac_kf li a:hover {
 						<li><a onclick="wxzf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;微信支付查询</a></li>
 						<li><a onclick="zfbzf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;支付宝支付查询</a></li>
 						<li><a onclick="tf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费登记</a></li>
-						<li><a onclick="tfcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费查询</a></li>
+						<li><a onclick="tfcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费审核</a></li>
 						<li><a onclick="lxsf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;离线收费</a></li>
 					</ul>
 				</li>
@@ -280,25 +282,18 @@ ul.ac_kf li a:hover {
 					<a href="#" class="mws-i-24 i-users">报表管理</a>
 					<ul class="ac_kf">
 						<li><a onclick="sfmxcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;收费明细查询</a></li>
-						<li><a onclick="xqsfhz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;小区收费汇总</a></li>
-						<li><a onclick="rsfhz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;日收费汇总</a></li>
+						
+						
 						<li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;新入网查询</a></li>
-						<li><a onclick="mjbg()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;面积变更查询</a></li>
-						<li><a onclick="lsndqf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;历史年度欠费查询</a></li>
-						<li><a onclick="dqyhlb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;当前用户类别查询</a></li>
+						
+						<li><a onclick="lsndqf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;欠缴费查询</a></li>
+						<li><a onclick="czrz()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;日志查询</a></li>
+					
 					</ul>
 				</li>
-				<li class="active"><a onclick="tjtb()" href="#" class="mws-i-24 i-users">统计图表</a></li>
-				<li class="active"><a onclick="xtsz()" href="#" class="mws-i-24 i-users">系统设置</a></li>
-				<li class="active"><a href="#" class="mws-i-24 i-address-book-2">知识库</a>
-					<ul class="ac_kf">
-						<li><a onclick="qiytl()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;企业条例</a></li>
-						<li><a onclick="guojfg()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;国家法规</a></li>
-						<li><a onclick="hangyzs()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;行业知识</a></li>
-						<li><a onclick="xitsm()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;系统说明</a></li>
-						<li><a onclick="wentjd()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;问题解答</a></li>
-
-					</ul></li>
+				<!-- <li class="active"><a onclick="tjtb()" href="#" class="mws-i-24 i-users">统计图表</a></li> -->
+				
+				
 
 				<!-- <li class="active"><a href="#" class="mws-i-24 i-cassette">员工定位</a>
 					<ul class="ac_kf">

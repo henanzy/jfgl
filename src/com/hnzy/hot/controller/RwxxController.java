@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hnzy.hot.service.RwxxService;
+import com.hnzy.hot.service.XxglService;
 import com.hnzy.hot.service.YhInfoService;
 
 import net.sf.json.JSONObject;
@@ -36,6 +37,8 @@ public class RwxxController {
 	private YhInfoService yhInfoService;
 	@Autowired
 	private RwxxService rwxxService;
+	@Autowired
+	private XxglService xxglService;
 	//查询楼栋
 	@RequestMapping("findLd")
 	@ResponseBody
@@ -61,7 +64,7 @@ public class RwxxController {
 	}
    @RequestMapping("InsertrRw")
    @ResponseBody
-	public void InsertrRw(String HTQSRQ,String HTJSRQ,String DJ, String TelePhone,String IDNum,String XqName,String BuildNO,String CellNO,String HouseNO,String yhName,String YHBM,String rwbm
+	public void InsertrRw(HttpSession session,String HTQSRQ,String HTJSRQ,String DJ, String TelePhone,String IDNum,String XqName,String BuildNO,String CellNO,String HouseNO,String yhName,String YHBM,String rwbm
 			,String rwDate,String sfrz,String sfdb,String cnss,String jzwmc,String jzwyt,String jzwcg,String bz ,String rwfy,String ht,String RWRQ) throws UnsupportedEncodingException{
 		Map<String,String>map=new HashMap<>();
 		ht=getUtf8(ht);
@@ -90,6 +93,7 @@ public class RwxxController {
 		map.put("ht",ht  );
 		map.put("RWRQ",RWRQ);
 		rwxxService.InsertDrwxx(map);
+		xxglService.InsertRz((String) session.getAttribute("UserName"), "入网登记   用户编码："+YHBM, new Date());
 	}
 	
 	@RequestMapping("findDy")
@@ -168,9 +172,9 @@ public class RwxxController {
 		}
 
 		JSONObject json = new JSONObject();
-
-		String imgUrl = "http://192.144.169.217:8090/img/" + fileName + ".jpg";
-
+		String ip =req.getScheme()+ "://"+req.getServerName()+ ":" + req.getServerPort()+"/";
+		String imgUrl = ip+"img/" + fileName + ".jpg";//http://192.144.169.217:8090/
+        System.out.println(imgUrl);
 		json.put("errno", 0);
 
 		json.put("url", imgUrl);
@@ -184,12 +188,13 @@ public class RwxxController {
 	public JSONObject rwxx(HttpSession session,String SHJG,String SHR,String id){
 		JSONObject json=new JSONObject();
 		
-		if(session.getAttribute("UserName")==null){
+		if(session.getAttribute("UserName")!="phrl"){
 			json.put("msg", "请使用具有权限的用户进行审核");
 			
 		}else{
 			rwxxService.UpdateRwxx(SHJG, (String) session.getAttribute("UserName"), id);
 			json.put("msg", "审核成功");
+			xxglService.InsertRz((String) session.getAttribute("UserName"), "入网登记审核 ："+SHJG +"  id:"+id, new Date());
 		}
 		
 		return json;
@@ -202,7 +207,7 @@ public class RwxxController {
 		
 		try {
 			//System.out.println(url);
-			Desktop.getDesktop().open(new File("C:/Users/Public/Desktop/得力拍照.lnk"));
+			Desktop.getDesktop().open(new File("C:得力拍照.lnk"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

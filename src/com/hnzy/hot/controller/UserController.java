@@ -129,10 +129,9 @@ public class UserController {
 		//新增登录用户
 		@ResponseBody
 		@RequestMapping("addYh")
-		public JSONObject addYh(HttpServletRequest request,String username,String password,String type,String ssgs) throws UnsupportedEncodingException{
+		public JSONObject addYh(HttpServletRequest request,String username,String password) throws UnsupportedEncodingException{
 			 username=new String(username.getBytes("ISO-8859-1"),"utf-8");
-			 type=new String(type.getBytes("ISO-8859-1"),"utf-8");
-			 ssgs=new String(ssgs.getBytes("ISO-8859-1"),"utf-8");
+			
 			JSONObject json=new JSONObject();
 			 //根据用户名字查找用户是否存在
 			 User user=userServer.findByName(username);
@@ -141,7 +140,7 @@ public class UserController {
 				 json.put("msg","0");
 			 }else{
 				  password=MD5Util.string2MD5(password);
-				 userServer.InsUsePass(username, password,type);
+				 userServer.InsUsePass(username, password,null);
 				 json.put("msg","1");
 			 }
 			 
@@ -390,6 +389,9 @@ public class UserController {
     	public String tfcx(){
     		return "sfgl/tfcx";
     	}
-    
+    	@RequestMapping("/czrz")
+		public String czrz(){
+			return"caozrz";
+		}
     	
 }

@@ -40,6 +40,11 @@ public class JfxxServiceImpl implements JfxxService{
 		// TODO Auto-generated method stub
 		jfxxDao.UpdateJfxx(JFBS, YHBM,JFRQ);
 	}
+	@Override
+	public Map<String, Object> findSfx(String sfx) {
+		// TODO Auto-generated method stub
+		return jfxxDao.findSfx(sfx);
+	}
 
 	
 

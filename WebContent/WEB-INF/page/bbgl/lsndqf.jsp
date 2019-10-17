@@ -235,9 +235,14 @@ th, td {
 					value="" /> &nbsp;&nbsp;&nbsp; 
 				用户编码：<input type="text" id="YHBM"
 					size=6px value="" /> &nbsp;&nbsp;&nbsp; -->
-				
+				 是否缴费<select id="JFBS" style="width: 150px" name="xqName">
+				          <option value="" >全部</option>
+                          <option value="是" >是</option>
+                          <option value="否" >否</option>
+					</select>
 				 <input type="submit" id="search_btn"
 					class="mws-button black" value="查询" />
+					<input id="export_btn" class="mws-button black" type="button" value="导出" />
 				</span>
 
 
@@ -275,7 +280,7 @@ th, td {
 								class="span-down"></span></th>							
 							<th class="table-th-css">稽查情况<span class="span-up"></span>
 								<span class="span-down"></span></th>
-							<th class="table-th-css">欠费金额<span class="span-up"></span>
+							<th class="table-th-css">是否缴费<span class="span-up"></span>
 								<span class="span-down"></span></th>														
 							<th class="table-th-css">面积<span class="span-up"></span>
 								<span class="span-down"></span></th>

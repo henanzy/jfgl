@@ -18,4 +18,6 @@ public interface JfxxDao {
    public List<Map<String, Object>> findJfze();
    
    public void UpdateJfxx(@Param("JFBS")String JFBS,@Param("YHBM")String YHBM,@Param("JFRQ")String JFRQ);
+   
+   public Map<String, Object> findSfx(String sfx);
 }

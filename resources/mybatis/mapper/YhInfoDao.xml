@@ -440,9 +440,9 @@
         </if> 
 	</select>
 	<select id="findQf" resultMap="YhMap" >
-		select y.id ,y.YhName,y.yhfl,f.QgID,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.YHBM,y.JCQK
+		select y.id ,y.YhName,y.yhfl,f.QgID,y.XqName,y.JFBS,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.YHBM,y.JCQK
 		,y.IDNum,f.FamKd ,y.Bz
-		from T_YhInfo y ,T_FmInfo f where y.ValAd=f.ValAd and (y.yhrb=0 or y.yhrb=2)and y.SFJF='否' and f.FamKd>0
+		from T_YhInfo y ,T_FmInfo f where y.ValAd=f.ValAd and (y.yhrb=0 or y.yhrb=2)
         <if test="xqm!=null and xqm!=''">
         and y.XqName=#{xqm}
         </if>
@@ -454,6 +454,9 @@
         </if>
         <if test="hh!=null and hh!=''">
 	    and y.HouseNO=#{hh}
-        </if>        
+        </if>  
+        <if test="JFBS!=null and JFBS!=''">
+	    and y.JFBS=#{JFBS}
+        </if>       
 	</select>
 </mapper>

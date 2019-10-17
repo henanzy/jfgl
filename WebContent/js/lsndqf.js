@@ -21,7 +21,7 @@ $(document).ready(function(){
 			arr1[5] = json[i].HouseNO;
 			
 			arr1[6] = json[i].JCQK;
-			arr1[7] = (json[i].HeatArea*15).toFixed(2);
+			arr1[7] = json[i].JFBS;
 			arr1[8] = json[i].HeatArea;
 			arr1[9] = json[i].BZ;
 			
@@ -163,6 +163,65 @@ $("#search_btn").click(function(){
 
 		sortIndex += 1;
 	}
+	var wordExport = document.getElementById("export_btn");
+	wordExport.onclick = function(){
+		var aID =  this.parentNode.getAttribute("id");
+		tableToExcel();
+	}
+	var base64 = function (s) {
+	    return window.btoa(unescape(encodeURIComponent(s)));
+	};
+	//替换table数据和worksheet名字
+	var format = function (s, c) {
+	    return s.replace(/{(\w+)}/g,
+	        function (m, p) {
+	            return c[p];
+	        });
+	}
+	function tableToExcel(){
+	    //要导出的json数据
+	  
+	    //列标题
+	    let str = '<tr><td>用户名</td><td>用户编码</td><td>小区</td>'+
+	    '<td>楼栋号</td><td>单元号</td><td>户号</td>'+
+	    '<td>稽查情况</td><td>是否缴费</td><td>面积</td>'+
+	    '<td>备注</td>'
+	    '</tr>';
+	    //循环遍历，每行加入tr标签，每个单元格加td标签
+	    for(let i = 0 ; i < shebList.length ; i++ ){
+	    	
+	      str+='<tr>';
+	     
+	      for(let item in shebList[i]){
+	          //增加\t为了不让表格显示科学计数法或者其他格式
+	    	 
+	    		  str+=`<td>${ shebList[i][item] + '\t'}</td>`;
+	    	  
+	    		   
+	    	  
+	              
+	      }
+	      str+='</tr>';
+	    	
+	    }
+	    //Worksheet名
+	    let worksheet = 'Sheet1'
+	    let uri = 'data:application/vnd.ms-excel;base64,';
+
+	    //下载的表格模板数据
+	    let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+	    xmlns:x="urn:schemas-microsoft-com:office:excel" 
+	    xmlns="http://www.w3.org/TR/REC-html40">
+	    <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+	      <x:Name>${worksheet}</x:Name>
+	      <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+	      </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+	      </head><body><table>${str}</table></body></html>`;
+	    //下载模板
+	    window.location.href = uri + base64(template)
+	  }
+	  //输出base64编码
+	  function base64 (s) { return window.btoa(unescape(encodeURIComponent(s))) }
 });
 
 //表格写入函数带分页
@@ -264,6 +323,11 @@ function tbodydis(oldlist,newlist,page){
 
 }
 
+
+
+
+//base64转码
+
 function compareWord(xq,ld,dy,hh,compareWordList){
 
 	var json;
@@ -278,13 +342,14 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 			"ldh":ld,
 			"dyh":dy,
 			"hh":hh,
+			"JFBS":$("#JFBS").val(),
 		},
 		success : function(data) {
 		 json=data.list;
 		
 		}
 	});
-
+	shebList=compareWordList;
 	for (var i = 0 ; i < json.length ; i ++) {
 		var arr1 = [];
 		arr1[0] = json[i].YhName;
@@ -295,7 +360,7 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		arr1[5] = json[i].HouseNO;
 		
 		arr1[6] = json[i].JCQK;
-		arr1[7] = (json[i].HeatArea*15).toFixed(2);
+		arr1[7] = json[i].JFBS;
 		arr1[8] = json[i].HeatArea;
 		arr1[9] = json[i].BZ;
 		compareWordList.push(arr1);
