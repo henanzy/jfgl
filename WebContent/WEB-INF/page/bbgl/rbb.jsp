@@ -108,7 +108,7 @@
 <script type="text/javascript" src="../js/themer.js"></script>
 
 <script type="text/javascript" src="../js/demo.formelements.js"></script>
- <script type="text/javascript" src="../js/sfmxcx.js"></script> 
+ <script type="text/javascript" src="../js/rbb.js"></script> 
 <style type="text/css">
 .span-up {
 	border-style: solid;
@@ -275,8 +275,8 @@ th, td {
 					value="" /> &nbsp;&nbsp;&nbsp; 
 				用户编码：<input type="text" id="YHBM"
 					size=6px value="" /> &nbsp;&nbsp;&nbsp;
-				<input type="date" id="startTime"  style="width:140px" value="" />-
-                <input type="date" id="endTime" style="width:140px" value="" />		
+				日期<input type="date" id="startTime"  style="width:140px" value="" />-
+              <!--   <input type="date" id="endTime" style="width:140px" value="" />		 -->
 				 <input type="submit" id="search_btn"
 					class="mws-button black" value="查询" />
 				</span>

@@ -1,3 +1,21 @@
+Date.prototype.format = function foramate(fmt)   
+	{ //author: meizz   
+	  var o = {   
+	    "M+" : this.getMonth()+1,                 //月份   
+	    "d+" : this.getDate(),                    //日   
+	    "h+" : this.getHours(),                   //小时   
+	    "m+" : this.getMinutes(),                 //分   
+	    "s+" : this.getSeconds(),                 //秒   
+	    "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+	    "S"  : this.getMilliseconds()             //毫秒   
+	  };   
+	  if(/(y+)/.test(fmt))   
+	    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+	  for(var k in o)   
+	    if(new RegExp("("+ k +")").test(fmt))   
+	  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+	  return fmt;   
+	}
 function getRootPath(){      
 	var curWwwPath=window.document.location.href;      
     var pathName=window.document.location.pathname;      
@@ -8,6 +26,7 @@ function getRootPath(){
 } 
 var  sum=0;
 var count=0;
+var dateStr;
 $(document).ready(function(){
 	var shebList = [];
 	
@@ -41,13 +60,20 @@ $(document).ready(function(){
 		};
 	}
 	var YhList;
+	   dateStr = $("#startTime").val()
+	   dateStr = dateStr.replace(/-/g,'/');
+	   var timeTamp = new Date(dateStr).getTime();
+	   var date = new Date();
+	   $("#startTime").val(date.format('yyyy-MM-dd'));
+	   date.setTime(timeTamp + 1000*60*60*24);
 	$.ajax({
 			url : getRootPath()+"/jfxx/findJfxx.action", 
 			async : false,
 			dataType : "json",
 			data : {
 				
-				
+				"startTime":$("#startTime").val(),
+				"endTime":date.format('yyyy-MM-dd'),
 			},
 			success : function(data) {
 				
@@ -274,9 +300,9 @@ function xin_del(p){
 		                      success: function (data) {
 		                    	   layer.close(index);
 		                    	   if(data.msg=="2"){
-		                    		  alert("请登录后再进行删除操作");
-		                    	   }
-		                    	   window.location.reload();
+			                    		  alert("请登录后再进行删除操作");
+			                    	   }
+		                          window.location.reload();
 		                     },
 		  
 		                 })
@@ -284,7 +310,12 @@ function xin_del(p){
 }
 
 function compareWord(xq,ld,dy,hh,compareWordList){
-
+	 dateStr = $("#startTime").val()
+	   dateStr = dateStr.replace(/-/g,'/');
+	   var timeTamp = new Date(dateStr).getTime();
+	   var date = new Date();
+	  
+	   date.setTime(timeTamp + 1000*60*60*24);
 	var json;
 	compareWordList.length=0;
 	$.ajax({
@@ -298,7 +329,7 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 			"IDNum":$("#IDNum").val(),
 			"YHBM":$("#YHBM").val(),
 			"startTime":$("#startTime").val(),
-			"endTime":$("#endTime").val(),
+			"endTime":date.format('yyyy-MM-dd'),
 			"SFFS":$("#SFFS").val(),
 			"XqName":xq,
 			"BuildNo":ld,

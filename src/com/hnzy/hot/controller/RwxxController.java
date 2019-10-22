@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hnzy.hot.service.JfxxService;
 import com.hnzy.hot.service.RwxxService;
 import com.hnzy.hot.service.XxglService;
 import com.hnzy.hot.service.YhInfoService;
@@ -41,6 +42,9 @@ public class RwxxController {
 	private XxglService XxglService;
 	@Autowired
 	private XxglService xxglService;
+	
+	@Autowired
+	public JfxxService jfxxService;
 	//查询楼栋
 	@RequestMapping("findLd")
 	@ResponseBody
@@ -57,10 +61,11 @@ public class RwxxController {
 	@RequestMapping("rwSer")
 	@ResponseBody
 	public JSONObject rwSer(String XqName,String BuildNo,String CellNo,String HouseNo) throws UnsupportedEncodingException{
-		XqName=new String(XqName.getBytes("ISO-8859-1"),"utf-8");
+		
 		JSONObject json=new JSONObject();
-    	Map<String, String> rwxx=rwxxService.findrwxx(XqName, BuildNo, CellNo, HouseNo);
-    	rwxx.put("rwbm", "YM"+String.valueOf(rwxx.get("BuildNO"))+""+String.valueOf(rwxx.get("CellNO"))+""+String.valueOf(rwxx.get("HouseNO")));
+		System.out.println(getUtf8(XqName)+getUtf8(HouseNo));
+    	Map<String, String> rwxx=rwxxService.findrwxx(getUtf8(XqName), getUtf8(BuildNo), getUtf8(CellNo),  getUtf8(HouseNo));
+    
 		json.put("rwxx", rwxx);
 		return json;
 	}
@@ -152,7 +157,7 @@ public class RwxxController {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload sfu = new ServletFileUpload(factory);
 		sfu.setHeaderEncoding("UTF-8"); // 处理中文问题
-		sfu.setSizeMax(1024 * 1024);
+		
 		String fileName = "";
 		
 		try {
@@ -201,6 +206,7 @@ public class RwxxController {
 		
 		return json;
 	}
+	
 	@RequestMapping("gpy")
 	@ResponseBody
 	public JSONObject geiYinpin (HttpServletRequest request){
@@ -221,10 +227,34 @@ public class RwxxController {
 	//删除收费明细查询
 	@RequestMapping("rwxxDelete")
 	@ResponseBody
-	public JSONObject delete(String YHBM){
+	public JSONObject delete(HttpSession session,String YHBM){
 		JSONObject json=new JSONObject();
-		XxglService.deleteJfxx(YHBM);
-		XxglService.deleteRwxx(YHBM);
+        if(session.getAttribute("UserName")!=null){
+        	XxglService.deleteJfxx(YHBM);
+    		XxglService.deleteRwxx(YHBM);
+    		Date date = new Date();
+    		
+    		
+    		String UserName=(String) session.getAttribute("UserName");
+    		Map map = new HashMap<>();
+    		if( yhInfoService.findYhByBm(YHBM).size()>0){
+    			 map= yhInfoService.findYhByBm(YHBM).get(0);
+    		}else{
+    			map.put("YhName", null);
+    			map.put("XqName", null);
+    			map.put("BuildNO", null);
+    			map.put("CellNO", null);
+    			map.put("HouseNO", null);
+    		}
+    		
+    		xxglService.InsertRz(UserName, "删除缴费信息 用户编码："+getUtf8(YHBM)+"   用户名："+map.get("YhName")+" 小区："+map.get("XqName")+"   楼栋："+map.get("BuildNO")+"  单元："+map.get("CellNO")+"  户号："+map.get("HouseNO"), date);
+    		jfxxService.UpdateJfxx("否", YHBM, null);
+    		
+    		json.put("msg", "1");
+		}else{
+			json.put("msg", "2");
+		}
+		
 		return json;
 		
 	}

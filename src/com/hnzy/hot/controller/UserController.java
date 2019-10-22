@@ -109,8 +109,7 @@ public class UserController {
 					String msg="";
 					Integer ID=(Integer) session.getAttribute("ID");
 
-					System.out.println(password11);
-					System.out.println(userServer.findUserPass(ID));
+					
 					
 						if (password11.equalsIgnoreCase(userServer.findUserPass(ID))) {  
 							User user =new User();
@@ -133,6 +132,10 @@ public class UserController {
 			 username=new String(username.getBytes("ISO-8859-1"),"utf-8");
 			
 			JSONObject json=new JSONObject();
+			if("phrl".equals(request.getSession().getAttribute("UserName"))==false){
+				json.put("msg","2");
+				return json;
+			} 
 			 //根据用户名字查找用户是否存在
 			 User user=userServer.findByName(username);
 			 if(user!=null){
@@ -384,7 +387,10 @@ public class UserController {
     	public String mjbg(){
     		return "bbgl/mjbg";
     	}
-    	
+    	@RequestMapping("/rbb")
+    	public String rbb(){
+    		return "bbgl/rbb";
+    	}
     	@RequestMapping("/tfcx")
     	public String tfcx(){
     		return "sfgl/tfcx";

@@ -225,9 +225,13 @@ function tfcx(){//
 function czrz(){// 
 	window.open("<%=basePath%>user/czrz.action","Conframe");
 }
+function rbb(){// 
+	window.open("<%=basePath%>jfxx/rbb.action","Conframe");
+}
 function yezxx(){// 
 	window.open("<%=basePath%>yhInfo/yezxx.action","Conframe");
 } 
+var UserName="<%=request.getSession().getAttribute("UserName")%>"
 </script>
 
 
@@ -255,26 +259,30 @@ ul.ac_kf li a:hover {
 				<li class="active"><a href="#" class="mws-i-24 i-users">入网管理</a>
 					<ul class="ac_kf">
 					 
-						<li><a class="first-a" onclick="rwdj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;入网登记</a></li>
+						<li><a class="first-a" onclick="rwdj()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;入网缴费</a></li>
+						<li><a onclick="sfmxcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;缴费明细查询</a></li>
+						<li><a onclick="rbb()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;缴费日报表</a></li>
 						<li><a onclick="pllr()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;批量录入</a></li>
 						<li><a onclick="yezxx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;用户信息</a></li>
-						<li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;入网审核</a></li>
-						<li class="active"><a href="#"><nobr style="font-size: 20px;">+</nobr>&nbsp;入网合同</a>
+					<!-- 	<li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;入网审核</a></li> -->
+						<!-- <li class="active"><a href="#"><nobr style="font-size: 20px;">+</nobr>&nbsp;入网合同</a>
 							<ul>
 								<li><a onclick="htmb()" target="Conframel">&nbsp;&nbsp;&nbsp;>&nbsp;合同模板</a></li>
-								<!-- <li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;>&nbsp;合同查询</a></li> -->
-							</ul></li>
+								<li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;>&nbsp;合同查询</a></li>
+							</ul></li> -->
 					</ul>
 				</li>
 				<li class="active"><a href="#" class="mws-i-24 i-users">收费管理</a>
 					<ul class="ac_kf">
 
-						<li><a onclick="gtsf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;柜台收费</a></li>
+						<!-- <li><a onclick="gtsf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;柜台收费</a></li> -->
 						<li><a onclick="yhds()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;银行代收查询</a></li>
 						<li><a onclick="wxzf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;微信支付查询</a></li>
 						<li><a onclick="zfbzf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;支付宝支付查询</a></li>
+						<c:if test="${UserName=='phrl'}">
 						<li><a onclick="tf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费登记</a></li>
-						<li><a onclick="tfcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费审核</a></li>
+						<li><a onclick="tfcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;退费记录</a></li>
+						</c:if>
 						<li><a onclick="lxsf()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;离线收费</a></li>
 					</ul>
 				</li>
@@ -286,7 +294,7 @@ ul.ac_kf li a:hover {
 				<li class="active">
 					<a href="#" class="mws-i-24 i-users">报表管理</a>
 					<ul class="ac_kf">
-						<li><a onclick="sfmxcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;收费明细查询</a></li>
+						<li><a onclick="sfmxcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;缴费明细查询</a></li>
 						
 						
 						<li><a onclick="htcx()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;新入网查询</a></li>
@@ -296,7 +304,7 @@ ul.ac_kf li a:hover {
 					
 					</ul>
 				</li>
-				<!-- <li class="active"><a onclick="tjtb()" href="#" class="mws-i-24 i-users">统计图表</a></li> -->
+				 <li class="active"><a onclick="tjtb()" href="#" class="mws-i-24 i-users">统计图表</a></li>
 				
 				
 

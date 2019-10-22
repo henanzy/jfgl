@@ -61,7 +61,7 @@ public class YhInfoController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		xqm=new String(xqm.getBytes("ISO-8859-1"),"utf-8");
 		map.put("xqm", xqm);
-		map.put("ldh", ldh);
+		map.put("ldh", getUtf8(ldh));
 		
 		json.put("Dy", yhInfoService.findDy(map));
 		return json;
@@ -69,9 +69,14 @@ public class YhInfoController {
 	
 	@RequestMapping("findHh")
 	@ResponseBody
-	public JSONObject findHh(Map<String, Object> map) throws UnsupportedEncodingException{
+	public JSONObject findHh(String xqm,String ldh,String dyh) throws UnsupportedEncodingException{
 		JSONObject json=new JSONObject();
 		//xqm=new String(xqm.getBytes("ISO-8859-1"),"utf-8");
+		Map<String, Object> map = new HashMap<String, Object>();
+		xqm=new String(xqm.getBytes("ISO-8859-1"),"utf-8");
+		map.put("xqm", xqm);
+		map.put("ldh", getUtf8(ldh));
+		map.put("dyh", getUtf8(dyh));
 		json.put("Hh", yhInfoService.findHh(map));
 		return json;
 	}
@@ -255,7 +260,7 @@ public class YhInfoController {
 	JSONObject json=new JSONObject();
 	
 	yhInfoService.DeleteYh(id);
-	yhInfoService.DeleteFm(id);
+	
 	return json;
    }
    
@@ -396,8 +401,9 @@ public class YhInfoController {
 			xqm=new String(xqm.getBytes("ISO-8859-1"),"utf-8");
 		}
 		map.put("xqm", xqm);
-		map.put("ldh", ldh);
-		map.put("dyh", dyh);
+		map.put("ldh", getUtf8(ldh));
+		map.put("dyh", getUtf8(dyh));
+		hh=getUtf8(hh);
 		if(hh!=null){
 			if(hh.length()==3){
 				hh=hh.substring(0, 1);

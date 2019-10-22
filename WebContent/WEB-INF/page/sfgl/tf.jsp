@@ -231,10 +231,12 @@ display:block;
 							<option value="">--单元--</option>
 					</select>
 				</span>
-	
+	<span>户号： <select name="houseNo" id="houseNo" style="width: 70px">
+							<option value="">--户号--</option>
+					</select>
+				</span>
 				<span class="mws-report-title" style="margin-left:10px;">
-				 户号:<input type="text" id="houseNo"  />
-					 &nbsp;&nbsp;&nbsp; 
+				
 					<input type="submit" class="mws-button black" id="search_btn" value="搜索" />
 				</span>
 			</p>
@@ -429,7 +431,30 @@ var xq;
 		
 		
 	});
+ $("#dyh").change(function(){
+	 $.ajax({
+			url : "<%=basePath%>yhInfo/findHh.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"xqm" : $("#xq").val(),
+				"ldh" : $("#ldh").val(),
+				"dyh" : $("#dyh").val(),
+			},
+			success : function(data) {
+				
+				$("#houseNo option:gt(0)").remove();
+				var hh=data.Hh;
+				for(var i=0; i<hh.length; i++){
+					
+					$("#houseNo").append("<option value='"+hh[i].name+"'>"+hh[i].name+"</option>");
+				}	
+			}
 
+		});
+		
+		
+	});
  </script>
 <script>
 $(document).ready(function(){

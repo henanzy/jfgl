@@ -1,3 +1,11 @@
+function getRootPath(){      
+	var curWwwPath=window.document.location.href;      
+    var pathName=window.document.location.pathname;      
+    var pos=curWwwPath.indexOf(pathName); 
+    var localhostPaht=curWwwPath.substring(0,pos);      
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);      
+    return(localhostPaht+projectName);  
+} 
 $(document).ready(function(){
 //  表格
 
@@ -119,7 +127,7 @@ function compareWord(compareWordList){
 	var json;
 	compareWordList.length=0;
 	$.ajax({
-		url : "czrz.action", 
+		url : getRootPath()+"/xxgl/czrz.action", 
 		async : false,
 		dataType : "json",
 		data : {

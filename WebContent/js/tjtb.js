@@ -127,7 +127,7 @@ $(function () {
 							
 						},
 						tooltip: {
-								pointFormat: ' <b>{point.y:.1f}<br/>{point.percentage:.1f}%</b>'
+								pointFormat: ' <b>{point.y:.1f}元<br/>{point.percentage:.1f}%</b>'
 						},
 						plotOptions: {
 								pie: {
@@ -141,56 +141,105 @@ $(function () {
 						}
 						
 				};
-				
+				var optbar1 = {
+						chart: {
+								plotBackgroundColor: null,
+								plotBorderWidth: null,
+								plotShadow: false,
+								type: 'pie'
+						},
+						title: {
+								text: null
+						},
+						subtitle:{
+							
+						},
+						tooltip: {
+								pointFormat: ' <b>{point.y}人<br/>{point.percentage:.1f}%</b>'
+						},
+						plotOptions: {
+								pie: {
+										allowPointSelect: true,
+										cursor: 'pointer',
+										dataLabels: {
+												enabled: false
+										},
+										showInLegend: true
+								}
+						}
+						
+				};
 				//欠费饼图
 				var grbardata = [
-					{name:"金领小区",qf:13864.3},
-					{name:"天鹅堡",qf:8617.8},
-					{name:"上村花苑",qf:4386.2}
+					
 				];
 				
 				tgrbar(optbar,grbardata,"pie-1",0);
 				
 				
 				//新入网饼图
-				var wdbardata = [
-					{name:"金领小区",rs:667},
-					{name:"天鹅堡",rs:281},
-					{name:"上村花苑",rs:497}
-				];
 				
-				twdbar(optbar,wdbardata,"pie-2",0);
+				
+				twdbar(optbar1,"pie-2",0);
 			 
 			 
 });
 
 
-//新入网饼图
-function twdbar(optbar,wdbardata,pie,m){
 
-				 optbar.subtitle.text =  "新入网人数比例图";
-					optbar.series = [{
-						name: 'Brands',
+function twdbar(optbar1,pie,m){
+	 var xqList=[];
+	 var dataList=[];
+		 $.ajax({
+				url : getRootPath()+"/yhInfo/findXq.action", 
+				async : false,
+				dataType : "json",
+				data : {
+					
+				},
+				success : function(data) {
+					
+					var opt="";
+					
+					for(var i=0; i<data.Xq.length; i++){
+						xqList.push(data.Xq[i].XqName)
+					}
+					
+					 for(var i=0; i<xqList.length; i++){
+						 $.ajax({
+								url : getRootPath()+"/xxgl/grbzt.action", 
+								async : false,
+								dataType : "json",
+								data : {
+									"xqm":xqList[i],
+								},
+								success : function(data) {
+							    var map= data.grbzt;
+								var arr =[];
+								arr[0]=xqList[i];
+								arr[1]=map.grmj;
+								arr[2]=map.wgrmj;
+								
+								dataList.push({name:xqList[i],y:parseInt(map.grmj)});
+								}
+							});
+						}
+				}
+
+			});
+		
+		 optbar1.subtitle.text =  "缴费人数比例图";
+		 optbar1.series = [{
+						name: '',
 						colorByPoint: true,
-						data: [{
-							name: '金领小区',
-							y: wdbardata[m].rs
-						},{
-							name: '天鹅堡',
-							y: wdbardata[m].rs
-						},{
-							name: '上村花苑',
-							y: wdbardata[m].rs,
-							sliced: true,
-							selected: true
-						}]
+						data: dataList
 					}];
-					var chart = Highcharts.chart(pie, optbar);
+					var chart = Highcharts.chart(pie, optbar1);
 	
 }
 
 
-//欠费饼图
+
 function tgrbar(optbar,grbardata,pie,m){
 	var pieList=[];
 	$.ajax({
@@ -207,7 +256,7 @@ function tgrbar(optbar,grbardata,pie,m){
 	    }
 		}
 	});
-				 optbar.subtitle.text = "缴费比例图";
+				 optbar.subtitle.text = "缴费金额比例图";
 					optbar.series = [{
 						name: '',
 						colorByPoint: true,

@@ -53,10 +53,16 @@ public class TfxxController {
 			map.put("TKRQ",getUtf8(TKRQ));map.put("TKR",getUtf8(TKR));
 			map.put("BZ",getUtf8(BZ));map.put("TFYY",getUtf8(TFYY));
 			map.put("cl",getUtf8(cl));
-			xxglService.InsertRz(TKR, "退费登记 用户编码："+getUtf8(YHBM)+"  金额"+BCTF, new Date());
-			jfxxService.UpdateJfxx("否", YHBM,null);
-			tfxxService.InsertTfxx(map);
-			json.put("msg", "1");
+			
+			xxglService.InsertRz((String) session.getAttribute("UserName"), "退费登记 用户编码："+getUtf8(YHBM)+"  金额"+BCTF, new Date());
+			if("否".equals(jfxxService.findJfBs(YHBM).get(0).get("JFBS"))){
+				json.put("msg", "0");
+			}else{
+				jfxxService.UpdateJfxx("否", YHBM,null);
+				tfxxService.InsertTfxx(map);
+				json.put("msg", "1");
+			}
+			
 			return json;
 		}
 	

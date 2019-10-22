@@ -250,6 +250,12 @@ public class YhInfoServiceImpl implements YhInfoService{
 		return yhnfoDao.findQf(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> findYhByBm(String YHBM) {
+		// TODO Auto-generated method stub
+		return yhnfoDao.findYhByBm(YHBM);
+	}
+
 
 
 	

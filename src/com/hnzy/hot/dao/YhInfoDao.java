@@ -86,5 +86,6 @@ public interface YhInfoDao {
 	
 	public List<Map<String, Object>> findQf(Map<String, Object> map);
 	
+	public List<Map<String, Object>> findYhByBm(String YHBM);
 
 }

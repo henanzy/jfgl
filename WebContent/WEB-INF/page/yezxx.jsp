@@ -350,7 +350,7 @@ $.ajax({
                     <span>选择小区：
 						<select id="xq" style="width:150px"
 						name="xqName">
-						
+						<option value="" >小区</option>
 					</select>
 					</span>
 					<span>楼栋号：

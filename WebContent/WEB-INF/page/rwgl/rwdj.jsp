@@ -269,9 +269,12 @@ th, td {
 							<option value="">--单元--</option>
 					</select>
 				</span>
-	
+				<span>户号： <select name="houseNo" id="houseNo" style="width: 70px">
+							<option value="">--户号--</option>
+					</select>
+				</span>
 				<span class="mws-report-title" style="margin-left:10px;">
-				 户号:<input type="text" id="houseNo"  />
+				
 					 &nbsp;&nbsp;&nbsp; 
 					<input type="submit" class="mws-button black" id="search_btn" value="搜索" />
 				</span>
@@ -299,7 +302,7 @@ th, td {
 				</p>
 				
 				<p class="khxx_p">
-                <label><span>入网日期:</span><input type="date" id="RWRQ" class="khxx_input" vlaue="" /></label> 
+                <label><span>入网日期:</span><input type="datetime" id="RWRQ" class="khxx_input" vlaue="" /></label> 
 					<label>
 						<span>是否入住:</span>
 						<select class="khxx_input" id="sfrz">
@@ -309,8 +312,9 @@ th, td {
 					</label>
 					<label><span>是否低保:</span>
 						<select class="khxx_input" id="sfdb">
-							<option value="是">是</option>
 							<option value="否">否</option>
+							<option value="是">是</option>
+							
 						</select>
 					</label>
 					<label>
@@ -354,7 +358,9 @@ th, td {
 					</label>
 				<label >
 						<span>交款方式:</span>
-						<input type="radio" name="JFTJ" value="现金" checked="checked" />现金						
+						<input type="radio" name="JFTJ" value="扫码" checked="checked" />扫码	
+						<input type="radio" name="JFTJ" value="POS机"  />POS机	
+						<input type="radio" name="JFTJ" value="现金"  />现金						
 						<input type="radio" name="JFTJ" value="刷卡" />刷卡
 						
 						<input type="radio" name="JFTJ" value="微信" />微信
@@ -368,7 +374,7 @@ th, td {
 						
 						<input type="radio" name="SFFS" value="物业代售" />物业代收
 					</label>
-					<label><span>收款日期:</span><input type="date" class="readonly_input"  readonly="readonly" id="JFSJ"  readonly="readonly" /></label>
+					<label><span>收款日期:</span><input type="datetime" vlaue="" class="khxx_input"   id="JFSJ"   /></label>
 				</p>
 				
 				 
@@ -559,6 +565,7 @@ th, td {
 		var ht=$("#ueditorContent").val();
 		
 		var DJ=$("#dj").val();
+		var UserName="<%=request.getSession().getAttribute("UserName")%>"
 		$.ajax({
 			url : getRootPath()+"/jfxx/InsertJfxx.action", 
 			async : false,
@@ -576,7 +583,7 @@ th, td {
 				"JFJE":$("#JFJE").val(),
 				"YSJE":$("#YSJE").val(),
 				"SYJE":$("#SYJE").val(),
-				
+				"SKZH":UserName,
 				"PJHM":$("#PJHM").val(),
 				
 				"LXDH":$("#TelePhone").val(),
@@ -585,48 +592,53 @@ th, td {
 				if(data.msg=="1"){
 					alert("缴费成功！")
 					$("#lsdh").val(data.lsdh)
+					$.ajax({
+						url : "<%=basePath%>rwxxCont/InsertrRw.action", 
+						async : false,
+						dataType : "json",
+						data : {
+							"IDNum":IDNum,
+							"XqName":XqName,
+							"BuildNO":BuildNO,
+							"CellNO":CellNO,
+							"HouseNO":HouseNO,
+							"yhName":yhName,
+							"YHBM":YHBM,
+							"rwbm":rwbm,
+							"rwDate":rwDate,
+							"sfrz":sfrz,
+							"sfdb":sfdb,
+							"cnss":cnss,
+							"jzwmc":jzwmc,
+							"jzwyt":jzwyt,
+							"jzwcg":jzwcg,
+							"bz":bz,
+							"rwfy":rwfy,
+							"TelePhone":TelePhone,
+							"HTQSRQ":HTQSRQ,
+							"HTJSRQ":HTJSRQ,
+							"DJ":DJ,
+							"ht":ht,
+						},
+						success : function(data) {
+						
+						}
+
+					});	
 				}
-				else{
-					alert("请登录后操作")
+				if(data.msg=="3"){
+					alert("该用户已经缴费或者用户编码重复，请查询后操作")
+					
+				}
+				if(data.msg=="2"){
+					alert("请登录后操作");
 					return;
 				}
 				
 			}
 
 		});
-		 $.ajax({
-				url : "<%=basePath%>rwxxCont/InsertrRw.action", 
-				async : false,
-				dataType : "json",
-				data : {
-					"IDNum":IDNum,
-					"XqName":XqName,
-					"BuildNO":BuildNO,
-					"CellNO":CellNO,
-					"HouseNO":HouseNO,
-					"yhName":yhName,
-					"YHBM":YHBM,
-					"rwbm":rwbm,
-					"rwDate":rwDate,
-					"sfrz":sfrz,
-					"sfdb":sfdb,
-					"cnss":cnss,
-					"jzwmc":jzwmc,
-					"jzwyt":jzwyt,
-					"jzwcg":jzwcg,
-					"bz":bz,
-					"rwfy":rwfy,
-					"TelePhone":TelePhone,
-					"HTQSRQ":HTQSRQ,
-					"HTJSRQ":HTJSRQ,
-					"DJ":DJ,
-					"ht":ht,
-				},
-				success : function(data) {
-				
-				}
-
-			});	
+		 
 		 
 	  });
   }
@@ -707,7 +719,30 @@ var xq;
 		
 		
 	});
+ $("#dyh").change(function(){
+	 $.ajax({
+			url : "<%=basePath%>yhInfo/findHh.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"xqm" : $("#xq").val(),
+				"ldh" : $("#ldh").val(),
+				"dyh" : $("#dyh").val(),
+			},
+			success : function(data) {
+				
+				$("#houseNo option:gt(0)").remove();
+				var hh=data.Hh;
+				for(var i=0; i<hh.length; i++){
+					
+					$("#houseNo").append("<option value='"+hh[i].name+"'>"+hh[i].name+"</option>");
+				}	
+			}
 
+		});
+		
+		
+	});
  </script>
 	</div>
 <script type="text/javascript" src="../js/rwgl/rwdj.js"></script>

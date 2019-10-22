@@ -207,7 +207,7 @@ display:block;
 		
 		<div class="mws-panel grid_4" style="width: 48%; float: left;">
 			<div class="mws-panel-header">
-				<span class="mws-i-24 i-chart">欠费状况饼状图</span>
+				<span class="mws-i-24 i-chart">缴费金额饼状图</span>
 			</div>
 			<div class="mws-panel-body">
 				<div class="mws-panel-content">
@@ -221,7 +221,7 @@ display:block;
 
 		<div class="mws-panel grid_4" style="width: 48%;">
 			<div class="mws-panel-header">
-				<span class="mws-i-24 i-chart-2">小区新入网人数饼状图</span>
+				<span class="mws-i-24 i-chart-2">小区缴费人数饼状图</span>
 			</div>
 			<div class="mws-panel-body">
 				<div class="mws-panel-content">

@@ -39,7 +39,7 @@
 	
 	<select id="findHh" resultMap="YhMap" >
 
-		select HouseNo as name,ValAd as id from T_YhInfo where XqName=#{xqm} and BuildNo=#{ldh} and CellNo=#{dyh} 
+		select HouseNo as name  from T_YhInfo where XqName=#{xqm} and BuildNo=#{ldh} and CellNo=#{dyh} 
 		order by HouseNo 
 	</select>
 	
@@ -178,7 +178,7 @@
 	<delete id="DeleteYh" >
 		delete from T_YhInfo
 		where
-		ValAd=#{ValAd}
+		id=#{id}
 	</delete>
 	
 	<delete id="DeleteFm" >
@@ -285,9 +285,13 @@
 	
 	
 	<select id="findTc" resultMap="YhMap" >
-		select y.id ,y.YhName,y.ValAd,y.yhfl,f.QgID,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,f.Status,y.HeatArea,y.YHBM,y.JCQK,
+		select y.id ,y.YhName,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.YHBM,y.JCQK,
+		y.IDNum,y.JFBS ,y.Bz
+		from T_YhInfo y  where (y.yhrb=0 or y.yhrb=2)
+		
+		<!-- select y.id ,y.YhName,y.ValAd,y.yhfl,f.QgID,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,f.Status,y.HeatArea,y.YHBM,y.JCQK,
 		f.RoomTemp,f.LockSt,y.IDNum,f.FamKd,f.ValTemp,f.Tqyb,y.SFJF,y.WCAd ,y.Bz,CONVERT(varchar(100),f.RecordTime , 20)as RecordTime
-		from T_YhInfo y ,T_FmInfo f where y.ValAd=f.ValAd and (y.yhrb=0 or y.yhrb=2)
+		from T_YhInfo y ,T_FmInfo f where y.ValAd=f.ValAd and (y.yhrb=0 or y.yhrb=2) -->
         <if test="xqm!=null and xqm!=''">
         and y.XqName=#{xqm}
         </if>
@@ -421,9 +425,9 @@
         </if> 
 	</select>
 	<select id="findQf" resultMap="YhMap" >
-		select y.id ,y.YhName,y.yhfl,f.QgID,y.XqName,y.JFBS,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.YHBM,y.JCQK
-		,y.IDNum,f.FamKd ,y.Bz
-		from T_YhInfo y ,T_FmInfo f where y.ValAd=f.ValAd and (y.yhrb=0 or y.yhrb=2)
+		select y.id ,y.YhName,y.yhfl,y.XqName,y.JFBS,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.YHBM,y.JCQK
+		,y.IDNum ,y.Bz
+		from T_YhInfo y  where y.yhrb=0 or y.yhrb=2
         <if test="xqm!=null and xqm!=''">
         and y.XqName=#{xqm}
         </if>
@@ -439,5 +443,9 @@
         <if test="JFBS!=null and JFBS!=''">
 	    and y.JFBS=#{JFBS}
         </if>       
+	</select>
+	<select id="findYhByBm" resultMap="YhMap" >
+	select y.YhName,y.XqName,y.BuildNO,y.CellNO,y.HouseNO
+		from T_YhInfo y  where YHBM=#{YHBM}
 	</select>
 </mapper>

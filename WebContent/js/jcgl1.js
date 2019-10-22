@@ -51,7 +51,7 @@ $(document).ready(function(){
 		var JcList;
 		$.ajax({
 				url : getRootPath()+"/jc/FindJcxx.action", 
-				
+				async : false,
 				dataType : "json",
 				data : {
 					"YHBM":id,
@@ -149,24 +149,24 @@ $(document).ready(function(){
 													/*$("#"+dy[i].CellNo+"_"+y).append("<td><div class='body-hh'>"+Clist[z].HouseNO+"</div><div class='body-mj'>"+Clist[z].HeatArea+"</div><div class='body-lb'>居民</div></td>")*/
 													var hh="";
 													
-													if(Clist[z].JFBS=="是"){
+													if(Clist[z].SFJF=="是"){
 														hh="<th colspan='2' style='font-weight:bold;background-color:#33FF33;'>"+Clist[z].HouseNO+"</th>"
 													}else{
 														hh="<th colspan='2' style='font-weight:bold;'>"+Clist[z].HouseNO+"</th>"
 													}
 													var wd=""
 														if(Clist[z].JCQK=="存在问题"){
-															wd=" <th  style='background-color:red;width:68px;font-size:15px;'>存在<br/>问题</th> <th>"+Clist[z].HeatArea+"㎡</th>"
+															wd=" <th rowspan='2' style='background-color:red;width:68px;font-size:15px;'>存在<br/>问题</th> <th>"+Clist[z].HeatArea+"㎡</th>"
 														}else{
-															wd=" <th  style='width:68px;font-size:15px;'>"+Clist[z].JCQK+"</th> <th>"+Clist[z].HeatArea+"㎡</th>"
+															wd=" <th rowspan='2' style='width:68px;font-size:15px;'>"+Clist[z].JCQK+"</th> <th>"+Clist[z].HeatArea+"㎡</th>"
 														}
 													$("#"+dy[i].CellNo+"_"+y).append("<td class='jc'><span style='display:none'>"+Clist[z].YHBM+"</span><table  style='width:100px'><tr>" +
 															hh +
 															"</tr><tr>" +
 															wd +
-															" </tr>" +
-															
-															" </table></td>")
+															" </tr><tr>" +
+															"<th>"+Clist[z].RoomTemp+"℃</th>" +
+															" </tr></table></td>")
 																	
 												}
 											}
@@ -263,24 +263,24 @@ function search(){
 												/*$("#"+dy[i].CellNo+"_"+y).append("<td><div class='body-hh'>"+Clist[z].HouseNO+"</div><div class='body-mj'>"+Clist[z].HeatArea+"</div><div class='body-lb'>居民</div></td>")*/
 												var hh="";
 												
-												if(Clist[z].JFBS=="是"){
+												if(Clist[z].SFJF=="是"){
 													hh="<th colspan='2' style='font-weight:bold;background-color:#33FF33;'>"+Clist[z].HouseNO+"</th>"
 												}else{
 													hh="<th colspan='2' style='font-weight:bold;'>"+Clist[z].HouseNO+"</th>"
 												}
 												var wd=""
 													if(Clist[z].JCQK=="存在问题"){
-														wd=" <th  style='background-color:red;width:68px;font-size:15px;'>存在<br/>问题</th> <th>"+Clist[z].HeatArea+"㎡</th>"
+														wd=" <th rowspan='2' style='background-color:red;width:68px;font-size:15px;'>存在<br/>问题</th> <th>"+Clist[z].HeatArea+"㎡</th>"
 													}else{
-														wd=" <th  style='width:68px;font-size:15px;'>"+Clist[z].JCQK+"</th> <th>"+Clist[z].HeatArea+"㎡</th>"
+														wd=" <th rowspan='2' style='width:68px;font-size:15px;'>"+Clist[z].JCQK+"</th> <th>"+Clist[z].HeatArea+"㎡</th>"
 													}
 												$("#"+dy[i].CellNo+"_"+y).append("<td class='jc'><span style='display:none'>"+Clist[z].YHBM+"</span><table  style='width:100px'><tr>" +
 														hh +
 														"</tr><tr>" +
 														wd +
-														" </tr>" +
-														
-														"</table></td>")
+														" </tr><tr>" +
+														"<th>"+Clist[z].RoomTemp+"℃</th>" +
+														" </tr></table></td>")
 																
 											}
 										}

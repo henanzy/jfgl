@@ -97,7 +97,7 @@
 <script type="text/javascript" src="../js/mws.js"></script>
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
- <script type="text/javascript" src="../js/jcgl.js"></script>
+<script type="text/javascript" src="../js/jcgl.js"></script>
 
  
  <style>
@@ -406,7 +406,7 @@ var xq;
 			
 			 for(var i=0; i<xq.length; i++){
 					
-				 if(xq[i].XqName.indexOf("嘉和广场")>-1)
+				 if(xq[i].XqName.indexOf("正大")>-1)
 					{
 					$("#xq").append("<option value='"+xq[i].XqName+"' selected	>"+xq[i].XqName+"</option>");
 					}else{

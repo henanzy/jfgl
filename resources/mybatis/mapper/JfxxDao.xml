@@ -53,13 +53,19 @@
 	    and j.JFSJ &gt;= #{startTime}
         </if>
         <if test="endTime!=null and endTime!=''">
-	     and j.JFSJ &lt;=#{endTime}
+	     and j.JFSJ &lt;#{endTime}
         </if> 
 	</select>
 	
 	<select id="findJfze" resultMap="JfMap" >
 	
-	select y.XqName ,sum(JFJE) as je from J_Jfxx j,T_YhInfo y where j.YHBM=y.YHBM group by y.XqName
+	select y.XqName ,sum(convert(float,JFJE)) as je from J_Jfxx j,T_YhInfo y where j.YHBM=y.YHBM group by y.XqName
+	
+	</select>
+	
+	<select id="findJfBs" resultMap="JfMap" >
+	
+	select y.JFBS  from T_YhInfo y where y.YHBM=#{YHBM}
 	
 	</select>
 	

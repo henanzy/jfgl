@@ -223,7 +223,7 @@ function xzyh(flag){
 	 layer.open({
 	        type: 1,
 	        title: "新增用户",
-	        area: ['400px', '500px'] ,
+	        area: ['400px', '220px'] ,
 	        offset: '120px',
 	        content: $("#YhModel").html()
 	    });
@@ -236,8 +236,7 @@ function xzyh(flag){
 	    $("#addYhSubmit").click(function () {
 	    	var username = $('#username').val();
 			var password = $('#password').val();
-			var type = $('#type').val();
-			var ssgs = $('#ssgs').val();
+			
 			
 			if(username==""||password==""){
 				alert("用户名或密码不为空!");
@@ -256,17 +255,24 @@ function xzyh(flag){
 					success : function(data) {
 	
 						msg = data.msg
+						 if(msg=="0"){
+							
+								alert("该用户没有注册权限");
+								return false;
+							
+							
+					     }
 						if(msg=="1"){
 							setTimeout(function () {
 								alert("添加成功");
 		                    }, 2500);
 							
-						}else{
-								setTimeout(function () {
+						}else if(msg=="0"){
+								
 									alert("用户名已存在!");
-			                    }, 2000);
-								layer.closeAll();
-								//xzyh(1)
+									return false;
+								
+								
 						}
 					}
 

@@ -148,10 +148,12 @@ function tf(){
 				alert("退费成功！")
 				
 			}
-			else{
-				alert("系统错误，请稍后再试")
+			else if(data.msg=="0"){
+				alert("该用户尚未缴费")
 			}
-			
+			else{
+				alert("系统错误请稍后再试")
+			}
 		}
 
 	});

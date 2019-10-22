@@ -45,6 +45,11 @@ public class JfxxServiceImpl implements JfxxService{
 		// TODO Auto-generated method stub
 		return jfxxDao.findSfx(sfx);
 	}
+	@Override
+	public List<Map<String, Object>> findJfBs(String YHBM) {
+		// TODO Auto-generated method stub
+		return jfxxDao.findJfBs(YHBM);
+	}
 
 	
 

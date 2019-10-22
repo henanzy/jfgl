@@ -42,7 +42,7 @@ public class JfxxController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			Date date = new Date();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss") ; 
-			SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd") ; 
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ; 
 			String jfsj = dateFormat.format(date);
 			String JFRQ = dateFormat1.format(date);
 			map.put("YHBM",getUtf8(YHBM));map.put("IDNum",getUtf8(IDNum));
@@ -53,13 +53,19 @@ public class JfxxController {
 			map.put("SKZH",getUtf8(SKZH));map.put("PJHM",getUtf8(PJHM));
 			map.put("LSDH",getUtf8(jfsj));map.put("LXDH",getUtf8(LXDH));
 			map.put("SFFS",getUtf8(SFFS));
+			
 			if(session.getAttribute("UserName")!=null){
+				if("是".equals(jfxxService.findJfBs(YHBM).get(0).get("JFBS"))){
+					json.put("msg", "3");
+					return json;
+				}else{
 				jfxxService.InsertJfxx(map);
 				jfxxService.UpdateJfxx("是", YHBM,JFRQ);
 				json.put("msg", "1");
 				json.put("lsdh", jfsj);
 				String UserName=(String) session.getAttribute("UserName");
 				xxglService.InsertRz(UserName, "供热缴费 用户编码："+getUtf8(YHBM)+"  金额"+JFJE+"  流水单号"+jfsj, date);
+				}
 			}
 			else{
 				json.put("msg", "2");
@@ -116,5 +122,8 @@ public class JfxxController {
 			json.put("map", jfxxService.findSfx(getUtf8(sfx)));			
 			return json;
 		}
-	
+	@RequestMapping("/rbb")
+	public String rbb(){
+		return "bbgl/rbb";
+	}
 }

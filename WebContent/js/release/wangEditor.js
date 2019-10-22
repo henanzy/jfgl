@@ -653,7 +653,7 @@ var config = {
     },
 
     // 默认上传图片 max size: 5M
-    uploadImgMaxSize: 5 * 1024 * 1024,
+    uploadImgMaxSize: 15 * 1024 * 1024,
 
     // 配置一次最多上传几个图片
     // uploadImgMaxLength: 5,

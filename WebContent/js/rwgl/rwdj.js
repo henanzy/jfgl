@@ -27,9 +27,14 @@ function getRootPath(){
 $(document).ready(function(){
 //  表格
 	var date = new Date();
-	$("#RWRQ").val(date.format('yyyy-MM-dd'));
+	$("#RWRQ").val(date.format('yyyy-MM-dd hh:mm'));
 	
-	$("#JFSJ").val(date.format('yyyy-MM-dd'));
+	$("#JFSJ").val(date.format('yyyy-MM-dd hh:mm'));
+	$("#HTQSRQ").val(date.format('yyyy-MM-dd'));
+	var d2=new Date('2020','2','15');
+	
+	$("#HTJSRQ").val(d2.format('yyyy-MM-dd'));
+	
 	$("#search_btn").click(function(){
 		$("#dj").val("19");
 		var xq=$("#xq").val();
@@ -56,7 +61,7 @@ $(document).ready(function(){
 					var XqName=rwxx.XqName;
 					var CellNO=rwxx.CellNO;
 					var HouseNO=rwxx.HouseNO;
-					var rwbm=rwxx.rwbm;
+					
 					var IDNum=rwxx.IDNum;
 					var YhName=rwxx.YhName;
 					var mj=rwxx.HeatArea;
@@ -68,7 +73,7 @@ $(document).ready(function(){
 					$("#XqName").val(XqName)
 					$("#CellNO").val(CellNO)
 					$("#HouseNO").val(HouseNO)
-					$("#rwbm").val(rwbm)
+					
 					$("#IDNum").val(IDNum)
 					$("#cnmj").val(mj)
 					$("#YSJE").val((mj*dj).toFixed(2));

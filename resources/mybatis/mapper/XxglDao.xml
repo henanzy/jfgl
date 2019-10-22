@@ -4,7 +4,7 @@
 	<resultMap id="XxglMap" type="java.util.HashMap"></resultMap>
 <select id="Search" resultMap="XxglMap" >
  select top 500 YhName,XqName,BuildNO,CellNO,HouseNO,DeviceType,DeviceID,ErrInfor,CONVERT(varchar(100),RecordTime , 20)as RecordTime
-from T_AlarmInfor a,T_YhInfo y where a.DeviceID=y.ValAd and y.SFJF='是'
+from T_AlarmInfor a,T_YhInfo y where a.DeviceID=y.ValAd and y.JFBS='是'
 <if test="xqm!=null and xqm!=''">
  and XqName=#{xqm}
 </if>
@@ -22,7 +22,7 @@ order by RecordTime  desc
 </select>
 
 <select id="skxx" resultMap="XxglMap">
-select top 1000 skq.Id,skq.SkqSbh,skq.SfJf,skq.kh,skq.FmState,skq.SkSuccess,CONVERT(varchar(100),skq.DateTime , 20)as DateTime,qg.xqName,yh.BuildNo,yh.CellNo,yh.HouseNO,qg.installAd from Skq skq,T_QgInfo qg,T_YhInfo yh
+select top 1000 skq.Id,skq.SkqSbh,skq.JFBS,skq.kh,skq.FmState,skq.SkSuccess,CONVERT(varchar(100),skq.DateTime , 20)as DateTime,qg.xqName,yh.BuildNo,yh.CellNo,yh.HouseNO,qg.installAd from Skq skq,T_QgInfo qg,T_YhInfo yh
  where skq.SkqSbh=qg.SkqSbh and yh.IDNum= skq.Kh and skq.SkqSbh=qg.SkqSbh 
  
 <if test="xqm!=null and xqm!=''">
@@ -76,8 +76,8 @@ select top 1000 * ,CONVERT(varchar(100),czsj , 20)as time from T_RZ where 1=1
 
 
 <select id="grbzt" resultMap="XxglMap" >
- select sum(case when y.SFJF='是' then 1 else 0 end) as grmj,
- sum(case when y.SFJF='否' then 1 else 0 end) as wgrmj
+ select sum(case when y.JFBS='是' then 1 else 0 end) as grmj,
+ sum(case when y.JFBS='否' then 1 else 0 end) as wgrmj
 
 from T_YhInfo y where (y.yhrb=0 or y.yhrb=2)
 <if test="xqm!=null and xqm!=''">
@@ -126,23 +126,23 @@ and BuildNO=#{ldh}
 </select>
 
 <select id="grmj" resultType="java.lang.Integer">
-select sum(HeatArea) from T_YhInfo where  (yhrb=0 or yhrb=2) and SFJF='是'
+select sum(HeatArea) from T_YhInfo where  (yhrb=0 or yhrb=2) and JFBS='是'
 </select>
 <select id="gryh" resultType="java.lang.Integer">
-select count(*) from T_YhInfo where  (yhrb=0 or yhrb=2) and SFJF='是'
+select count(*) from T_YhInfo where  (yhrb=0 or yhrb=2) and JFBS='是'
 </select>
 <select id="grbl" resultType="java.lang.String">
-select (select sum(HeatArea) from T_YhInfo where  (yhrb=0 or yhrb=2) and SFJF='是')/
+select (select sum(HeatArea) from T_YhInfo where  (yhrb=0 or yhrb=2) and JFBS='是')/
   (select sum(HeatArea) from T_YhInfo where  (yhrb=0 or yhrb=2))*100
 </select>
  
 
 <select id="wgryh" resultType="java.lang.Integer">
-select count(*) from T_YhInfo where  (yhrb=0 or yhrb=2) and SFJF='否'
+select count(*) from T_YhInfo where  (yhrb=0 or yhrb=2) and JFBS='否'
 </select>
 
 <select id="pjsw" resultType="java.lang.Integer">
-select AVG(f.RoomTemp) from T_YhInfo y,T_FmInfo f where  (y.yhrb=0 or y.yhrb=2) and y.SFJF='是' and f.ValAd =y.ValAd
+select AVG(f.RoomTemp) from T_YhInfo y,T_FmInfo f where  (y.yhrb=0 or y.yhrb=2) and y.JFBS='是' and f.ValAd =y.ValAd
 </select>
 
 <select id="cgqDz" resultMap="XxglMap">
