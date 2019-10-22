@@ -256,6 +256,12 @@ public class YhInfoServiceImpl implements YhInfoService{
 		return yhnfoDao.findYhByBm(YHBM);
 	}
 
+	@Override
+	public void UpdateYhByBm(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		 yhnfoDao.UpdateYhByBm(map);
+	}
+
 
 
 	

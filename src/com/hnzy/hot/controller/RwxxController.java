@@ -181,7 +181,7 @@ public class RwxxController {
 		JSONObject json = new JSONObject();
 		String ip =req.getScheme()+ "://"+req.getServerName()+ ":" + req.getServerPort()+"/";
 		String imgUrl = ip+"img/" + fileName + ".jpg";//http://192.144.169.217:8090/
-        System.out.println(imgUrl);
+       
 		json.put("errno", 0);
 
 		json.put("url", imgUrl);

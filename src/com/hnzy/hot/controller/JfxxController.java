@@ -77,7 +77,7 @@ public class JfxxController {
 	@RequestMapping("findJfxx")
 	   @ResponseBody
 		public JSONObject findJfxx(String YHBM,String IDNum,String YhName,String CNQ,String JFTJ,String XqName,
-				String BuildNo,String CellNO,String hh,String SFFS,String startTime,String endTime) throws UnsupportedEncodingException{
+				String BuildNo,String CellNO,String hh,String SFFS,String startTime,String endTime,String SKZH) throws UnsupportedEncodingException{
 			JSONObject json=new JSONObject();
 			Map<String, Object> map = new HashMap<String, Object>();
 			
@@ -87,7 +87,7 @@ public class JfxxController {
 			map.put("BuildNo",getUtf8(BuildNo));map.put("CellNO",getUtf8(CellNO));
 			map.put("hh",getUtf8(hh));map.put("SFFS",getUtf8(SFFS));
 			map.put("startTime",getUtf8(startTime));map.put("endTime",getUtf8(endTime));
-			
+			map.put("SKZH",getUtf8(SKZH));
 			
 			
 			json.put("list", jfxxService.findYhds(map));

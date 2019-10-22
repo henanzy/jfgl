@@ -9,6 +9,70 @@ function getRootPath(){
 var  sum=0;
 var count=0;
 $(document).ready(function(){
+	var wordExport = document.getElementById("export_btn");
+	wordExport.onclick = function(){
+		var aID =  this.parentNode.getAttribute("id");
+		tableToExcel();
+	}
+	var base64 = function (s) {
+	    return window.btoa(unescape(encodeURIComponent(s)));
+	};
+	//替换table数据和worksheet名字
+	var format = function (s, c) {
+	    return s.replace(/{(\w+)}/g,
+	        function (m, p) {
+	            return c[p];
+	        });
+	}
+	function tableToExcel(){
+	    //要导出的json数据
+	  
+	    //列标题
+	    let str = '<tr><td>采暖期</td><td>用户名</td><td>用户编码</td><td>小区</td>'+
+	    '<td>楼栋号</td><td>单元号</td><td>户号</td>'+
+	    '<td>缴费时间</td><td>卡号</td><td>应收金额</td>'+
+	    '<td>缴费金额</td><td>缴费方式</td><td>交款方式</td><td>计费方式</td>'+
+	    '<td>面积</td><td>票据号码</td><td>流水单号</td><td>收款人</td>'+
+	    '</tr>';
+	    //循环遍历，每行加入tr标签，每个单元格加td标签
+	    for(let i = 0 ; i < shebList.length ; i++ ){
+	    	
+	      str+='<tr>';
+	     
+	      for(let item in shebList[i]){
+	          //增加\t为了不让表格显示科学计数法或者其他格式
+	    	 if(item==16){
+	    		 str+=`<td>${ '’'+shebList[i][item] +'\t'}</td>`;
+	    	 }else{
+	    		 str+=`<td>${ shebList[i][item] +'\t'+' '}</td>`;
+	    	 }
+	    		 
+	    	  
+	    		   
+	    	  
+	              
+	      }
+	      str+='</tr>';
+	    	
+	    }
+	    //Worksheet名
+	    let worksheet = 'Sheet1'
+	    let uri = 'data:application/vnd.ms-excel;base64,';
+
+	    //下载的表格模板数据
+	    let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+	    xmlns:x="urn:schemas-microsoft-com:office:excel" 
+	    xmlns="http://www.w3.org/TR/REC-html40">
+	    <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+	      <x:Name>${worksheet}</x:Name>
+	      <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+	      </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+	      </head><body><table>${str}</table></body></html>`;
+	    //下载模板
+	    window.location.href = uri + base64(template)
+	  }
+	  //输出base64编码
+	  function base64 (s) { return window.btoa(unescape(encodeURIComponent(s))) }
 	var shebList = [];
 	
 	function jsArrChange(json){
@@ -304,6 +368,7 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 			"BuildNo":ld,
 			"CellNO":dy,
 			"hh":hh,
+			"SKZH":$("#SKZH").val(),
 		},
 		success : function(data) {
 		 json=data.list;

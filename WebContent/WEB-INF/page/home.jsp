@@ -249,8 +249,7 @@ function xzyh(flag){
 					data : {
 						"username" : username,
 						"password" : password,
-						"type" : type,
-						"ssgs" : ssgs,
+						
 					},
 					success : function(data) {
 	
@@ -274,6 +273,13 @@ function xzyh(flag){
 								
 								
 						}
+						else if(msg=="2"){
+							
+							alert("您没有注册权限!");
+							return false;
+						
+						
+				}
 					}
 
 				});

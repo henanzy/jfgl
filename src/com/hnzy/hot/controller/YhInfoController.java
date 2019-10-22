@@ -142,7 +142,7 @@ public class YhInfoController {
 	map.put("Wd", Wd);
 	map.put("Place", Place);
 	map.put("id", id);
-	System.out.println("id"+id+"    xq"+XqName);
+	
 	yhInfoService.UpdateXq(map);
 		return "redirect:xiaoqxx.action";
 		
@@ -482,5 +482,19 @@ public class YhInfoController {
 			}
 		}
 		return str;
+	}
+   
+   @RequestMapping("UpdateYhByBm")
+	@ResponseBody
+	public JSONObject findLd(String YhName,String Telephone,String YHBM) throws UnsupportedEncodingException{
+		JSONObject json=new JSONObject();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		map.put("YhName", getUtf8(YhName));
+		map.put("Telephone", getUtf8(Telephone));
+		map.put("YHBM", getUtf8(YHBM));
+		yhInfoService.UpdateYhByBm(map);
+		return json;
 	}
 }

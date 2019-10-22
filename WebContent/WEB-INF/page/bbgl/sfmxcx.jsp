@@ -275,10 +275,13 @@ th, td {
 					value="" /> &nbsp;&nbsp;&nbsp; 
 				用户编码：<input type="text" id="YHBM"
 					size=6px value="" /> &nbsp;&nbsp;&nbsp;
+				收款人：<input type="text" id="SKZH"
+					size=6px value="" /> &nbsp;&nbsp;&nbsp;	
 				<input type="date" id="startTime"  style="width:140px" value="" />-
                 <input type="date" id="endTime" style="width:140px" value="" />		
 				 <input type="submit" id="search_btn"
 					class="mws-button black" value="查询" />
+					<input id="export_btn" class="mws-button black" type="button" value="导出" />
 				</span>
 
 

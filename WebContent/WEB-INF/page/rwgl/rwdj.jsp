@@ -211,6 +211,15 @@ display:block;
 	color:#fff;
 	border-radius:3px;
 }
+#xg{
+	border:none;
+	background-color:rgb(60,61,61);
+	width:60px;
+	height:24px;
+	margin-right:6px;
+	color:#fff;
+	border-radius:3px;
+}
 .ht{
 	border:none;
 	background-color:rgb(60,61,61);
@@ -295,7 +304,7 @@ th, td {
 					<label><span>户号:</span><input type="text" id="HouseNO" class="readonly_input" readonly="readonly" vlaue="" /></label>
 				</p>
 				<p class="khxx_p">
-					<label><span>用户名称:</span><input type="text" id="yhName"class="readonly_input" readonly="readonly" vlaue="" /></label>
+					<label><span>用户名称:</span><input type="text" id="yhName"class="khxx_input"  vlaue="" /></label>
 					<label><span>用户编码:</span><input type="text" id="YHBM" class="readonly_input" readonly="readonly" vlaue="" /></label>
 					<label><span>入网编码:</span><input type="text" id="rwbm" class="khxx_input" vlaue="" /></label>
 					<label><span>联系电话:</span><input type="text" id="TelePhone" class="khxx_input" vlaue="" /></label>
@@ -372,7 +381,7 @@ th, td {
 						<input type="radio" name="SFFS" value="银行代收" />银行代收
 						<input type="radio" name="SFFS" value="走收" />走收
 						
-						<input type="radio" name="SFFS" value="物业代售" />物业代收
+						<input type="radio" name="SFFS" value="物业代收" />物业代收
 					</label>
 					<label><span>收款日期:</span><input type="datetime" vlaue="" class="khxx_input"   id="JFSJ"   /></label>
 				</p>
@@ -380,7 +389,7 @@ th, td {
 				 
 				<p class="khxx_p" style="text-align:center">
 				
-				  
+				    <input style="width:80px;" type="button" alt=""  id="xg" onclick="xgyh()" value="修改用户" />
 				    <input style="width:80px;"  type="button" id="htsc" value="合同上传" />
 					<input style="width:80px;" onclick="jt()" type="button" id="subbtn" value="确认" />
 					<input style="width:80px;" type="button" alt=""  id="dayin" onclick="dy()" value="打印" />
@@ -641,6 +650,22 @@ th, td {
 		 
 		 
 	  });
+  }
+  function xgyh(){
+	  $.ajax({
+			url:"<%=basePath%>yhInfo/UpdateYhByBm.action",
+			async:false,
+			dataType:"json",
+			data:{	
+				"YhName":$("#yhName").val(),
+				"Telephone":$("#TelePhone").val(),
+				"YHBM":$("#YHBM").val(),
+			},
+			success:function(data){
+				alert("用户信息修改成功")
+			}
+			
+		});	
   }
 </script>
 <script type="text/javascript">

@@ -448,4 +448,10 @@
 	select y.YhName,y.XqName,y.BuildNO,y.CellNO,y.HouseNO
 		from T_YhInfo y  where YHBM=#{YHBM}
 	</select>
+	
+	<update id="UpdateYhByBm">
+		update T_YhInfo set
+		YhName=#{YhName},Telephone=#{Telephone}
+		where YHBM=#{YHBM}
+	</update>
 </mapper>

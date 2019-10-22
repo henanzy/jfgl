@@ -55,6 +55,10 @@
         <if test="endTime!=null and endTime!=''">
 	     and j.JFSJ &lt;#{endTime}
         </if> 
+        
+        <if test="SKZH!=null and SKZH!=''">
+	     and j.SKZH = #{SKZH}
+        </if> 
 	</select>
 	
 	<select id="findJfze" resultMap="JfMap" >
