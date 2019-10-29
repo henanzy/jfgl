@@ -227,22 +227,7 @@ $("#search_btn").click(function(){
 //表格写入函数带分页
 function tbodydis(oldlist,newlist,page){
 	
-	if(oldlist == ""){
-		var opt = [];
-		for(var i = 0; i < newlist.length; i++) {
-			for (var j = 0 ; j <newlist[i].length ; j ++) {
-				if(j == 1){
-					if( opt.indexOf(newlist[i][1]) == -1){
-						opt.push(newlist[i][1]);
-					}
-				}
-			}
-		}
-		for(var i = 0; i < opt.length; i++) {
-			$("#xq").append("<option>"+opt[i]+"</option>");
-		}
-	}
-	
+
 	var current = 1;
 	function pageInit(currentPage, pagesize) {
 		current = currentPage; // 将当前页存储全局变量
@@ -349,7 +334,7 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		
 		}
 	});
-	shebList=compareWordList;
+	
 	for (var i = 0 ; i < json.length ; i ++) {
 		var arr1 = [];
 		arr1[0] = json[i].YhName;
@@ -365,5 +350,5 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		arr1[9] = json[i].BZ;
 		compareWordList.push(arr1);
 	};
-
+	
 }	

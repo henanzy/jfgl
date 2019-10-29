@@ -79,7 +79,13 @@ select top 1000 * ,CONVERT(varchar(100),czsj , 20)as time from T_RZ where 1=1
  select sum(case when y.JFBS='是' then 1 else 0 end) as grmj,
  sum(case when y.JFBS='否' then 1 else 0 end) as wgrmj
 
-from T_YhInfo y where (y.yhrb=0 or y.yhrb=2)
+from T_YhInfo y
+
+<if test="startTime!=null and startTime!=''">
+	,J_Jfxx j 
+</if>
+
+ where (y.yhrb=0 or y.yhrb=2)
 <if test="xqm!=null and xqm!=''">
  and XqName=#{xqm}
 </if>
@@ -89,6 +95,12 @@ and BuildNO=#{ldh}
 <if test="dyh!=null and dyh!=''">
 	and CellNO=#{dyh}
 </if>
+<if test="startTime!=null and startTime!=''">
+	and j.JFSJ &gt;= #{startTime} and y.yhbm=j.YHBM 
+</if>
+<if test="endTime!=null and endTime!=''">
+	and j.JFSJ &lt;#{endTime}
+</if> 
 </select>
 
 <select id="wdbzt" resultMap="XxglMap" >

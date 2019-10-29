@@ -427,7 +427,7 @@
 	<select id="findQf" resultMap="YhMap" >
 		select y.id ,y.YhName,y.yhfl,y.XqName,y.JFBS,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.YHBM,y.JCQK
 		,y.IDNum ,y.Bz
-		from T_YhInfo y  where y.yhrb=0 or y.yhrb=2
+		from T_YhInfo y  where (y.yhrb=0 or y.yhrb=2)
         <if test="xqm!=null and xqm!=''">
         and y.XqName=#{xqm}
         </if>

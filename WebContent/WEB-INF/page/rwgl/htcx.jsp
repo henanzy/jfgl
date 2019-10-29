@@ -5,7 +5,8 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
+	String ip =request.getScheme()+ "://"+request.getServerName()+ ":" + request.getServerPort()+"/";
+	          
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -112,6 +113,7 @@
 <script type="text/javascript" src="../js/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../js/layui/layui.js"></script>
 <script type="text/javascript" src="../js/layui/layui.all.js"></script>
+<script type="text/javascript" src="../js/LodopFuncs.js"></script>
 <link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" media="screen" />
 
 	<link rel="stylesheet" type="text/css"
@@ -155,7 +157,13 @@ input{
 	color:#fff;
 	border-radius:3px;
 }
-
+#close{
+	border:none;
+	background-color:rgb(60,61,61);
+	
+	color:#fff;
+	border-radius:3px;
+}
 .shbh{
 	border:none;
 	background-color:rgb(60,61,61);
@@ -361,7 +369,23 @@ th, td {
 		</nav>
 
 	</div>
-	
+	<div class="na_crea" style="min-width:1000px;overflow-x: hidden;">
+			<div class="na_crea_body">
+				<span class="close" id="close1"></span>
+				<h5> <input style="width:80px;"  type="button" id="htpz"  value="合同拍照" /></h5>
+				<br>
+				<form action="addZsk.action"  method="post">
+					
+					<div id="E" style="height:600px"></div>
+					
+					<textarea name="contents" id="ueditorContent" style="width:100%; height:200px;display:none" ></textarea>
+					<input class="na_modify_input"  readonly="readonly" type="hidden" id="htid" value="" />
+					
+		            <p style="text-align:center"><input  type="button" id="close" value="确认" /></p>
+				
+				</form>
+			</div>
+	</div>      
 	<div class="wz_look" style="min-width:1000px;overflow-x: hidden;">
 			<div class="wz_look_body">
 				<span class="close"></span>
@@ -373,6 +397,78 @@ th, td {
 </body>
 <script type="text/javascript">
 
+var  LODOP;
+
+function dy() {	
+	var xq=$("#XqName").val();
+
+	var ld=$("#BuildNO").val();
+	var dy=$("#CellNO").val();
+	var hh=$("#HouseNO").val();
+	var lsdh=$("#lsdh").val();
+	var YHBM=$("#YHBM").val();
+	var mj=$("#cnmj").val();
+	var JIFFS=$("#JIFFS").val();
+	var JFJE=$("#JFJE").val();
+	var SFFS=$("input[name='SFFS']:checked").val();
+	var JFSJ=$("#JFSJ").val();
+	var UserName="<%=request.getSession().getAttribute("UserName")%>"
+	LODOP=getLodop(); 
+	
+	LODOP.SET_PRINT_PAGESIZE(1, 800,3400,"");
+	LODOP.ADD_PRINT_IMAGE(340,110,250,250,"<img src='../images/cwz.gif' width=120px height=120px/>");
+	LODOP.SET_PRINT_STYLE("FontSize",15);
+	LODOP.ADD_PRINT_TEXT(10,80,400,45,"南乐普惠热力");
+	LODOP.ADD_PRINT_TEXT(30,5,400,45,"--------------------------");
+	LODOP.SET_PRINT_STYLE("FontName","隶书");
+	LODOP.SET_PRINT_STYLE("FontSize",10);
+	LODOP.ADD_PRINT_TEXT(65,110,180,45,"缴费小票");
+	LODOP.ADD_PRINT_TEXT(90,5,400,45,"-------------------------------------");
+	LODOP.ADD_PRINT_TEXT(115,10,300,25,"流水单号:  "+lsdh);
+	LODOP.ADD_PRINT_TEXT(140,10,300,25,"用户编码:  "+YHBM);
+	LODOP.ADD_PRINT_TEXT(165,10,300,25,"小区    :  "+xq);
+	LODOP.ADD_PRINT_TEXT(190,10,300,25,"楼栋    :  "+ld+"   单元："+dy+"   户号："+hh);
+	LODOP.ADD_PRINT_TEXT(215,10,300,25,"住户面积:  "+mj+"㎡");
+	LODOP.ADD_PRINT_TEXT(240,10,300,25,"计费方式:  "+JIFFS+"收费");
+	LODOP.ADD_PRINT_TEXT(265,10,400,25,"缴费金额:  "+JFJE+"元     ");
+	LODOP.ADD_PRINT_TEXT(290,10,400,25,"缴费日期:  "+JFSJ);
+	LODOP.ADD_PRINT_TEXT(315,10,400,25,"缴费方式:  "+SFFS);
+	LODOP.ADD_PRINT_TEXT(340,10,400,25,"收费员  :  "+UserName);
+	LODOP.SET_PRINT_STYLE("FontSize",7);
+	LODOP.ADD_PRINT_TEXT(450,90,400,25,"*本票据仅作为收费证明，不作为收据使用");
+	
+	
+	LODOP.ADD_PRINT_IMAGE(960,110,250,250,"<img src='../images/cwz.gif'  width=120px height=120px/>");
+	LODOP.SET_PRINT_STYLE("FontSize",15);
+	LODOP.ADD_PRINT_TEXT(630,80,400,45,"南乐普惠热力");
+	LODOP.ADD_PRINT_TEXT(660,5,400,45,"--------------------------");
+	LODOP.SET_PRINT_STYLE("FontName","隶书");
+	LODOP.SET_PRINT_STYLE("FontSize",10);
+	LODOP.ADD_PRINT_TEXT(685,110,180,45,"缴费小票");
+	LODOP.ADD_PRINT_TEXT(710,5,400,45,"-------------------------------------");
+	LODOP.ADD_PRINT_TEXT(735,10,300,25,"流水单号:  "+lsdh);
+	LODOP.ADD_PRINT_TEXT(760,10,300,25,"用户编码:  "+YHBM);
+	LODOP.ADD_PRINT_TEXT(785,10,300,25,"小区    :  "+xq);
+	LODOP.ADD_PRINT_TEXT(810,10,300,25,"楼栋    :  "+ld+"   单元："+dy+"   户号："+hh);
+	LODOP.ADD_PRINT_TEXT(835,10,300,25,"住户面积:  "+mj+"㎡");
+	LODOP.ADD_PRINT_TEXT(860,10,300,25,"计费方式:  "+JIFFS+"收费");
+	LODOP.ADD_PRINT_TEXT(885,10,400,25,"缴费金额:  "+JFJE+"元     ");
+	LODOP.ADD_PRINT_TEXT(910,10,400,25,"缴费日期:  "+JFSJ);
+	LODOP.ADD_PRINT_TEXT(935,10,400,25,"缴费方式:  "+SFFS);
+	LODOP.ADD_PRINT_TEXT(960,10,400,25,"收费员  :  "+UserName);
+	LODOP.SET_PRINT_STYLE("FontSize",12);
+	LODOP.ADD_PRINT_TEXT(1020,10,400,25,"客户签字 :____________");
+	LODOP.SET_PRINT_STYLE("FontSize",7);
+	LODOP.ADD_PRINT_TEXT(1070,90,400,25,"*本票据仅作为收费证明，不作为收据使用");
+	
+	
+	
+	
+	
+	      
+	LODOP.PREVIEW();	       
+};
+var ip="<%=ip%>"
 	
 var xq;
 

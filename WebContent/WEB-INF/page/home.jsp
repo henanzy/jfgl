@@ -753,7 +753,7 @@ function xgmm(flag) {
 	
 		<div id="mws-container" class="clearfix">
 			 
-			<div class="Conframe" style="height:90%;overflow:hidden;">
+			<div class="Conframe" style="height:90%;">
 			 	<div id="page-tab">
 					<button class="tab-btn" id="page-prev"></button>
 					<nav id="page-tab-content">

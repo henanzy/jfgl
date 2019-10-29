@@ -266,7 +266,7 @@ html, body {
 	position: absolute;
 	left: 220px;
 	top: 70px;
-	overflow: auto;
+	
 	right: 0px;
 	bottom: 42px;
 	z-index: 999;

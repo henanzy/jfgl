@@ -38,5 +38,9 @@ public class RwxxServiceImpl implements RwxxService {
 		// TODO Auto-generated method stub
 		 rwxxdao.UpdateRwxx(SHJG, SHR, id);
 	}
-	
+	@Override
+	public void UpdateHt(String ht, String id) {
+		// TODO Auto-generated method stub
+		rwxxdao.UpdateHt(ht,id);
+	}
 }

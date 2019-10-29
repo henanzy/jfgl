@@ -112,7 +112,7 @@ html,body{
 	width: 98% !important;
 	min-width: 170px;
 	margin: 8px 1%;
-	height: 80px;
+	height: 65px;
 	float: left;
 	cursor: pointer;
 	display: block;
@@ -204,7 +204,28 @@ display:block;
 			</div>
 		</div>
 		
-		
+		<div class="mws-report-container clearfix">
+			
+			<p class="mws-report" href="#" style="font-size: 14px;min-width:800px;height:90px;">
+				<span class="mws-report-icon mws-ic ic-building"></span> 
+				<span class="mws-report-content" style="margin-top: 10px;"> </span> 
+				
+				
+				<span class="mws-report-title" style="margin-left:10px;">
+				<span class="mws-report-title"> 数据范围：
+					<select id="type" style="width: 150px" name="xqName">
+                          <option value="mr" selected="selected">每日</option>
+                          <option value="qb" selected="selected">全部</option>
+					</select>
+				</span>
+				 &nbsp;&nbsp;&nbsp; 
+				日期 ：<input type="date" id="startTime"  style="width:140px" value="" />
+					 &nbsp;&nbsp;&nbsp; 
+					<input type="submit" class="mws-button black" id="search_btn" value="搜索" />
+				</span>
+			</p>
+			
+		</div>
 		<div class="mws-panel grid_4" style="width: 48%; float: left;">
 			<div class="mws-panel-header">
 				<span class="mws-i-24 i-chart">缴费金额饼状图</span>

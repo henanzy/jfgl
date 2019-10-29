@@ -59,4 +59,9 @@
 	
 	update J_Rwxx set SHJG=#{SHJG} ,SHR=#{SHR} where id=#{id}
 	</update>
+	
+	<update id="UpdateHt">
+	
+	update J_Rwxx set ht=#{ht} where id=#{id}
+	</update>
 </mapper>

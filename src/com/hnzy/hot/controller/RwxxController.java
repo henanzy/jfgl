@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -259,4 +258,20 @@ public class RwxxController {
 		
 	}
 	
+	@RequestMapping("UpdateHt")
+	@ResponseBody
+	public JSONObject UpdateHt(HttpSession session,String ht, String id){
+		JSONObject json=new JSONObject();
+		
+		if(session.getAttribute("UserName")==null){
+			json.put("msg", "1");
+			
+		}else{
+			rwxxService.UpdateHt(getUtf8(ht),id);
+			json.put("msg", "0");
+			
+		}
+		
+		return json;
+	}
 }

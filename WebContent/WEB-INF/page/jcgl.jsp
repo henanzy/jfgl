@@ -257,14 +257,14 @@ width:51px;
  
 
 </head>
-<body>
+<body style="overflow:scroll;">
 
-	<div id="increasedis" class="clearfix" >
+	<div id="increasedis" class="clearfix" style="width:1700px">
 		
 		
 		
 		<div class="mws-panel grid_8 "
-			style="width: 98%; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:1000px">
+			style="width: 98%; overflow:scroll; padding-left: 12px; margin: 0px 0px 30px 0px; min-width:1700px">
 			<div class="mws-panel-header">
 				<span class="mws-i-24 i-table-1">稽查管理 &nbsp;&nbsp; 选择小区：
 						<select id="xq" style="width:150px"
@@ -279,7 +279,7 @@ width:51px;
 				
 			</div>
 			
-			<div id="khxx" class="mws-panel-body" style="height:3200px; width:1600px;padding:10px;">
+			<div id="khxx" class="mws-panel-body"  style="height:2200px; width:1600px;padding:10px;">
 
 				
 				<div  class="tablediv cell_div" id="table_body">

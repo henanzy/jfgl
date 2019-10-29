@@ -12,4 +12,6 @@ public interface RwxxService {
 			,@Param("startTime")String startTime,@Param("endTime")String endTime);
 	
 	public void UpdateRwxx(@Param("SHJG")String SHJG,@Param("SHR")String SHR,@Param("id")String id);
+	
+	public void UpdateHt(@Param("ht")String ht,@Param("id")String id);
 }

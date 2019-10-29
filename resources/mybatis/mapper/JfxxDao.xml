@@ -59,11 +59,21 @@
         <if test="SKZH!=null and SKZH!=''">
 	     and j.SKZH = #{SKZH}
         </if> 
+        order by j.JFSJ
 	</select>
 	
 	<select id="findJfze" resultMap="JfMap" >
 	
-	select y.XqName ,sum(convert(float,JFJE)) as je from J_Jfxx j,T_YhInfo y where j.YHBM=y.YHBM group by y.XqName
+	select y.XqName ,sum(convert(float,JFJE)) as je from J_Jfxx j,T_YhInfo y where j.YHBM=y.YHBM
+	
+	<if test="startTime!=null and startTime!=''">
+	and j.JFSJ &gt;= #{startTime} and y.yhbm=j.YHBM 
+</if>
+<if test="endTime!=null and endTime!=''">
+	and j.JFSJ &lt;#{endTime}
+</if> 
+	 group by y.XqName
+	
 	
 	</select>
 	

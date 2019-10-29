@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<%
+<%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
+	String ip =request.getScheme()+ "://"+request.getServerName()+ ":" + request.getServerPort()+"/";
+	          
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -370,10 +370,9 @@ th, td {
 						<input type="radio" name="JFTJ" value="扫码" checked="checked" />扫码	
 						<input type="radio" name="JFTJ" value="POS机"  />POS机	
 						<input type="radio" name="JFTJ" value="现金"  />现金						
-						<input type="radio" name="JFTJ" value="刷卡" />刷卡
 						
-						<input type="radio" name="JFTJ" value="微信" />微信
-						<input type="radio" name="JFTJ" value="支付宝" />支付宝
+						
+						
 					</label>
 				<label >
 						<span>收费方式:</span>
@@ -499,6 +498,8 @@ th, td {
 		      
 		LODOP.PREVIEW();	       
 	};
+	
+	
 	function bf(){
 		
 		$.ajax({

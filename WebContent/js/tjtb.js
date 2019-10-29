@@ -1,3 +1,21 @@
+Date.prototype.format = function foramate(fmt)   
+	{ //author: meizz   
+	  var o = {   
+	    "M+" : this.getMonth()+1,                 //月份   
+	    "d+" : this.getDate(),                    //日   
+	    "h+" : this.getHours(),                   //小时   
+	    "m+" : this.getMinutes(),                 //分   
+	    "s+" : this.getSeconds(),                 //秒   
+	    "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+	    "S"  : this.getMilliseconds()             //毫秒   
+	  };   
+	  if(/(y+)/.test(fmt))   
+	    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+	  for(var k in o)   
+	    if(new RegExp("("+ k +")").test(fmt))   
+	  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+	  return fmt;   
+	}
 function getRootPath(){      
 	var curWwwPath=window.document.location.href;      
     var pathName=window.document.location.pathname;      
@@ -7,7 +25,12 @@ function getRootPath(){
     return(localhostPaht+projectName);  
 } 
 $(function () {
-
+	 dateStr = $("#startTime").val()
+	   dateStr = dateStr.replace(/-/g,'/');
+	   var timeTamp = new Date(dateStr).getTime();
+	   var date = new Date();
+	   $("#startTime").val(date.format('yyyy-MM-dd'));
+	   date.setTime(timeTamp + 1000*60*60*24);
 	 var xqList=[];
 	 var dataList=[];
 		 $.ajax({
@@ -55,6 +78,13 @@ $(function () {
 			 wgryh.push(js1);
 		 }
 	//柱状图
+		 $("#search_btn").click(function(){
+			
+			 twdbar(optbar1,"pie-2",0,$("#type").val());
+			 
+			 tgrbar(optbar,grbardata,"pie-1",0,$("#type").val());
+
+		});
 			  var chart = Highcharts.chart('container',{
 				 	chart: {
 				 		type: 'column'
@@ -180,16 +210,29 @@ $(function () {
 				//新入网饼图
 				
 				
-				twdbar(optbar1,"pie-2",0);
+				twdbar(optbar1,"pie-2",0,"qb");
 			 
 			 
 });
 
 
 
-function twdbar(optbar1,pie,m){
+function twdbar(optbar1,pie,m,type){
 	 var xqList=[];
 	 var dataList=[];
+	 var dateStr = $("#startTime").val()
+	   dateStr = dateStr.replace(/-/g,'/');
+	   var timeTamp = new Date(dateStr).getTime();
+	   var date = new Date();
+	  
+	   date.setTime(timeTamp + 1000*60*60*24);
+	   var str=""
+	   var end=""
+		  
+	   if(type=="mr"){
+		   str=$("#startTime").val();
+		   end=date.format('yyyy-MM-dd');
+	   }
 		 $.ajax({
 				url : getRootPath()+"/yhInfo/findXq.action", 
 				async : false,
@@ -212,6 +255,8 @@ function twdbar(optbar1,pie,m){
 								dataType : "json",
 								data : {
 									"xqm":xqList[i],
+									"startTime":str,
+									"endTime":end,
 								},
 								success : function(data) {
 							    var map= data.grbzt;
@@ -240,14 +285,28 @@ function twdbar(optbar1,pie,m){
 
 
 
-function tgrbar(optbar,grbardata,pie,m){
+function tgrbar(optbar,grbardata,pie,m,type){
 	var pieList=[];
+	var	dateStr = $("#startTime").val()
+	   dateStr = dateStr.replace(/-/g,'/');
+	   var timeTamp = new Date(dateStr).getTime();
+	   var date = new Date();
+	  
+	   date.setTime(timeTamp + 1000*60*60*24);
+	   var str=""
+	   var end=""
+		   
+	   if(type=="mr"){
+		   str=$("#startTime").val();
+		   end=date.format('yyyy-MM-dd');
+	   }
 	$.ajax({
 		url : getRootPath()+"/jfxx/findJfze.action", 
 		async : false,
 		dataType : "json",
 		data : {
-			
+			"startTime":str,
+			"endTime":end,
 		},
 		success : function(data) {
 	    var list= data.list;

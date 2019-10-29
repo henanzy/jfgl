@@ -5,7 +5,8 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
+	String ip =request.getScheme()+ "://"+request.getServerName()+ ":" + request.getServerPort()+"/";
+	          
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -381,7 +382,7 @@ th, td {
 </div>
 </body>
 <script type="text/javascript">
-
+var ip="<%=ip%>"
 	
 var xq;
 

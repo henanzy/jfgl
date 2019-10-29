@@ -102,7 +102,7 @@ public class XxglController {
 	
 	@RequestMapping("grbzt")
 	@ResponseBody
-	public JSONObject grbzt(String xqm,String ldh,String dyh) throws UnsupportedEncodingException{
+	public JSONObject grbzt(String xqm,String ldh,String dyh,String startTime,String endTime) throws UnsupportedEncodingException{
 		JSONObject json=new JSONObject();
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(xqm!=null){
@@ -113,8 +113,17 @@ public class XxglController {
 		map.put("xqm", xqm);
 		map.put("ldh", ldh);
 		map.put("dyh", dyh);
+		map.put("startTime", startTime);
+		map.put("endTime", endTime);
 		
-		json.put("grbzt", XxglService.grbzt(map));
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		if( XxglService.grbzt(map)==null){
+			map1.put("grmj", 0);
+			map1.put("wgrmj", 0);
+		}else{
+			map1=XxglService.grbzt(map);
+		}
+		json.put("grbzt", map1);
 		return json;
 	}
 	

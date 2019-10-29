@@ -121,7 +121,8 @@ $(document).ready(function(){
 								var size=0;
 								
 								for(var y=0; y<list.length; y=y+size){
-								
+									
+									size=0;
 									var s;
 									if(y+size>=list.length){
 										return;
@@ -144,7 +145,8 @@ $(document).ready(function(){
 											success : function(data) {
 												var Clist=data.list;
 												size=Clist.length;
-												$("#"+dy[i].CellNo).prepend("<tr class='cellone-body' id='"+dy[i].CellNo+"_"+y+"'></tr>");
+											
+												$("#"+dy[i].CellNo).append("<tr class='cellone-body' id='"+dy[i].CellNo+"_"+y+"'></tr>");
 												for(var z=0; z<Clist.length; z++){
 													/*$("#"+dy[i].CellNo+"_"+y).append("<td><div class='body-hh'>"+Clist[z].HouseNO+"</div><div class='body-mj'>"+Clist[z].HeatArea+"</div><div class='body-lb'>居民</div></td>")*/
 													var hh="";

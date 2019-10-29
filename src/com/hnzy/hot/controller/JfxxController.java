@@ -108,9 +108,12 @@ public class JfxxController {
 	}
 	@RequestMapping("findJfze")
 	   @ResponseBody
-		public JSONObject findJfze(String YHBM) throws UnsupportedEncodingException{
+		public JSONObject findJfze(String startTime,String endTime) throws UnsupportedEncodingException{
 			JSONObject json=new JSONObject();
-			json.put("list", jfxxService.findJfze());			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("startTime", startTime);
+			map.put("endTime", endTime);
+			json.put("list", jfxxService.findJfze(map));			
 			return json;
 		}
 	

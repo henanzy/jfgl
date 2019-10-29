@@ -141,7 +141,7 @@ html,body{
 		
 		<div class="mws-report-container clearfix">
 			
-			<p class="mws-report" href="#" style="font-size: 16px;min-width:800px;height:320px;padding:10px;">
+			<div class="mws-report" href="#" style="font-size: 16px;min-width:800px;height:320px;padding:10px;">
 				<span class="mws-report-icon mws-ic ic-building"></span>  
 				
 				<span class="mws-report-content" style="margin-top: 0px;">
@@ -162,15 +162,14 @@ html,body{
 				<span class="mws-report-content spanli" style="font-size: 14px;margin-top: -8px;margin-left:90px;">
 					<a>收款日期不能晚于当期日期</a>
 				</span>
+				<form style="display:inline" action="read.action" method="post" enctype="multipart/form-data"  > 
+          				
+              		    <input style="width:15px;" name="Importfile" type="file"  /> 
+             			
+                      <input type="submit" class="btn" value="导入" class="btn btn-primary btn-sm" />
+                </form>
 				
-				<span class="mws-report-content" style="margin-top: 4px;margin-left:90px;">
-					选择文件：<input type="file" value="" /> <a style="font-size: 14px;text-decoration:underline">导出离线收费基础数据</a>
-				</span>
-				
-				<span class="mws-report-content" style="margin-top: 4px;margin-left:90px;">
-					<input type="button" value="导入" />
-				</span>
-			</p>
+			</div>
 			
 		</div>
 		

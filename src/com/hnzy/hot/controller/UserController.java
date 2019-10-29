@@ -1,5 +1,6 @@
 package com.hnzy.hot.controller;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hnzy.hot.pojo.User;
 import com.hnzy.hot.pojo.YhMessage;
+import com.hnzy.hot.service.JfxxService;
 import com.hnzy.hot.service.UserService;
 import com.hnzy.hot.util.JSONSerializer;
 import com.hnzy.hot.util.MD5Util;
@@ -26,6 +31,8 @@ import net.sf.json.JSONObject;
 public class UserController {
 	@Autowired
 	private UserService userServer;
+	@Autowired
+	public JfxxService jfxxService;
 	//跳转到登录页面
 		@RequestMapping("/toLogin")
 		public String tologin(){
@@ -399,5 +406,28 @@ public class UserController {
 		public String czrz(){
 			return"caozrz";
 		}
-    	
+    	@RequestMapping("read")
+	     public String impotr(HttpServletRequest request,HttpSession session, Model model) throws Exception {
+	     int adminId = 1;
+	     //获取上传的文件
+	     MultipartHttpServletRequest multipart = (MultipartHttpServletRequest) request;
+	     MultipartFile file = multipart.getFile("Importfile");
+	    
+	     if(file.getSize()>0){
+	     //数据导入
+	    	 
+	    	 String UserName=(String) session.getAttribute("UserName");
+	    	 if(UserName!=null){
+	    		 InputStream in = file.getInputStream();
+	    		 jfxxService.importExcelInfo(UserName,in,file,adminId);
+	    		 in.close();
+	    	 }else{
+	    		 return "faile";
+	    	 }
+	    	
+	     	return "Excelsuccess";
+	     }else{
+	    	 return "faile";
+	     }
+	   }
 }

@@ -378,8 +378,10 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 function wz_look(p){
 	$(".wz_look").show();
 	var xintd = $(p).parent().parent().children();
+	var str=xintd[2].innerHTML;
+
+	var str1= str.replace("http://192.168.254.3:8090/",ip).replace("http://120.194.242.219:8090/",ip)
 	
-	
-	$(".wz_look_content").html(xintd[2].innerHTML);
+	$(".wz_look_content").html(str1);
 	
 }

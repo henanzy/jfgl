@@ -277,7 +277,7 @@ th, td {
 					size=6px value="" /> &nbsp;&nbsp;&nbsp;
 				收款人：<input type="text" id="SKZH"
 					size=6px value="" /> &nbsp;&nbsp;&nbsp;
-				日期<input type="date" id="startTime"  style="width:140px" value="" />-
+				日期<input type="date" id="startTime"  style="width:140px" value="" />
               <!--   <input type="date" id="endTime" style="width:140px" value="" />		 -->
 				 <input type="submit" id="search_btn"
 					class="mws-button black" value="查询" />

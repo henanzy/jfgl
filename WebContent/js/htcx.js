@@ -9,6 +9,34 @@ function getRootPath(){
 
 $(document).ready(function(){
 	var shebList = [];
+$("#close").click(function(){
+		
+		
+		$.ajax({
+			url : getRootPath()+"/rwxxCont/UpdateHt.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				
+				"ht":$("#ueditorContent").val(),
+				"id":$("#htid").val(),
+				
+			},
+			success : function(data) {
+			if(data.msg=="0"){
+				$(".na_crea").hide();
+				$("#ueditorContent").val("");
+				var page=$("#currentNum").html();
+				search(page);
+				return;
+			}else{
+				alert("请登录后操作")
+				return;
+			}
+				
+			}
+		});
+	});
 	function jsArrChange(json){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
@@ -41,7 +69,7 @@ $(document).ready(function(){
 			shebList.push(arr1);
 		};
 	}
-	$(".ht").click(function(){
+	$(".ht").unbind().click(function(){
 		wz_look(this)
 	});
 	var YhList;
@@ -223,11 +251,12 @@ function tbodydis(oldlist,newlist,page){
 			$(this).parent().removeClass("blue").addClass(classname);
 			$("table tbody tr").find('td:eq(' + $(this).index() + ')').removeClass('blue')
 		});
-		$(".ht").click(function(){
+		$(".ht").unbind().click(function(){
 			wz_look(this)
 		});
-		$(".wz_look .close").click(function(){
+		$(".na_crea .close").click(function(){
 			$(".wz_look").hide();
+			$("#ueditorContent").val("")
 		});
 		
 		$(".shtg").click(function(){
@@ -262,11 +291,12 @@ function tbodydis(oldlist,newlist,page){
 		pageInit(curr, select.value)
 	}
 	pageInit(page, 15);
-	$(".ht").click(function(){
+	$(".ht").unbind().click(function(){
 		wz_look(this)
 	});
-	$(".wz_look .close").click(function(){
+	$(".na_crea .close").click(function(){
 		$(".wz_look").hide();
+		$("#ueditorContent").val("")
 	});
 	$(".shtg").click(function(){
 		shtg(this);
@@ -354,18 +384,45 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 
 }	
 function wz_look(p){
-	$(".wz_look").show();
 	var xintd = $(p).parent().parent().children();
-	//修改数据
-	/*var changenewsList = [];
-	for(var x = 1 ; x < 5 ; x ++){
-		if(x == 1){
-			changenewsList.push(xintd[x].childNodes[0].innerHTML);
-			continue;
-		}
-		changenewsList.push(xintd[x].innerHTML);
-	}*/
+	$(".na_crea").show();
 	
-	$(".wz_look_content").html(xintd[22].innerHTML);
+	$("#close1").click(function(){
+		$(".na_crea").hide();
+		$("#ueditorContent").val("")
+	});
+	var str=xintd[22].innerHTML;
+
+	var str1= str.replace("http://192.168.254.3:8090/",ip).replace("http://120.194.242.219:8090/",ip)
+	/*var str1= str.replace("http://192.168.254.3:8090/","http://120.194.242.219:8090/")*/
+	
+	console.log(str1)
+	$("#ueditorContent").val(str1);
+	
+	$("#htid").val(xintd[2].innerHTML);
+	
+	var E = window.wangEditor;
+	var editor = new E('#E');
+	var $ueditorContent = $('#ueditorContent');
+	editor.customConfig.onchange = function (html) {
+	    // 监控变化，同步更新到 textarea
+	    $ueditorContent.val(html);
+	};
+	editor.customConfig.uploadImgServer = getRootPath()+"/rwxxCont/fileUp.action" ;
+	editor.customConfig.uploadFileName = 'img';
+	editor.customConfig.uploadImgHooks = {
+	        // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+	        customInsert: function (insertImg, result, editor) {
+	            // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果：
+	            var url = result.url;
+	            
+	            insertImg(url);
+	        },
+	      },
+	editor.create();
+	
+	
+	 editor.txt.html($ueditorContent.val());
+	 
 	
 }

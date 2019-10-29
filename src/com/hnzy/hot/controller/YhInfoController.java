@@ -172,9 +172,9 @@ public class YhInfoController {
 		
 		
 		map.put("xqm", xqm);
-		map.put("ldh", ldh);
-		map.put("dyh", dyh);
-		map.put("hh", hh);
+		map.put("ldh", getUtf8(ldh));
+		map.put("dyh", getUtf8(dyh));
+		map.put("hh", getUtf8(hh));
 		map.put("YHBM", YHBM);
 		map.put("yhfl", yhfl);
 		map.put("FamKd1", FamKd1);
@@ -464,11 +464,11 @@ public class YhInfoController {
 			xqm=new String(xqm.getBytes("ISO-8859-1"),"utf-8");
 		}
 		map.put("xqm", xqm);
-		map.put("ldh", ldh);
-		map.put("dyh", dyh);		
-		map.put("hh", hh);
+		map.put("ldh", getUtf8(ldh));
+		map.put("dyh", getUtf8(dyh));		
+		map.put("hh", getUtf8(hh));
 		map.put("JFBS",getUtf8( JFBS));
-		
+	
 		json.put("list", yhInfoService.findQf(map));
 		return json;
 	}
