@@ -173,21 +173,7 @@ $("#search_btn").click(function(){
 //表格写入函数带分页
 function tbodydis(oldlist,newlist,page){
 	
-	if(oldlist == ""){
-		var opt = [];
-		for(var i = 0; i < newlist.length; i++) {
-			for (var j = 0 ; j <newlist[i].length ; j ++) {
-				if(j == 1){
-					if( opt.indexOf(newlist[i][1]) == -1){
-						opt.push(newlist[i][1]);
-					}
-				}
-			}
-		}
-		for(var i = 0; i < opt.length; i++) {
-			$("#xq").append("<option>"+opt[i]+"</option>");
-		}
-	}
+
 	
 	var current = 1;
 	function pageInit(currentPage, pagesize) {

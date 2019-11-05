@@ -18,4 +18,6 @@ public interface JfxxService {
 	public Map<String, Object> findSfx(String sfx);
 	public List<Map<String, Object>> findJfBs(String YHBM);
 	public void importExcelInfo(String  UserName,InputStream in, MultipartFile file,Integer adminId) throws Exception;
+	
+	public void UpdateJfje(@Param("YHBM")String YHBM);
 }

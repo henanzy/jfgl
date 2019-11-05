@@ -23,4 +23,22 @@
 		update J_Jcxx set JCQK=#{JCQK},YRZT=#{YRZT} ,JCRQ=#{JCRQ},JCWT=#{JCWT},JCR=#{JCR},JCBZ=#{JCBZ},CLQK=#{CLQK},
 		CLRQ=#{CLRQ},CLJG=#{CLJG},CLBZ=#{CLBZ} where YHBM=#{YHBM}
 	</update>
+	
+	 <select id="findJc" resultMap="JcMap" >
+	
+	select  * from   tb_jc_manage
+	 <if test="XqName!=null and XqName!=''">
+			and xq=#{XqName}
+		</if>
+		
+		<if test="BuildNo!=null and BuildNo!=''">
+			and ld=#{BuildNo}
+		</if>
+		<if test="CellNO!=null and CellNO!=''">
+			and dy=#{CellNO}
+		</if>
+		<if test="hh!=null and hh!=''">
+	    and hh=#{hh}
+        </if>
+	</select>
 </mapper>

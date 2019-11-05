@@ -41,6 +41,14 @@ public class JcServiceImpl implements JcService{
 		// TODO Auto-generated method stub
 		jcDao.updateJCQK(JCQK, YHBM);
 	}
+
+
+
+	@Override
+	public List<Map<String, Object>> findJc(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return jcDao.findJc(map);
+	}
 	
 
 	

@@ -97,7 +97,7 @@
 <script type="text/javascript" src="../js/mws.js"></script>
 <script type="text/javascript" src="../js/demo.js"></script>
 <script type="text/javascript" src="../js/themer.js"></script>
-<script type="text/javascript" src="../js/jcgl.js"></script>
+<script type="text/javascript" src="../js/jfst.js"></script>
 
  
  <style>

@@ -96,4 +96,11 @@
 	select jg from J_SFXX where sfx=#{sfx}
 	
 	</select>
+	
+	<insert id="UpdateJfje" >
+		update J_Jfxx set JFJE ='0'
+		 
+		
+		where YHBM=#{YHBM}
+	</insert>
 </mapper>

@@ -182,6 +182,11 @@ public class JfxxServiceImpl implements JfxxService{
 		}
 		return str;
 	}
+	@Override
+	public void UpdateJfje(String YHBM) {
+		// TODO Auto-generated method stub
+		jfxxDao.UpdateJfje(YHBM);
+	}
 
 	
 }

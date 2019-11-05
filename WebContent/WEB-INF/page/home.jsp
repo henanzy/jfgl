@@ -711,7 +711,7 @@ function xgmm(flag) {
 					 <li><a href="#" onclick="xgmm(0)">更改密码</a></li>
                         <li><a href="#" onclick="xzyh(0)">用户注册</a></li>
                         <li><a href="<%=ip%>jfgl/user/toLogin.action">登录</a></li>
-                        <li><a href="<%=ip%>kefu/user/home.action">客服系统</a></li>
+                        <li><a href="<%=ip%>kfgl/user/toLogin.action">客服系统</a></li>
 					   <!--  <li><a href="#" onclick="xgmm(0)">更改密码</a></li>
                         <li><a href="#" onclick="xzyh(0)">用户注册</a></li>
                        <li><a href="http://192.144.169.217:8090/zhineng/user/toLogin.action">登录</a></li>

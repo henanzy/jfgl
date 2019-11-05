@@ -148,19 +148,17 @@ html,body{
 					离线收费
 				</span>
 				<span class="mws-report-content" style="font-size: 14px;margin-top: -8px;margin-left:60px;">
-					提示：数据导入需要几分钟时间，请稍等片刻
+					提示：数据导入需要时间，请稍等片刻
 				</span>
 				<span class="mws-report-content spanli" style="font-size: 14px;margin-top: -8px;margin-left:90px;">
-					<a>导入数据之前确保Excel中所有存在的减免类别，附加类别已在系统中添加</a>
+					<a>导入数据之前确保Excel中所有用户已在系统中添加且尚未缴费</a>
 				</span>
 				<span class="mws-report-content spanli" style="font-size: 14px;margin-top: -8px;margin-left:90px;">
-					<a>导入收费记录的收款人以及录入票据的开票人皆视为当前用户</a>
+					<a>导入收费记录的收款人为已注册的系统账户</a>
 				</span>
+				
 				<span class="mws-report-content spanli" style="font-size: 14px;margin-top: -8px;margin-left:90px;">
-					<a>Excel中录入票据的开票方式如未在入库时运行设置则将被视为“手开”</a>
-				</span>
-				<span class="mws-report-content spanli" style="font-size: 14px;margin-top: -8px;margin-left:90px;">
-					<a>收款日期不能晚于当期日期</a>
+					<a>确保用户编码唯一</a>
 				</span>
 				<form style="display:inline" action="read.action" method="post" enctype="multipart/form-data"  > 
           				

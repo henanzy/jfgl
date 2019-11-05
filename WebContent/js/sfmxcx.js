@@ -262,13 +262,14 @@ function tbodydis(oldlist,newlist,page){
 				
 				
 				for (var j = 0 ; j <newlist[i].length ; j ++) {
-					/*if(j==0){
-
-						html += "<td style='display:none;'>" + newlist[i][j] + "</td>";
-    					
-    				}else{*/
-    					 html += "<td>" + newlist[i][j] + "</td>"
-    				/*s*/
+					
+					if(newlist[i][10]=="0"){
+						 html += "<td><font  color='red'>" + newlist[i][j] + "</font></td>"
+					}
+					else{
+						 html += "<td>" + newlist[i][j] + "</td>"
+					}
+    				
                  
 				}
 				html += "<td><input class='xinjgd_del' type='button' value='删除' /></td></tr>";

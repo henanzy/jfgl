@@ -12,36 +12,31 @@ $(document).ready(function(){
 	function jsArrChange(json){
 		for (var i = 0 ; i < json.length ; i ++) {
 			var arr1 = [];
-			arr1[0] = json[i].CNQ;
-			arr1[1] = json[i].YhName;
-			arr1[2] = json[i].YHBM;
-			arr1[3] = json[i].XqName;
-			arr1[4] = json[i].BuildNO;
-			arr1[5] = json[i].CellNO;
-			arr1[6] = json[i].HouseNO;
 			
-			arr1[7] = json[i].JFSJ;
-			arr1[8] = json[i].IDNum;
-			arr1[9] = json[i].YSJE;
-			arr1[10] = json[i].JFJE;
-			arr1[11] = json[i].JFTJ;
-			arr1[12] = json[i].JIFFS;
+			arr1[0] = json[i].admin;
+			arr1[1] = json[i].createAt;
+			arr1[2] = json[i].xq;
+			arr1[3] = json[i].ld;
+			arr1[4] = json[i].dy;
+			arr1[5] = json[i].hh;
 			
-			arr1[13] = json[i].HeatArea;
-			arr1[14] = json[i].PJHM;
-			arr1[15] = json[i].LSDH;
+			arr1[6] = json[i].jcType;
+			arr1[7] = json[i].jcRemark;
+			arr1[8] = json[i].HeatArea;
+			arr1[9] = json[i].BZ;
+			
 			
 			shebList.push(arr1);
 		};
 	}
 	var YhList;
 	$.ajax({
-			url : getRootPath()+"/jfxx/findJfxx.action", 
+			url : getRootPath()+"/jc/findJc.action", 
 			async : false,
 			dataType : "json",
 			data : {
 				
-				"SFFS":"银行代收",
+				
 			},
 			success : function(data) {
 				
@@ -168,13 +163,70 @@ $("#search_btn").click(function(){
 
 		sortIndex += 1;
 	}
+	var wordExport = document.getElementById("export_btn");
+	wordExport.onclick = function(){
+		var aID =  this.parentNode.getAttribute("id");
+		tableToExcel();
+	}
+	var base64 = function (s) {
+	    return window.btoa(unescape(encodeURIComponent(s)));
+	};
+	//替换table数据和worksheet名字
+	var format = function (s, c) {
+	    return s.replace(/{(\w+)}/g,
+	        function (m, p) {
+	            return c[p];
+	        });
+	}
+	function tableToExcel(){
+	    //要导出的json数据
+	  
+	    //列标题
+	    let str = '<tr><td>登记人</td><td>稽查时间</td><td>小区</td>'+
+	    '<td>楼栋号</td><td>单元号</td><td>户号</td>'+
+	    '<td>稽查情况</td><td>稽查备注</td>'+
+	    '</tr>';
+	    //循环遍历，每行加入tr标签，每个单元格加td标签
+	    for(let i = 0 ; i < shebList.length ; i++ ){
+	    	
+	      str+='<tr>';
+	     
+	      for(let item in shebList[i]){
+	          //增加\t为了不让表格显示科学计数法或者其他格式
+	    	 
+	    		  str+=`<td>${ shebList[i][item] + '\t'}</td>`;
+	    	  
+	    		   
+	    	  
+	              
+	      }
+	      str+='</tr>';
+	    	
+	    }
+	    //Worksheet名
+	    let worksheet = 'Sheet1'
+	    let uri = 'data:application/vnd.ms-excel;base64,';
+
+	    //下载的表格模板数据
+	    let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+	    xmlns:x="urn:schemas-microsoft-com:office:excel" 
+	    xmlns="http://www.w3.org/TR/REC-html40">
+	    <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+	      <x:Name>${worksheet}</x:Name>
+	      <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+	      </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+	      </head><body><table>${str}</table></body></html>`;
+	    //下载模板
+	    window.location.href = uri + base64(template)
+	  }
+	  //输出base64编码
+	  function base64 (s) { return window.btoa(unescape(encodeURIComponent(s))) }
 });
 
 //表格写入函数带分页
 function tbodydis(oldlist,newlist,page){
 	
-	
-	
+
 	var current = 1;
 	function pageInit(currentPage, pagesize) {
 		current = currentPage; // 将当前页存储全局变量
@@ -255,55 +307,47 @@ function tbodydis(oldlist,newlist,page){
 
 }
 
+
+
+
+//base64转码
+
 function compareWord(xq,ld,dy,hh,compareWordList){
 
 	var json;
 	compareWordList.length=0;
 	$.ajax({
-		url : getRootPath()+"/jfxx/findJfxx.action", 
+		url : getRootPath()+"/jc/findJc.action", 
 		async : false,
 		dataType : "json",
 		data : {
-			"CNQ":$("#CNQ").val(),
-			"JFTJ":$("#JFTJ").val(),
-			"YhName":$("#YhName").val(),
-			"IDNum":$("#IDNum").val(),
-			"YHBM":$("#YHBM").val(),
-			"startTime":$("#startTime").val(),
-			"endTime":$("#endTime").val(),
-			"SFFS":"银行代收",
-			"XqName":xq,
-			"BuildNo":ld,
-			"CellNO":dy,
+			
+			"xqm":xq,
+			"ldh":ld,
+			"dyh":dy,
 			"hh":hh,
+			
 		},
 		success : function(data) {
 		 json=data.list;
 		
 		}
 	});
-
+	
 	for (var i = 0 ; i < json.length ; i ++) {
 		var arr1 = [];
-		arr1[0] = json[i].CNQ;
-		arr1[1] = json[i].YhName;
-		arr1[2] = json[i].YHBM;
-		arr1[3] = json[i].XqName;
-		arr1[4] = json[i].BuildNO;
-		arr1[5] = json[i].CellNO;
-		arr1[6] = json[i].HouseNO;
+		arr1[0] = json[i].YhName;
+		arr1[1] = json[i].YHBM;
+		arr1[2] = json[i].XqName;
+		arr1[3] = json[i].BuildNO;
+		arr1[4] = json[i].CellNO;
+		arr1[5] = json[i].HouseNO;
 		
-		arr1[7] = json[i].JFSJ;
-		arr1[8] = json[i].IDNum;
-		arr1[9] = json[i].YSJE;
-		arr1[10] = json[i].JFJE;
-		arr1[11] = json[i].JFTJ;
-		arr1[12] = json[i].JIFFS;
-		
-		arr1[13] = json[i].HeatArea;
-		arr1[14] = json[i].PJHM;
-		arr1[15] = json[i].LSDH;
+		arr1[6] = json[i].JCQK;
+		arr1[7] = json[i].JFBS;
+		arr1[8] = json[i].HeatArea;
+		arr1[9] = json[i].BZ;
 		compareWordList.push(arr1);
 	};
-
+	
 }	

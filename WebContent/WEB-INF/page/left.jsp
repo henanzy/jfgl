@@ -231,6 +231,16 @@ function rbb(){//
 function yezxx(){// 
 	window.open("<%=basePath%>yhInfo/yezxx.action","Conframe");
 } 
+function findjc(){// 
+	window.open("<%=basePath%>jc/findjc.action","Conframe");
+} 
+function jfst(){// 
+	window.open("<%=basePath%>jc/jfst.action","Conframe");
+} 
+function gzfst(){// 
+	window.open("<%=basePath%>jc/gzfst.action","Conframe");
+} 
+
 var UserName="<%=request.getSession().getAttribute("UserName")%>"
 </script>
 
@@ -287,7 +297,16 @@ ul.ac_kf li a:hover {
 					</ul>
 				</li>
 
-				<li class="active"><a onclick="jcgl()" href="#" class="mws-i-24 i-users">稽查管理</a></li>
+				<li class="active"><a  href="#" class="mws-i-24 i-users">稽查管理</a>
+				<ul class="ac_kf">
+
+						
+						<li><a onclick="jcgl()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;稽查视图</a></li>
+						<li><a onclick="jfst()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;缴费视图</a></li>
+						<li><a onclick="gzfst()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;缴费视图（公租房）</a></li>
+						<li><a onclick="findjc()" target="Conframel">&nbsp;&nbsp;&nbsp;&nbsp;稽查报表</a></li>
+					</ul>
+				</li>
 				<!-- <li class="active"><a onclick="qqzx()" href="#" class="mws-i-24 i-users">清欠中心</a></li> -->
 				<li class="active"><a onclick="cnbg()" href="#" class="mws-i-24 i-users">采暖变更</a></li>
 				<!-- <li class="active"><a onclick="khgl()" href="#" class="mws-i-24 i-users">客户管理</a></li>  -->

@@ -14,4 +14,6 @@ public interface JcDao {
 	public List<Map<String, Object>> findJcByBm(String YHBM);
 	
 	public void updateJCxx(Map<String, Object> map);
+	
+	public List<Map<String, Object>> findJc(Map<String, Object> map);
 }

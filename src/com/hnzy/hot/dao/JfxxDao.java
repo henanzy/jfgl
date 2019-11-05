@@ -22,4 +22,7 @@ public interface JfxxDao {
    public Map<String, Object> findSfx(String sfx);
    
    public List<Map<String, Object>> findJfBs(String YHBM);
+   
+   public void UpdateJfje(@Param("YHBM")String YHBM);
+   
 }

@@ -78,4 +78,36 @@ public class JcController {
 		}
 		return str;
 	}
+	
+	@RequestMapping("findJc")
+	   @ResponseBody
+		public JSONObject findJcxx(String XqName,String BuildNo,String CellNO,String hh) throws UnsupportedEncodingException{
+			JSONObject json=new JSONObject();
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			
+			map.put("XqName",getUtf8(XqName));
+			map.put("BuildNo",getUtf8(BuildNo));map.put("CellNO",getUtf8(CellNO));
+			map.put("hh",getUtf8(hh));
+			
+			
+			
+			json.put("list", jcService.findJc(map));
+			return json;
+		}
+	
+	@RequestMapping("findjc")
+	public String bzxx(){
+		return "bbgl/jc";
+	}
+	
+	@RequestMapping("jfst")
+	public String jfst(){
+		return "jfst";
+	}
+	
+	@RequestMapping("gzfst")
+	public String gzfst(){
+		return "gzfst";
+	}
 }

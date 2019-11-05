@@ -48,10 +48,10 @@
 	      and HouseNO=#{HouseNo}
         </if>
         <if test="startTime!=null and startTime!=''">
-	    and RWRQ &gt;= #{startTime}
+	    and J_Rwxx. HTQSRQ &gt;= #{startTime}
         </if>
         <if test="endTime!=null and endTime!=''">
-	     and RWRQ &lt;=#{endTime}
+	     and J_Rwxx. HTQSRQ &lt;=#{endTime}
         </if> 
         order by J_Rwxx.id desc
 	</select>

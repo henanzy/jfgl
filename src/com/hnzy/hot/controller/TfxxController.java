@@ -59,6 +59,7 @@ public class TfxxController {
 				json.put("msg", "0");
 			}else{
 				jfxxService.UpdateJfxx("否", YHBM,null);
+				jfxxService.UpdateJfje(YHBM);
 				tfxxService.InsertTfxx(map);
 				json.put("msg", "1");
 			}
