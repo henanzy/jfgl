@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -376,11 +376,11 @@ th, td {
 					</label>
 				<label >
 						<span>收费方式:</span>
-						<input type="radio" name="SFFS" value="柜台收费" checked="checked" />柜台收费
-						<input type="radio" name="SFFS" value="银行代收" />银行代收
-						<input type="radio" name="SFFS" value="走收" />走收
+						<input type="radio" id="gtsf"name="SFFS" value="柜台收费" checked="checked" />柜台收费
+						<input type="radio" id="yhds" name="SFFS" value="银行代收" />银行代收
+						<input type="radio" id="zs"name="SFFS" value="走收" />走收
 						
-						<input type="radio" name="SFFS" value="物业代收" />物业代收
+						<input type="radio" id="wyds"name="SFFS" value="物业代收" />物业代收
 					</label>
 					<label><span>收款日期:</span><input type="datetime" vlaue="" class="khxx_input"   id="JFSJ"   /></label>
 				</p>
@@ -431,7 +431,7 @@ th, td {
 	
 	function dy() {	
 		var xq=$("#XqName").val();
-
+var LXDH= $("#TelePhone").val();
 		var ld=$("#BuildNO").val();
 		var dy=$("#CellNO").val();
 		var hh=$("#HouseNO").val();
@@ -462,8 +462,9 @@ th, td {
 		LODOP.ADD_PRINT_TEXT(240,10,300,25,"计费方式:  "+JIFFS+"收费");
 		LODOP.ADD_PRINT_TEXT(265,10,400,25,"缴费金额:  "+JFJE+"元     ");
 		LODOP.ADD_PRINT_TEXT(290,10,400,25,"缴费日期:  "+JFSJ);
-		LODOP.ADD_PRINT_TEXT(315,10,400,25,"缴费方式:  "+SFFS);
-		LODOP.ADD_PRINT_TEXT(340,10,400,25,"收费员  :  "+UserName);
+		LODOP.ADD_PRINT_TEXT(340,10,400,25,"缴费方式:  "+SFFS);
+		LODOP.ADD_PRINT_TEXT(365,10,400,25,"收费员  :  "+UserName);
+                LODOP.ADD_PRINT_TEXT(315,10,400,25,"客服电话:  0393 8509620");
 		LODOP.SET_PRINT_STYLE("FontSize",7);
 		LODOP.ADD_PRINT_TEXT(450,90,400,25,"*本票据仅作为收费证明，不作为收据使用");
 		
@@ -484,8 +485,9 @@ th, td {
 		LODOP.ADD_PRINT_TEXT(860,10,300,25,"计费方式:  "+JIFFS+"收费");
 		LODOP.ADD_PRINT_TEXT(885,10,400,25,"缴费金额:  "+JFJE+"元     ");
 		LODOP.ADD_PRINT_TEXT(910,10,400,25,"缴费日期:  "+JFSJ);
-		LODOP.ADD_PRINT_TEXT(935,10,400,25,"缴费方式:  "+SFFS);
-		LODOP.ADD_PRINT_TEXT(960,10,400,25,"收费员  :  "+UserName);
+		LODOP.ADD_PRINT_TEXT(985,10,400,25,"缴费方式:  "+SFFS);
+		LODOP.ADD_PRINT_TEXT(935,10,400,25,"收费员  :  "+UserName);
+                LODOP.ADD_PRINT_TEXT(960,10,400,25,"客服电话:  0393 8509620");
 		LODOP.SET_PRINT_STYLE("FontSize",12);
 		LODOP.ADD_PRINT_TEXT(1020,10,400,25,"客户签字 :____________");
 		LODOP.SET_PRINT_STYLE("FontSize",7);
@@ -677,7 +679,19 @@ th, td {
  
 	
 var xq;
+var UserName="<%=request.getSession().getAttribute("UserName")%>"
+if(UserName=="zyyh001"||UserName=="zyyh002"){
+	$("#yhds").attr('checked','true');
+	
+}
+if(UserName=="zdsy"){
+	$("#wyds").attr('checked','true');
+	
+}
 
+if(UserName=="zdsy"){
+	 $("#xq").append("<option value='正大盛苑'>正大盛苑</option>");
+}else{
  $.ajax({
 		url : "<%=basePath%>yhInfo/findXq.action", 
 		async : false,
@@ -697,7 +711,7 @@ var xq;
 		}
 
 	});
- 
+}
  $("#xq").change(function(){
 	 $.ajax({
 			url : "<%=basePath%>yhInfo/findLd.action", 

@@ -108,7 +108,7 @@
 <script type="text/javascript" src="../js/themer.js"></script>
 
 <script type="text/javascript" src="../js/demo.formelements.js"></script>
- <script type="text/javascript" src="../js/rbb.js"></script> 
+
 <style type="text/css">
 .span-up {
 	border-style: solid;
@@ -311,6 +311,8 @@ th, td {
 								class="span-down"></span></th>
 							<th class="table-th-css">用户编码<span class="span-up"></span> <span
 								class="span-down"></span></th>
+							<th class="table-th-css">联系电话<span class="span-up"></span> <span
+								class="span-down"></span></th>	
 							<th class="table-th-css">小区名称<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							<th class="table-th-css">楼栋号<span class="span-up"></span> <span
@@ -383,7 +385,7 @@ th, td {
 	</div>
 </body>
 <script type="text/javascript">
-
+var UserName="<%=request.getSession().getAttribute("UserName")%>"
 	
 var xq;
 
@@ -456,4 +458,5 @@ var xq;
 	});
 
  </script>
+  <script type="text/javascript" src="../js/rbb.js"></script> 
 </html>

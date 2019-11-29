@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -108,7 +108,7 @@
 <script type="text/javascript" src="../js/themer.js"></script>
 
 <script type="text/javascript" src="../js/demo.formelements.js"></script>
- <script type="text/javascript" src="../js/sfmxcx.js"></script> 
+
 <style type="text/css">
 .span-up {
 	border-style: solid;
@@ -240,6 +240,9 @@ th, td {
 							<option value="">单元</option>
 					</select>
 				</span> 
+户号： <select name="houseNo" id="houseNo" style="width: 70px">
+							<option value="">--户号--</option>
+					</select>
 				 <label>采暖期：</label> 
                 <select id="CNQ">
 						<option value="" selected="selected">--选择采暖期--</option>
@@ -267,8 +270,7 @@ th, td {
 						
 				</select>
 				<br/><br/>
-				户号：<input type="text" name="hh" id="hh" size=6px value="" />
-					&nbsp;&nbsp;&nbsp; 
+				
 				客户名：<input type="text" id="YhName" size=6px
 					value="" /> &nbsp;&nbsp;&nbsp; 	
 				用户卡号：<input type="text" id="IDNum" size=6px
@@ -310,7 +312,10 @@ th, td {
 							<th class="table-th-css">用户姓名<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							<th class="table-th-css">用户编码<span class="span-up"></span> <span
-								class="span-down"></span></th>
+								class="span-down"></span></th>	
+							<th class="table-th-css">电话号码<span class="span-up"></span> <span
+								class="span-down"></span></th>	
+							
 							<th class="table-th-css">小区名称<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							<th class="table-th-css">楼栋号<span class="span-up"></span> <span
@@ -343,7 +348,7 @@ th, td {
 								class="span-down"></span></th>
 							<th class="table-th-css">收款人<span class="span-up"></span> <span
 								class="span-down"></span></th>
-								<th class="table-th-css">操作<span class="span-up"></span> <span
+							<th class="table-th-css">操作<span class="span-up"></span> <span
 								class="span-down"></span></th>
 							
 						</tr>
@@ -383,7 +388,7 @@ th, td {
 	</div>
 </body>
 <script type="text/javascript">
-
+var UserName="<%=request.getSession().getAttribute("UserName")%>"
 	
 var xq;
 
@@ -454,6 +459,30 @@ var xq;
 		
 		
 	});
+$("#dyh").change(function(){
+	 $.ajax({
+			url : "<%=basePath%>yhInfo/findHh.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				"xqm" : $("#xq").val(),
+				"ldh" : $("#ldh").val(),
+				"dyh" : $("#dyh").val(),
+			},
+			success : function(data) {
+				
+				$("#houseNo option:gt(0)").remove();
+				var hh=data.Hh;
+				for(var i=0; i<hh.length; i++){
+					
+					$("#houseNo").append("<option value='"+hh[i].name+"'>"+hh[i].name+"</option>");
+				}	
+			}
 
+		});
+		
+		
+	});
  </script>
+  <script type="text/javascript" src="../js/sfmxcx.js"></script> 
 </html>

@@ -272,7 +272,7 @@ th, td {
 				<span class="mws-report-icon mws-ic ic-building"></span> <span
 					class="mws-report-content" style="margin-top: 5px;"> <span>选择小区：
 						<select id="xq" style="width: 150px" name="xqName">
-                          <option value="" selected="selected">--选择小区--</option>
+                         
 					</select>
 				</span> <span>楼栋号： <select name="ldh" id="ldh" style="width: 70px">
 							<option value="">楼栋</option>
@@ -470,8 +470,11 @@ function dy() {
 };
 var ip="<%=ip%>"
 	
-var xq;
-
+	var xq;
+var UserName="<%=request.getSession().getAttribute("UserName")%>"
+if(UserName=="zdsy"){
+	 $("#xq").append("<option value='正大盛苑'>正大盛苑</option>");
+}else{
  $.ajax({
 		url : "<%=basePath%>yhInfo/findXq.action", 
 		async : false,
@@ -491,6 +494,7 @@ var xq;
 		}
 
 	});
+}
  
  $("#xq").change(function(){
 	 $.ajax({

@@ -322,12 +322,14 @@ nav li,
 </script>
 <script type="text/javascript">
 var list;
-$.ajax({
+var UserName="<%=request.getSession().getAttribute("UserName")%>"
+if(UserName=="zdsy"){
+	$.ajax({
 		url : "<%=basePath%>yhInfo/findYh.action", 
 		async : false,
 		dataType : "json",
 		data : {
-		
+			"xqm":"正大盛苑",
 		},
 		success : function(data) {
 			
@@ -335,6 +337,22 @@ $.ajax({
 		}
 
 	});
+}else{
+	$.ajax({
+		url : "<%=basePath%>yhInfo/findYh.action", 
+		async : false,
+		dataType : "json",
+		data : {
+			
+		},
+		success : function(data) {
+			
+			list=data.list;	   
+		}
+
+	});
+}
+
 
 </script>
 <body>
@@ -630,6 +648,12 @@ $.ajax({
 	
 var xq;
 
+var UserName="<%=request.getSession().getAttribute("UserName")%>"
+if(UserName=="zdsy"){
+	 $("#xq").append("<option value='正大盛苑'>正大盛苑</option>");
+	 $("#xq1").append("<option value='正大盛苑'>正大盛苑</option>");
+	 $("#xq2").append("<option value='正大盛苑'>正大盛苑</option>");
+}else{
  $.ajax({
 		url : "<%=basePath%>yhInfo/findXq.action", 
 		async : false,
@@ -644,14 +668,14 @@ var xq;
 			
 			 for(var i=0; i<xq.length; i++){
 					
-					$("#xq").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
-					$("#xq1").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
-					$("#xq2").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
-					
+				 $("#xq").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
+				 $("#xq1").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
+				 $("#xq2").append("<option value='"+xq[i].XqName+"'>"+xq[i].XqName+"</option>");
 				}
 		}
 
 	});
+}
 
  
  $("#xq").change(function(){

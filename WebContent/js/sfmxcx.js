@@ -1,4 +1,4 @@
-function getRootPath(){      
+﻿function getRootPath(){      
 	var curWwwPath=window.document.location.href;      
     var pathName=window.document.location.pathname;      
     var pos=curWwwPath.indexOf(pathName); 
@@ -28,7 +28,7 @@ $(document).ready(function(){
 	    //要导出的json数据
 	  
 	    //列标题
-	    let str = '<tr><td>采暖期</td><td>用户名</td><td>用户编码</td><td>小区</td>'+
+	    let str = '<tr><td>采暖期</td><td>用户名</td><td>电话号码</td><td>用户编码</td><td>电话号</td><td>小区</td>'+
 	    '<td>楼栋号</td><td>单元号</td><td>户号</td>'+
 	    '<td>缴费时间</td><td>卡号</td><td>应收金额</td>'+
 	    '<td>缴费金额</td><td>缴费方式</td><td>交款方式</td><td>计费方式</td>'+
@@ -83,29 +83,48 @@ $(document).ready(function(){
 			arr1[0] = json[i].CNQ;
 			arr1[1] = json[i].YhName;
 			arr1[2] = json[i].YHBM;
-			arr1[3] = json[i].XqName;
-			arr1[4] = json[i].BuildNO;
-			arr1[5] = json[i].CellNO;
-			arr1[6] = json[i].HouseNO;
+			arr1[3] = json[i].Telephone;
+			arr1[4] = json[i].XqName;
+			arr1[5] = json[i].BuildNO;
+			arr1[6] = json[i].CellNO;
+			arr1[7] = json[i].HouseNO;
 			
-			arr1[7] = json[i].JFSJ;
-			arr1[8] = json[i].IDNum;
-			arr1[9] = json[i].YSJE;
-			arr1[10] = json[i].JFJE;
-			arr1[11] = json[i].JFTJ;
-			arr1[12] = json[i].SFFS;
-			arr1[13] = json[i].JIFFS;
+			arr1[8] = json[i].JFSJ;
+			arr1[9] = json[i].IDNum;
+			arr1[10] = json[i].YSJE;
+			arr1[11] = json[i].JFJE;
+			arr1[12] = json[i].JFTJ;
+			arr1[13] = json[i].SFFS;
+			arr1[14] = json[i].JIFFS;
 			
-			arr1[14] = json[i].HeatArea;
-			arr1[15] = json[i].PJHM;
-			arr1[16] = json[i].LSDH;
-			arr1[17] = json[i].SKZH;
+			arr1[15] = json[i].HeatArea;
+			arr1[16] = json[i].PJHM;
+			arr1[17] = json[i].LSDH;
+			arr1[18] = json[i].SKZH;
 			sum+=parseFloat(json[i].JFJE);
 			shebList.push(arr1);
 		};
+		sum=sum.toFixed(2);
 	}
 	var YhList;
-	$.ajax({
+	if(UserName=="zyyh001"||UserName=="zyyh002"||UserName=="zdsy"){
+		$.ajax({
+			url : getRootPath()+"/jfxx/findJfxx.action", 
+			async : false,
+			dataType : "json",
+			data : {
+				
+				"SKZH":UserName,
+			},
+			success : function(data) {
+				
+				YhList=data.list;
+				jsArrChange(YhList);
+			}
+
+		});
+	}else{
+		$.ajax({
 			url : getRootPath()+"/jfxx/findJfxx.action", 
 			async : false,
 			dataType : "json",
@@ -120,6 +139,8 @@ $(document).ready(function(){
 			}
 
 		});
+	}
+	
 
 	tbodydis("",shebList,1)
 
@@ -128,7 +149,7 @@ $(document).ready(function(){
 		var xq = $('#xq').val();
 		var ld = $('#ldh').val();
 		var dy = $('#dyh').val();
-		var hh = $('#hh').val();
+		var hh = $('#houseNo').val();
 		var compareWordList = [];
 		sum=0;
 		count=0;
@@ -384,25 +405,27 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 		arr1[0] = json[i].CNQ;
 		arr1[1] = json[i].YhName;
 		arr1[2] = json[i].YHBM;
-		arr1[3] = json[i].XqName;
-		arr1[4] = json[i].BuildNO;
-		arr1[5] = json[i].CellNO;
-		arr1[6] = json[i].HouseNO;
+		arr1[3] = json[i].Telephone;
+		arr1[4] = json[i].XqName;
+		arr1[5] = json[i].BuildNO;
+		arr1[6] = json[i].CellNO;
+		arr1[7] = json[i].HouseNO;
 		
-		arr1[7] = json[i].JFSJ;
-		arr1[8] = json[i].IDNum;
-		arr1[9] = json[i].YSJE;
-		arr1[10] = json[i].JFJE;
-		arr1[11] = json[i].JFTJ;
-		arr1[12] = json[i].SFFS;
-		arr1[13] = json[i].JIFFS;
+		arr1[8] = json[i].JFSJ;
+		arr1[9] = json[i].IDNum;
+		arr1[10] = json[i].YSJE;
+		arr1[11] = json[i].JFJE;
+		arr1[12] = json[i].JFTJ;
+		arr1[13] = json[i].SFFS;
+		arr1[14] = json[i].JIFFS;
 		
-		arr1[14] = json[i].HeatArea;
-		arr1[15] = json[i].PJHM;
-		arr1[16] = json[i].LSDH;
-		arr1[17] = json[i].SKZH;
+		arr1[15] = json[i].HeatArea;
+		arr1[16] = json[i].PJHM;
+		arr1[17] = json[i].LSDH;
+		arr1[18] = json[i].SKZH;
 		sum+=parseFloat(json[i].JFJE);
 		compareWordList.push(arr1);
 	};
+	sum=sum.toFixed(2);
 
 }	

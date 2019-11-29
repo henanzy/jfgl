@@ -28,12 +28,13 @@
 	
 	
 	<select id="findLd" resultMap="YhMap" >
-		select distinct BuildNo from T_YhInfo where XqName=#{xqm} order by BuildNo
+		
+		select  BuildNo from T_YhInfo where XqName=#{xqm} group by BuildNO  order by  right ('0000000000'+BuildNo,10) 
 
 	</select>
 	
 	<select id="findDy" resultMap="YhMap" >
-		select distinct CellNo from T_YhInfo where XqName=#{xqm} and BuildNo=#{ldh} order by CellNo
+		select  CellNo from T_YhInfo where XqName=#{xqm}  and BuildNo=#{ldh} group by CellNo order by   right ('0000000000'+CellNo,10) 
 
 	</select>
 	
@@ -145,7 +146,7 @@
         and y.YHBM=#{YHBM}
         </if>
         <if test="xqm!=null and xqm!=''">
-        order by y.BuildNO asc,y.CellNO asc
+        order by right ('0000000000'+y.BuildNO,10) asc,right ('0000000000'+y.CellNO,10),right ('0000000000'+y.HouseNo,10)
         </if>
        
 	</select>

@@ -85,6 +85,11 @@ public class JfxxServiceImpl implements JfxxService{
 	       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss") ; 
 	       Date date = new Date();
 	       String LSDH = dateFormat.format(date)+i;
+	      
+	       if(ob.get(0)==null||"".equals(ob.get(0))){
+	    	   System.out.println(i);
+	    	   continue;
+	       }
 	        if(ob.get(0)!=null&&ob.get(0)!=""){
 	        	Map map1 = new HashMap();
 	        	map1.put("YHBM", ob.get(0));
@@ -98,24 +103,24 @@ public class JfxxServiceImpl implements JfxxService{
 	        		
 	        	}
 	        }
-	        //判断用户名是否为空
+	       
 	        if(ob.get(1)!=null&&ob.get(1)!=""){
 	        	 LXDH=(String) ob.get(1);
 	        }
-	        //判断卡号为空
+	    
 	        if(ob.get(2)!=null&&ob.get(2)!=""){
 	        	  CNQ=(String) ob.get(2);
 	        }
-	        //判断楼栋为空
+	        
 	        if(ob.get(3)!=null&&ob.get(3)!="" ){
 	        	 JFSJ=(String) ob.get(3);
 	        
 	        }
-	        //判单元为空
+	        
 	        if(ob.get(4)!=null&&ob.get(4)!=""){
 	        	YSJE=(String) ob.get(4);
 	        }
-	        //判户号为空
+	        
 	        if(ob.get(5)!=null&&ob.get(5)!=""){
 	        	JFJE=(String) ob.get(5);
 	        }
