@@ -16,6 +16,12 @@ $(document).ready(function(){
 			arr1[8] = json[i].Telephone;
 			
 			arr1[9] = json[i].Bz;
+			if(json[i].LHYY==null){
+				arr1[10]=""
+			}else{
+				arr1[10] = json[i].LHYY;
+			}
+			arr1[11] = json[i].SFLH;
 			qgxxList.push(arr1);
 		};
 	}
@@ -32,6 +38,7 @@ $(document).ready(function(){
 	$(".close").click(function(){
 		$("#increase_word").hide();
 		$("#change_word").hide();
+		$("#lh_word").hide();
 	});
 	
 });
@@ -120,6 +127,14 @@ function compareWord(xq,ld,dy,hh,compareWordList){
 			arr1[8] = json[i].Telephone;
 			
 			arr1[9] = json[i].Bz;
+			if(json[i].LHYY==null){
+				arr1[10]=""
+			}else{
+				arr1[10] = json[i].LHYY;
+			}
+			
+			
+			arr1[11] = json[i].SFLH;
 			compareWordList.push(arr1);
 		};
 		
@@ -164,7 +179,7 @@ function tbodydis(oldlist,newlist){
 				
 
 				for (var j = 0 ; j <newlist[i].length ; j ++) {
-					if(j==0||j==14){
+					if(j==0||j==10||j==11){
 
 						html += "<td style='display:none;'>" + newlist[i][j] + "</td>";
     					
@@ -172,7 +187,7 @@ function tbodydis(oldlist,newlist){
                   html += "<td>" + newlist[i][j] + "</td>"
     				}
 				}
-				html += "<td><input class='xinjgd_change'  type='button' value='修改' /><input class='xinjgd_del' type='button' value='删除' /></td></tr>";
+				html += "<td><input class='xinjgd_change'  type='button' value='修改' /><input class='xinjgd_del' type='button' value='删除' /><input class='xinjgd_lh'  type='button' value='拉黑' /><input class='xinjgd_qx'  type='button' value='取消拉黑' /></td></tr>";
 			}
 		}
 		qgxx_body.innerHTML = html;
@@ -201,7 +216,12 @@ function tbodydis(oldlist,newlist){
 		$(".xinjgd_del").click(function(){
 			xin_del(this);
 		});
-		
+		$(".xinjgd_qx").click(function(){
+			qxlh(this);
+		});
+		$(".xinjgd_lh").click(function(){
+			xinjgd_lh(this);
+		});
 	}
 	
 	select.onchange = function(ev) {
@@ -242,6 +262,7 @@ function tbodydis(oldlist,newlist){
 	$(".close").click(function(){
 		$("#increase_word").hide();
 		$("#change_word").hide();
+		$("#lh_word").hide();
 	});
 	$("#increase_btn").click(function(){
 
@@ -253,6 +274,12 @@ function tbodydis(oldlist,newlist){
 	});
 	$(".xinjgd_del").click(function(){
 		xin_del(this);
+	});
+	$(".xinjgd_qx").click(function(){
+		qxlh(this);
+	});
+	$(".xinjgd_lh").click(function(){
+		xinjgd_lh(this);
 	});
 	$("#word_change_btn").click(function(){
 		$("#update").submit();
@@ -357,7 +384,26 @@ function tbodydis(oldlist,newlist){
 		
 	}
 	
+	function xinjgd_lh(p){
+		$("#lh_word").show();
+		
+		
 
+		
+		 
+		var xintr = $(p).parent().parent().children();
+		//修改数据
+		var changewordList = [];
+		
+		
+			
+				changewordList.push(xintr[0].innerHTML);
+				changewordList.push(xintr[10].innerHTML);
+					
+		
+		$("#lh_word .lh_word_input")[0].value = changewordList[0];
+		$("#lh_word .lh_word_input")[1].value = changewordList[1];
+	}
 	
 
 
@@ -379,6 +425,28 @@ function tbodydis(oldlist,newlist){
 			                          window.location.reload();
 			                     },
 			  
+			                 })
+			              });
+	}
+	
+	function qxlh(p){
+		var xintr = $(p).parent().parent().children();
+		var id=xintr[0].innerHTML
+		
+		 layer.confirm('确认取消拉黑么', function(index) {
+			                 $.ajax({
+			                     type: "post",
+			                    url: "Qxlh.action",
+			                      dataType:'json',
+			                  	data:{	
+			      					"id":id,
+			      					"SFLH":"否",
+			      				},
+			                     dataType: "json",
+			                      success: function (data) {
+			                    	   layer.close(index);
+			                          window.location.reload();
+			                     },
 			                 })
 			              });
 	}

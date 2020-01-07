@@ -121,7 +121,7 @@
 	</delete>
 	
 	<select id="findYh" resultMap="YhMap" >
-		select y.id ,y.YhName,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.Bz,y.Telephone,YHBM,JFBS
+		select y.id ,y.YhName,y.LHYY,y.SFLH,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,y.HeatArea,y.Bz,y.Telephone,YHBM,JFBS
 		from T_YhInfo y  where 1=1
         <if test="xqm!=null and xqm!=''">
         and y.XqName=#{xqm}
@@ -456,4 +456,10 @@
 		YhName=#{YhName},Telephone=#{Telephone}
 		where YHBM=#{YHBM}
 	</update>
+	
+	<update id="UpdateLhyh" >
+        update T_YhInfo set
+		SFLH=#{SFLH},LHYY=#{LHYY}
+		where id=#{id} 
+    </update>
 </mapper>

@@ -261,7 +261,12 @@ public class YhInfoServiceImpl implements YhInfoService{
 		// TODO Auto-generated method stub
 		 yhnfoDao.UpdateYhByBm(map);
 	}
-
+	
+	@Override
+	public void UpdateLhyh(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		 yhnfoDao.UpdateLhyh(map);
+	}
 
 
 	

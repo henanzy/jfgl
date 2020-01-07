@@ -37,4 +37,6 @@ public interface XxglDao {
    public List<Map<String, Object>> cgqDz();
    public void deleteJfxx(String YHBM);
    public void deleteRwxx(String YHBM);
+   
+   public Map<String, Object> grmjbzt(Map<String, Object> map);
 }

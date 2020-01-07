@@ -33,6 +33,7 @@ $(function () {
 	   date.setTime(timeTamp + 1000*60*60*24);
 	 var xqList=[];
 	 var dataList=[];
+	 var dataList1=[];
 		 $.ajax({
 				url : getRootPath()+"/yhInfo/findXq.action", 
 				async : false,
@@ -65,6 +66,22 @@ $(function () {
 								dataList.push(arr);
 								}
 							});
+						 $.ajax({
+								url : getRootPath()+"/xxgl/grmjbzt.action", 
+								async : false,
+								dataType : "json",
+								data : {
+									"xqm":xqList[i],
+								},
+								success : function(data) {
+							    var map= data.grbzt;
+								var arr1 =[];
+								arr1[0]=xqList[i];
+								arr1[1]=map.grmj;
+								arr1[2]=map.wgrmj;
+								dataList1.push(arr1);
+								}
+							});
 						}
 				}
 
@@ -76,6 +93,14 @@ $(function () {
 			 var js1=dataList[i][2];
 			 gryh.push(js);
 			 wgryh.push(js1);
+		 }
+		 var grmj=[];
+		 var wgrmj=[];
+		 for(var i=0; i<dataList1.length; i++){
+			 var js=dataList1[i][1];
+			 var js1=dataList1[i][2];
+			 grmj.push(js);
+			 wgrmj.push(js1);
 		 }
 	//柱状图
 		 $("#search_btn").click(function(){
@@ -139,7 +164,60 @@ $(function () {
 				 		data: wgryh
 				 	}]
 				 });
-	
+			  var chart = Highcharts.chart('container_mj',{
+				 	chart: {
+				 		type: 'column'
+				 	},
+				 	title: {
+				 		text: '供热面积柱状图'
+				 	},
+				 	subtitle: {
+				 		text: ''
+				 	},
+				 	xAxis: {
+
+				 		categories: xqList,
+				 		crosshair: true
+				 	},
+				 	yAxis: {
+				 		min: 0,
+				 		title: {
+				 			text: '㎡'
+				 		}
+				 	},
+				 	tooltip: {
+				 		// head + 每个 point + footer 拼接成完整的 table
+				 		headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+				 		pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				 		'<td style="padding:0"><b>{point.y:.1f} ㎡</b></td></tr>',
+				 		footerFormat: '</table>',
+				 		shared: true,
+				 		useHTML: true
+				 	},
+//				 	plotOptions: {
+//				 		column: {
+//				 			borderWidth: 0
+//				 		}
+//				 	},
+				 	plotOptions: {
+						column: {
+							// 关于柱状图数据标签的详细配置参考：https://api.hcharts.cn/highcharts#plotOptions.column.dataLabels
+							dataLabels: {
+								enabled: true,
+								// verticalAlign: 'top', // 竖直对齐方式，默认是 center
+								inside: true
+							}
+						}
+					},
+
+				 	series:  [{
+				 		name: '供热面积',
+				 		data: grmj
+				 	}, {
+				 		name: '未供热面积',
+				 		data: wgrmj
+				 	}]
+				 });
 	
 
 //				饼状图

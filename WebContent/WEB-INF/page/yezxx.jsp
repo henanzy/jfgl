@@ -104,6 +104,7 @@
 		font-size: 12px;
 		border-radius:4px;
 	}
+#lh_word,
 #increase_word,
 	#change_word{
 		display:none;
@@ -118,6 +119,7 @@
 	
 	/* 新增修改弹出框关闭按钮 */
 	#increase_word .close,
+	#lh_word .close,
 	#change_word .close{
 		display:block;
 		background-color:rgb(193,213,43);
@@ -154,24 +156,28 @@
 		text-align:center;
 		padding:0 4px;
 	}
+	#lh_word .close::before,
 	#increase_word .close::before,
 	#change_word .close::before {
 	    content: "\2716";
 	}
 	
 	/* 新增修改弹出框input */
+	#lh_word .mws-form-row .lh_word_input,
 	#increase_word .mws-form-row .increase_word_input,
 	#change_word .mws-form-row .change_word_input {
 		width:200px;
 	}
 	
 	/* 新增修改弹出框label */
+	#lh_word .mws-form-row label,
 	#increase_word .mws-form-row label,
 	#change_word .mws-form-row label{
 		width:150px;
 	}
 	
 	/* 新增修改弹出框确认按钮 */
+	#lh_word #word_lh_btn,
 	#increase_word #word_increase_btn,
 	#change_word #word_change_btn{
 		position:relative;
@@ -209,6 +215,7 @@
 
 
 /* 新增修改弹出框 */
+#increase_lh,
 	#increase_word,
 	#change_word{
 		display:none;
@@ -221,12 +228,25 @@
 		background-color:rgba(0,0,0,0.6);
 	}
 		/*修改按钮 */
+		
+	.xinjgd_lh,	
 	 .xinjgd_change,
 	 .xinjgd_del{
 		border:none;
 		background-color:rgb(60,61,61);
 		height:24px;
 		width:40px;
+		margin-right:16px;
+		margin-top:2px;
+		color:#fff;
+		font-size: 12px;
+		border-radius:4px;
+	}
+	 .xinjgd_qx{
+		border:none;
+		background-color:rgb(60,61,61);
+		height:24px;
+		width:60px;
 		margin-right:16px;
 		margin-top:2px;
 		color:#fff;
@@ -639,7 +659,37 @@ if(UserName=="zdsy"){
 				</div>
 			</div>
 		</div>
-       
+       <div id="lh_word">
+			<div class="mws-panel grid_4"
+				style="width: 400px; min-width: 550px; margin: 150px 30%;">
+				<div class="mws-panel-header">
+					<span class="mws-i-24 i-pencil">拉黑用户</span> <span class="close"></span>
+				</div>
+				<div class="mws-panel-body" style="height: 150px;">
+					<form class="mws-form" id="lh" action="UpdateLhyh.action" method="post">
+						<div class="mws-form-inline">
+						 <input type="hidden" class="mws-textinput lh_word_input"
+							name="id" id="id" value="" />
+						
+							
+							
+							<div class="mws-form-row">
+								<label>&emsp;拉黑原因：</label>
+
+								<div class="mws-form-item large">
+									<input type="text" class="mws-textinput lh_word_input" 
+										name="LHYY" value="" autofocus="autofocus" />
+								</div>
+							</div>
+<input type="hidden" class="mws-textinput lh_word_input"
+							name="SFLH" id="SFLH" value="是" />
+						</div>
+						<input type="submit" id="word_lh_btn"
+							class="mws-button black" value="拉黑" />
+					</form>
+				</div>
+			</div>
+		</div>
 
                  
 </div>           

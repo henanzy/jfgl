@@ -195,7 +195,7 @@ display:block;
 		
 		<div class="mws-panel grid_8">
 			<div class="mws-panel-header">
-				<span class="mws-i-24 i-bar-graph">小区缴费比例柱状图</span>
+				<span class="mws-i-24 i-bar-graph">小区缴费人数比例柱状图</span>
 			</div>
 			<div class="mws-panel-body">
 				<div class="mws-panel-content">
@@ -203,7 +203,16 @@ display:block;
 				</div>
 			</div>
 		</div>
-		
+		<div class="mws-panel grid_8">
+			<div class="mws-panel-header">
+				<span class="mws-i-24 i-bar-graph">小区缴费面积比例柱状图</span>
+			</div>
+			<div class="mws-panel-body">
+				<div class="mws-panel-content">
+					<div id="container_mj" style="width: 100%; height: 300px;"></div>
+				</div>
+			</div>
+		</div>
 		<div class="mws-report-container clearfix">
 			
 			<p class="mws-report" href="#" style="font-size: 14px;min-width:800px;height:90px;">

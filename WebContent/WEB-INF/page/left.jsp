@@ -308,7 +308,7 @@ ul.ac_kf li a:hover {
 					</ul>
 				</li>
 				<!-- <li class="active"><a onclick="qqzx()" href="#" class="mws-i-24 i-users">清欠中心</a></li> -->
-				<li class="active"><a onclick="cnbg()" href="#" class="mws-i-24 i-users">采暖变更</a></li>
+				<!-- <li class="active"><a onclick="cnbg()" href="#" class="mws-i-24 i-users">采暖变更</a></li> -->
 				<!-- <li class="active"><a onclick="khgl()" href="#" class="mws-i-24 i-users">客户管理</a></li>  -->
 				<li class="active">
 					<a href="#" class="mws-i-24 i-users">报表管理</a>

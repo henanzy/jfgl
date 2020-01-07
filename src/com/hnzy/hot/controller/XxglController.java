@@ -192,6 +192,28 @@ public class XxglController {
 		 XxglService.DeleteCgqDz(id);
 		return json;
 	}
-	
+	@RequestMapping("grmjbzt")
+	@ResponseBody
+	public JSONObject grmjbzt(String xqm) throws UnsupportedEncodingException{
+		JSONObject json=new JSONObject();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(xqm!=null){
+			xqm=new String(xqm.getBytes("ISO-8859-1"),"utf-8");
+		}
+		
+		
+		map.put("xqm", xqm);
+		
+		
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		if( XxglService.grmjbzt(map)==null){
+			map1.put("grmj", 0);
+			map1.put("wgrmj", 0);
+		}else{
+			map1=XxglService.grmjbzt(map);
+		}
+		json.put("grbzt", map1);
+		return json;
+	}
 
 }

@@ -374,10 +374,10 @@ th, td {
 						
 						
 					</label>
-				<label >
+				     <label >
 						<span>收费方式:</span>
 						<input type="radio" id="gtsf"name="SFFS" value="柜台收费" checked="checked" />柜台收费
-						<input type="radio" id="yhds" name="SFFS" value="银行代收" />银行代收
+						<input type="radio" id="yhds" name="SFFS" value="中原银行卡缴费" />中原银行卡缴费
 						<input type="radio" id="zs"name="SFFS" value="走收" />走收
 						
 						<input type="radio" id="wyds"name="SFFS" value="物业代收" />物业代收

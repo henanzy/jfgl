@@ -173,4 +173,18 @@ delete from J_Jfxx where YHBM=#{YHBM}
 <delete id="deleteRwxx">
 delete from J_Rwxx where YHBM=#{YHBM}
 </delete>
+
+<select id="grmjbzt" resultMap="XxglMap" >
+select round( sum(case when y.JFBS='是' then convert(float,y.HeatArea ) else 0 end) ,0)as grmj,
+ round(sum(case when y.JFBS='否' then convert(float,y.HeatArea )else 0 end),0) as wgrmj
+
+from T_YhInfo y
+
+
+ where (y.yhrb=0 or y.yhrb=2)
+<if test="xqm!=null and xqm!=''">
+ and XqName=#{xqm}
+</if>
+
+</select>
 </mapper>

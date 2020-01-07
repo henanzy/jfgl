@@ -113,6 +113,12 @@ public class XxglServiceImpl implements XxglService{
 		xxglDao.deleteRwxx(YHBM);
 	}
 
+	@Override
+	public Map<String, Object> grmjbzt(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return xxglDao.grmjbzt(map);
+	}
+
 
 	
 }
