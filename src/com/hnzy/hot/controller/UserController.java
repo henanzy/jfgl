@@ -55,31 +55,13 @@ public class UserController {
 		//来电弹屏和首页
 		@RequestMapping("/home" )
     	public String home(HttpSession session,String mobile,HttpServletRequest request,String type,String gs,String UserName) throws UnsupportedEncodingException{
-			List<YhMessage> findData = new ArrayList();
-    		/*List<Map<String, Object>> YhList=dataService.find(null,null,null,null);
-    		request.setAttribute("YhList", JSONSerializer.serialize(YhList));*/
-			YhMessage da = new YhMessage();
-			da.setXqm("金领小区");
-			da.setLdh("1");
-			da.setDyh("2");
-			da.setXqm("市政小区");
-			da.setLdh("1");
-			da.setDyh("2");
-			da.setXqm("涧河小区");
-			da.setLdh("1");
-			da.setDyh("2");
-			da.setXqm("交警队");
-			da.setLdh("1");
-			da.setDyh("2");
-    		findData.add(da);
-    		if(gs!=null){
-    			gs=new String(gs.getBytes("ISO-8859-1"),"utf-8")+"";
+			
+			String username=(String) session.getAttribute("UserName");
+    		if(username!=null){
+    			return "home";
+    		}else{
+    			return "index";
     		}
-    		session.setAttribute("type",type);
-    		session.setAttribute("gs",gs);
-    		/*session.setAttribute("UserName",UserName);*/
-    		request.setAttribute("YhList", JSONSerializer.serialize(findData));
-    		return "home";
     	}
 		@ResponseBody
 		@RequestMapping("/login")

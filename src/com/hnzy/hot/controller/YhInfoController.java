@@ -503,28 +503,23 @@ public class YhInfoController {
 	public String UpdateLhyh(String SFLH,String LHYY,String id) throws UnsupportedEncodingException{
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(id);
+		
 		
 		map.put("SFLH", SFLH);
 		map.put("LHYY", LHYY);
 		map.put("id", id);
 		yhInfoService.UpdateLhyh(map);
-		 return "redirect:yezxx.action";
+		return "redirect:yezxx.action";
 	}
    
    @RequestMapping("Qxlh")
    @ResponseBody
    public JSONObject Qxlh(String SFLH,String id){
-	JSONObject json=new JSONObject();
-	
-	Map<String, Object> map = new HashMap<String, Object>();
-	System.out.println(id);
-	
-	map.put("SFLH", SFLH);
-	
+	JSONObject json=new JSONObject();	
+	Map<String, Object> map = new HashMap<String, Object>();		
+	map.put("SFLH", SFLH);	
 	map.put("id", id);
-	yhInfoService.UpdateLhyh(map);
-	
+	yhInfoService.UpdateLhyh(map);	
 	return json;
    }
    

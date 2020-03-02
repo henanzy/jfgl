@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hnzy.hot.service.JfxxService;
 import com.hnzy.hot.service.XxglService;
+import com.hnzy.hot.service.YhInfoService;
 
 import net.sf.json.JSONObject;
 
@@ -24,6 +25,8 @@ import net.sf.json.JSONObject;
 public class JfxxController {
 	@Autowired
 	public JfxxService jfxxService;
+	@Autowired
+	public YhInfoService yhInfoService;
 	@Autowired
 	private XxglService xxglService;
 	@RequestMapping("findYhByBm")
@@ -58,7 +61,12 @@ public class JfxxController {
 				if("是".equals(jfxxService.findJfBs(YHBM).get(0).get("JFBS"))){
 					json.put("msg", "3");
 					return json;
-				}else{
+				}else if("是".equals(yhInfoService.findYhByBm(YHBM).get(0).get("SFLH"))){
+					json.put("msg", "4");
+					return json;
+				}
+				
+				else{
 				jfxxService.InsertJfxx(map);
 				jfxxService.UpdateJfxx("是", YHBM,JFRQ);
 				json.put("msg", "1");

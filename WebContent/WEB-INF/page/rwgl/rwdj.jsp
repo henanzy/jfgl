@@ -266,7 +266,7 @@ th, td {
 			<p class="mws-report" href="#" style="font-size: 14px;min-width:800px;height:90px;">
 				<span class="mws-report-icon mws-ic ic-building"></span> 
 				<span class="mws-report-content" style="margin-top: 10px;"> 
-				
+				</span>
 				<span class="mws-report-title"> 选择小区 :
 					<select id="xq" style="width: 150px" name="xqName">
                           <option value="" selected="selected">--选择小区--</option>
@@ -464,7 +464,7 @@ var LXDH= $("#TelePhone").val();
 		LODOP.ADD_PRINT_TEXT(290,10,400,25,"缴费日期:  "+JFSJ);
 		LODOP.ADD_PRINT_TEXT(340,10,400,25,"缴费方式:  "+SFFS);
 		LODOP.ADD_PRINT_TEXT(365,10,400,25,"收费员  :  "+UserName);
-                LODOP.ADD_PRINT_TEXT(315,10,400,25,"客服电话:  0393 8509620");
+        LODOP.ADD_PRINT_TEXT(315,10,400,25,"客服电话:  0393 8509620");
 		LODOP.SET_PRINT_STYLE("FontSize",7);
 		LODOP.ADD_PRINT_TEXT(450,90,400,25,"*本票据仅作为收费证明，不作为收据使用");
 		
@@ -487,7 +487,7 @@ var LXDH= $("#TelePhone").val();
 		LODOP.ADD_PRINT_TEXT(910,10,400,25,"缴费日期:  "+JFSJ);
 		LODOP.ADD_PRINT_TEXT(985,10,400,25,"缴费方式:  "+SFFS);
 		LODOP.ADD_PRINT_TEXT(935,10,400,25,"收费员  :  "+UserName);
-                LODOP.ADD_PRINT_TEXT(960,10,400,25,"客服电话:  0393 8509620");
+        LODOP.ADD_PRINT_TEXT(960,10,400,25,"客服电话:  0393 8509620");
 		LODOP.SET_PRINT_STYLE("FontSize",12);
 		LODOP.ADD_PRINT_TEXT(1020,10,400,25,"客户签字 :____________");
 		LODOP.SET_PRINT_STYLE("FontSize",7);
@@ -641,6 +641,10 @@ var LXDH= $("#TelePhone").val();
 				if(data.msg=="3"){
 					alert("该用户已经缴费或者用户编码重复，请查询后操作")
 					
+				}
+				if(data.msg=="4"){
+					alert("该用户已被拉黑，如需缴费请先取消黑名单");
+					return;
 				}
 				if(data.msg=="2"){
 					alert("请登录后操作");

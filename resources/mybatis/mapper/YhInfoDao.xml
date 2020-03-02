@@ -447,7 +447,7 @@
         </if>       
 	</select>
 	<select id="findYhByBm" resultMap="YhMap" >
-	select y.YhName,y.XqName,y.BuildNO,y.CellNO,y.HouseNO
+	select y.YhName,y.XqName,y.BuildNO,y.CellNO,y.HouseNO,y.SFLH
 		from T_YhInfo y  where YHBM=#{YHBM}
 	</select>
 	
@@ -462,4 +462,6 @@
 		SFLH=#{SFLH},LHYY=#{LHYY}
 		where id=#{id} 
     </update>
+    
+    
 </mapper>

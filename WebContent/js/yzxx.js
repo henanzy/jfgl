@@ -170,11 +170,21 @@ function tbodydis(oldlist,newlist){
 		
 		var html = "";
 		for(var i = 0; i < newlist.length; i++) {
+			
 			if(i >= startRow && i <= endRow) { // 通过间隔分隔数组
 				if(i%2 == 1){
-					html += "<tr class='gradeX odd'>";
+					if(newlist[i][11]=="是"){
+						html += "<tr style='color:red' class='gradeX odd'>";
+					}else{
+						html += "<tr class='gradeX odd'>";
+					}
+					
 				}else if(i%2 == 0){
+					if(newlist[i][11]=="是"){
+						html += "<tr style='color:red' class='gradeX even'>";
+					}else{
 					html += "<tr class='gradeX even'>";
+					}
 				}
 				
 
